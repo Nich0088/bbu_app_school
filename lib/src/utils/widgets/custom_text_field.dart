@@ -88,22 +88,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         TextFormField(
           maxLength: widget.maxLength,
-          initialValue: widget.controller == null ? widget.initialValue : null,
+          initialValue: widget.initialValue,
           controller: widget.controller,
           style: widget.textFormFieldStyle ??
-              Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 14),
-          scrollPadding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+              Theme.of(context).textTheme.bodyMedium,
+          scrollPadding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
           keyboardType: widget.keyboardType,
           inputFormatters: widget.inputFormatters,
           onEditingComplete: widget.onEditingComplete,
           validator: widget.validator,
-          obscureText: widget.obscureText!,
+          obscureText: widget.obscureText ?? false,
           onTap: widget.onTap,
           focusNode: widget.focusNode,
           decoration: InputDecoration(
             filled: true,
-            fillColor: widget.controller!.text == ''
+            fillColor: widget.controller?.text == ''
                 ? const Color(0xffF2F2F2)
                 : AppColor.cardColor,
             contentPadding: (() {
@@ -111,9 +112,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 return widget.padding;
               } else {
                 return EdgeInsets.only(
-                  top: 25,
-                  left: 15,
-                  bottom: widget.prefixIcon == null ? 0 : 10,
+                  top: 24,
+                  left: 16,
+                  bottom: widget.prefixIcon == null ? 0 : 12,
                 );
               }
             }()),
@@ -121,33 +122,39 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderSide: const BorderSide(
                 color: Color(0xFFFF4444),
               ),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(AppStyle.borderRadius),
             ),
             hintText: widget.hintText,
-            hintStyle: widget.hintStyle ??
-                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontSize: 14,
-                    ),
+            hintStyle:
+                widget.hintStyle ?? Theme.of(context).textTheme.bodyLarge,
             label: (() {
               if (widget.labelWidget != null) {
                 return widget.labelWidget;
               } else {
-                return SizedBox(
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(6)),
+                    color: widget.controller?.text == ''
+                        ? const Color(0xffF2F2F2)
+                        : AppColor.cardColor,
+                  ),
                   width: widget.isRequired == true
-                      ? (widget.label!.length * 11)
-                      : widget.label!.length * 7,
+                      ? ((widget.label?.length ?? 0) * 12)
+                      : (widget.label?.length ?? 0) * 8,
                   child: Row(
                     children: [
                       Text(
                         widget.label != null ? '${widget.label}' : '',
                         style: widget.labelStyle ??
-                            Theme.of(context).textTheme.bodyLarge,
+                            Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: AppColor.successColor,
+                                ),
                       ),
                       if (widget.isRequired == true)
                         Text(
                           ' *',
                           style: widget.requiredSignStyle ??
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     color: widget.validateColor ??
                                         const Color(0xFFFF4444),
                                   ),
@@ -158,14 +165,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
               }
             }()),
             labelStyle: widget.labelStyle ??
-                Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 14),
+                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColor.primaryColor,
+                    ),
             prefix: widget.prefix,
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.suffixIcon,
             suffix: widget.suffix,
             counter: const Offstage(),
             enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(
+                  AppStyle.borderRadius,
+                ),
+              ),
               borderSide: BorderSide(
                 width: 1,
                 color: widget.isValidate == false
@@ -193,9 +206,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 isNull = false;
               });
             }
-            if (widget.onChangeTextField != null) {
-              widget.onChangeTextField!(value);
-            }
+            widget.onChangeTextField?.call(value);
           },
           onSaved: widget.onSavedTextField,
         ),

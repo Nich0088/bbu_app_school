@@ -12,26 +12,36 @@ void main() {
 }
 
 final GoRouter _goRouter = GoRouter(
-  initialLocation: "/splash-screen",
+  initialLocation: AppScreen.splashScreen.path,
   routes: [
     GoRoute(
-      path: "/",
+      path: AppScreen.dashboardScreen.path,
       builder: (context, state) => const DashboardScreen(),
     ),
     GoRoute(
-      path: "/splash-screen",
+      path: AppScreen.splashScreen.path,
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(
-      path: "/role-selection",
+      path: AppScreen.roleSelectionScreen.path,
       builder: (context, state) => const RoleSelectionScreen(),
     ),
     GoRoute(
-      path: "/login",
+      path: AppScreen.loginScreen.path,
       builder: (context, state) => const LoginScreen(),
     ),
   ],
 );
+
+enum AppScreen {
+  dashboardScreen("/"),
+  splashScreen("/splash"),
+  roleSelectionScreen("/role-selection"),
+  loginScreen("/login");
+
+  final String path;
+  const AppScreen(this.path);
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

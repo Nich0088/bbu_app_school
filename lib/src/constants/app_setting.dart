@@ -25,6 +25,6 @@ class AppStyle {
     spreadRadius: 0,
     offset: const Offset(0, 1),
   );
-  static const double borderRadius = 10;
+  static const double borderRadius = 12;
   static const double horizontalPadding = 20;
 }

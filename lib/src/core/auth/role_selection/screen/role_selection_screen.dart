@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
@@ -28,7 +29,7 @@ class RoleSelectionScreen extends StatelessWidget {
             ),
             child: FilledButton(
               onPressed: () {
-                context.go("/login");
+                context.go(AppScreen.loginScreen.path);
               },
               child: Text(
                 "User",
@@ -43,7 +44,7 @@ class RoleSelectionScreen extends StatelessWidget {
             ),
             child: FilledButton(
               onPressed: () {
-                context.go("/");
+                context.go(AppScreen.dashboardScreen.path);
               },
               child: Text(
                 "Guest",

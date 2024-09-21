@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
 import 'package:school_app/src/utils/widgets/custom_text_field.dart';
@@ -19,7 +21,7 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 54),
+              const SizedBox(height: 80),
               Align(
                 alignment: Alignment.center,
                 child: Image.asset(
@@ -51,21 +53,24 @@ class LoginScreen extends StatelessWidget {
                   controller:
                       loginController.usernameTextEditingController.value,
                   onChangeTextField: (value) {
-                    //
+                    context.pop();
                   },
                   label: "Password",
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
               Align(
                 alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    //
+                child: GestureDetector(
+                  onTap: () {
+                    debugPrint("Forgot password?");
                   },
-                  child: Text(
-                    "Forgot Password?",
-                    style: Theme.of(context).textTheme.bodySmall,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Text(
+                      "Forgot Password?",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                 ),
               ),
@@ -76,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: FilledButton(
                   onPressed: () {
-                    //
+                    context.go(AppScreen.dashboardScreen.path);
                   },
                   child: Text(
                     "Login",
@@ -94,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: FilledButton(
                   onPressed: () {
-                    //
+                    context.pop();
                   },
                   child: Text(
                     "Back",

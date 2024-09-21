@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -9,7 +10,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(
       const Duration(milliseconds: 3000),
       () {
-        context.go("/role-selection");
+        context.go(AppScreen.roleSelectionScreen.path);
       },
     );
     return Scaffold(
