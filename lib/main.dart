@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/configs/theme/theme.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
@@ -29,6 +30,8 @@ final GoRouter _goRouter = GoRouter(
     GoRoute(
       path: AppScreen.loginScreen.path,
       builder: (context, state) => const LoginScreen(),
+      // path: AppScreen.scholarshipScreen.path,
+      // builder: (context, state) => const ScholarshipScreen(),
     ),
   ],
 );
@@ -37,7 +40,8 @@ enum AppScreen {
   dashboardScreen("/"),
   splashScreen("/splash"),
   roleSelectionScreen("/role-selection"),
-  loginScreen("/login");
+  loginScreen("/login"),
+  scholarshipScreen("/scholarship_screen");
 
   final String path;
   const AppScreen(this.path);

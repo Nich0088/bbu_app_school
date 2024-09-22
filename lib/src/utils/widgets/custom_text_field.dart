@@ -44,7 +44,7 @@ class CustomTextField extends StatefulWidget {
     this.padding,
     this.controller,
     this.label,
-    this.labelWidget,
+    this.labelWidget ,
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,

@@ -26,8 +26,8 @@ class LoginScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Image.asset(
                   AppLogo.appLogo,
-                  height: 93,
-                  width: 133,
+                  height: 150,
+                  width: 110,
                 ),
               ),
               const SizedBox(height: 64),
@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                     //
                   },
                   label: "Username",
+
                 ),
               ),
               const SizedBox(height: 24),
@@ -56,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                     context.pop();
                   },
                   label: "Password",
+
                 ),
               ),
               const SizedBox(height: 12),

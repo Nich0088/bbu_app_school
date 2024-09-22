@@ -6,7 +6,7 @@ class AppColor {
   static const errorColor = Color(0xFFF02D3A);
   static const warningColor = Color(0xFFE3B505);
   static const infoColor = Color(0xFF78C3FB);
-  static const successColor = Color(0xFF21D19F);
+  static const successColor = Color(0xFF9586A8);
   static const textPrimaryColor = Color(0xFFFFFFFF);
   static const textSecondaryColor = Color(0xFF9586A8);
   static const cardColor = Color(0xFFFAFDFF);
@@ -16,6 +16,7 @@ class AppColor {
 
 class AppLogo {
   static const appLogo = "assets/app_logo.png";
+  static const scholarship = "assets/bbu_scholarship.png";
 }
 
 class AppStyle {
