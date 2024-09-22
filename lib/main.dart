@@ -4,11 +4,16 @@ import 'package:school_app/src/configs/theme/theme.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
+import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
+import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
+import 'package:school_app/src/utils/helpers/local_storage.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorage.init();
+  configurationDependencies();
   runApp(const MyApp());
 }
 
@@ -17,7 +22,10 @@ final GoRouter _goRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppScreen.dashboardScreen.path,
-      builder: (context, state) => const DashboardScreen(),
+      builder: (context, state) {
+        final UserType? userType = state.extra as UserType?;
+        return DashboardScreen(userType: userType);
+      },
     ),
     GoRoute(
       path: AppScreen.splashScreen.path,
@@ -30,8 +38,10 @@ final GoRouter _goRouter = GoRouter(
     GoRoute(
       path: AppScreen.loginScreen.path,
       builder: (context, state) => const LoginScreen(),
-      // path: AppScreen.scholarshipScreen.path,
-      // builder: (context, state) => const ScholarshipScreen(),
+    ),
+    GoRoute(
+      path: AppScreen.scholarshipScreen.path,
+      builder: (context, state) => const ScholarshipScreen(),
     ),
   ],
 );
@@ -41,7 +51,7 @@ enum AppScreen {
   splashScreen("/splash"),
   roleSelectionScreen("/role-selection"),
   loginScreen("/login"),
-  scholarshipScreen("/scholarship_screen");
+  scholarshipScreen("/scholarship-screen");
 
   final String path;
   const AppScreen(this.path);

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
+import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/utils/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -83,7 +84,10 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: FilledButton(
                   onPressed: () {
-                    context.go(AppScreen.dashboardScreen.path);
+                    context.go(
+                      AppScreen.dashboardScreen.path,
+                      extra: UserType.loggedInUser,
+                    );
                   },
                   child: Text(
                     "Login",

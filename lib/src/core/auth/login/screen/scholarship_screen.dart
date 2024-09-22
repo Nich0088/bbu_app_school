@@ -14,18 +14,18 @@ class ScholarshipScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 15),
+              margin: const EdgeInsets.only(top: 15),
               child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new),
+                icon: const Icon(Icons.arrow_back_ios_new),
                 onPressed: () {
                   // Action for more options
                 },
               ),
             ),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 80),
-                margin: EdgeInsets.only(top: 24),
-                child: Text(
+                padding: const EdgeInsets.symmetric(horizontal: 80),
+                margin: const EdgeInsets.only(top: 24),
+                child: const Text(
                   'Scholarship',
                   style: TextStyle(
                     fontSize: 20,
@@ -34,7 +34,7 @@ class ScholarshipScreen extends StatelessWidget {
                 )),
           ],
         ),
-        backgroundColor: AppColor.primaryColor,// Customize AppBar color
+        backgroundColor: AppColor.primaryColor, // Customize AppBar color
         centerTitle: true, // Center the title
       ),
       body: Center(
