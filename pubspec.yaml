@@ -38,6 +38,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/dashboard/
 
   fonts:
     - family: sourcesanspro
