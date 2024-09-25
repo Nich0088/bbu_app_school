@@ -17,6 +17,7 @@ class AppColor {
 class AppLogo {
   static const appLogo = "assets/app_logo.png";
   static const scholarship = "assets/bbu_scholarship.png";
+  static const events = "assets/events1.png";
 }
 
 class AppStyle {
