@@ -15,6 +15,8 @@ PreferredSizeWidget CustomAppBar(
   Color? backgroundColor,
   GestureTapCallback? onPressedBack,
   GestureTapCallback? onViewProfile,
+  GestureTapCallback? onNotificationPressed,
+  GestureTapCallback? onLanguagePressed,
   Color? colorTitle,
   PreferredSizeWidget? bottom,
 }) {
@@ -95,7 +97,7 @@ PreferredSizeWidget CustomAppBar(
           color: iconColor,
         ),
         onPressed: () {
-          onPressedBack?.call();
+          onNotificationPressed?.call();
         },
       ),
       IconButton(
@@ -104,7 +106,7 @@ PreferredSizeWidget CustomAppBar(
           color: iconColor,
         ),
         onPressed: () {
-          onPressedBack?.call();
+          onLanguagePressed?.call();
         },
       ),
     ],
