@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(
       const Duration(milliseconds: 3000),
       () {
-        context.go(AppScreen.roleSelectionScreen.path);
+        context.go(AppScreen.loginScreen.path);
       },
     );
     return Scaffold(

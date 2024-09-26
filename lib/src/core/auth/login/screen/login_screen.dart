@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                   onChangeTextField: (value) {
                     //
                   },
-                  label: "Username",
+                  label: "Email",
 
                 ),
               ),

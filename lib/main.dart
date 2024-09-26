@@ -20,7 +20,7 @@ void main() async {
 }
 
 final GoRouter _goRouter = GoRouter(
-  initialLocation: AppScreen.eventsScreen.path,
+  initialLocation: AppScreen.splashScreen.path,
   routes: [
     GoRoute(
       path: AppScreen.dashboardScreen.path,
