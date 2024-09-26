@@ -9,6 +9,7 @@ import 'package:school_app/src/modules/dashboard/controller/dashboard_controller
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/utils/widgets/custom_app_bar.dart';
+import 'package:school_app/src/utils/widgets/custom_button.dart';
 import 'package:school_app/src/widgets/dashboard/certificate_format_item_widget.dart';
 import 'package:school_app/src/widgets/dashboard/home_grid_item_widget.dart';
 import 'package:school_app/src/widgets/dashboard/message_item_widget.dart';
@@ -40,6 +41,9 @@ class DashboardScreen extends StatelessWidget {
         username: "Elon Musk",
         imageUrl:
             "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
+        onLanguagePressed: () {
+          _showBottomSheet(context);
+        },
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -60,10 +64,10 @@ class DashboardScreen extends StatelessWidget {
               child: GridView.builder(
                 padding: const EdgeInsets.all(AppStyle.horizontalPadding),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Number of columns in the grid
-                  childAspectRatio: 1.0, // Aspect ratio of each item
-                  crossAxisSpacing: 12, // Spacing between columns
-                  mainAxisSpacing: 12, // Spacing between rows
+                  crossAxisCount: 3,
+                  childAspectRatio: 1.0,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
                 ),
                 shrinkWrap: true,
                 // itemCount: getIt<DashboardController>().homeGridItemList.length,
@@ -225,6 +229,141 @@ class DashboardScreen extends StatelessWidget {
           children: [],
         ),
       ),
+    );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                width: 60,
+                height: 5,
+                decoration: const BoxDecoration(
+                  color: Color(0x617C7C7C),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                "Change Language",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: Colors.black),
+              ),
+              const SizedBox(height: 40),
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: AppStyle.horizontalPadding,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0x617C7C7C),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppStyle.horizontalPadding,
+                        vertical: 16,
+                      ),
+                      child: Image.asset(
+                        "assets/dashboard/khmer.png",
+                        fit: BoxFit.cover,
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
+                    Text(
+                      "ភាសាខ្មែរ",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.black),
+                    ),
+                    const Spacer(),
+                    const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: Color(0xFF3283e0),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 12,
+                  left: AppStyle.horizontalPadding,
+                  right: AppStyle.horizontalPadding,
+                ),
+                decoration: const BoxDecoration(
+                  color: Color(0x617C7C7C),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppStyle.horizontalPadding,
+                        vertical: 16,
+                      ),
+                      child: Image.asset(
+                        "assets/dashboard/english.png",
+                        fit: BoxFit.cover,
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
+                    Text(
+                      "English",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.black),
+                    ),
+                    const Spacer(),
+                    const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: Icon(
+                        Icons.check_rounded,
+                        color: Color(0xFF3283e0),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 56,
+                  left: AppStyle.horizontalPadding,
+                  right: AppStyle.horizontalPadding,
+                  bottom: AppStyle.horizontalPadding,
+                ),
+                child: CustomButton(
+                  onPressed: () {
+                    //
+                  },
+                  title: "Continue",
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
