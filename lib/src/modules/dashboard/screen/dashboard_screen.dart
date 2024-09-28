@@ -123,11 +123,6 @@ class DashboardScreen extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity,
               height: 115,
-              padding: const EdgeInsets.only(
-                left: 12,
-                top: 12,
-                bottom: 12,
-              ),
               decoration: const BoxDecoration(
                 color: AppColor.cardColor,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -138,6 +133,7 @@ class DashboardScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return CertificateFormatItemWidget(
+                    index: index,
                     item: dashboardController.certificateFormatList[index],
                     onTap: () {
                       //
@@ -196,20 +192,29 @@ class DashboardScreen extends StatelessWidget {
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
-            CarouselSlider.builder(
-              itemCount: dashboardController.imageSlideList.length,
-              itemBuilder: (context, index, realIndex) {
-                return CachedNetworkImage(
-                  imageUrl: dashboardController.imageSlideList[index],
-                  fit: BoxFit.fill,
-                );
-              },
-              options: CarouselOptions(
-                aspectRatio: 2.0,
-                enlargeCenterPage: true,
-                enlargeFactor: 0.4,
-                autoPlay: true,
-                autoPlayCurve: Curves.linear,
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 16,
+              ),
+              child: CarouselSlider.builder(
+                itemCount: dashboardController.imageSlideList.length,
+                itemBuilder: (context, index, realIndex) {
+                  return ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: CachedNetworkImage(
+                      width: double.infinity,
+                      imageUrl: dashboardController.imageSlideList[index],
+                      fit: BoxFit.fill,
+                    ),
+                  );
+                },
+                options: CarouselOptions(
+                  height: 240,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 2),
+                  viewportFraction: 0.9,
+                  enlargeCenterPage: true,
+                ),
               ),
             ),
           ],

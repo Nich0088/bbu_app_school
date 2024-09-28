@@ -7,15 +7,22 @@ class CertificateFormatItemWidget extends StatelessWidget {
     super.key,
     required this.item,
     required this.onTap,
+    required this.index,
   });
 
   final GestureTapCallback onTap;
   final CertificateFormatItem item;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: 12),
+      margin: EdgeInsets.only(
+        top: 12,
+        right: 12,
+        bottom: 12,
+        left: index == 0 ? 12 : 0,
+      ),
       decoration: BoxDecoration(
         color: const Color(
           0xFFC2DBFF,
