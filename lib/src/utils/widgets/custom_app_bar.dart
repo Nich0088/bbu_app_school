@@ -8,6 +8,7 @@ PreferredSizeWidget CustomAppBar(
   double elevation = 0.0,
   bool isDashboardAppBar = false,
   bool isDarkStatusBar = false,
+  bool isCenterTitle = false,
   Color iconColor = Colors.white,
   String title = '',
   String username = '',
@@ -81,34 +82,37 @@ PreferredSizeWidget CustomAppBar(
           title,
           style: Theme.of(context)
               .textTheme
-              .displayMedium
+              .headlineMedium
               ?.copyWith(color: colorTitle),
         );
       }
     }()),
+    centerTitle: isCenterTitle,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness:
           isDarkStatusBar == true ? Brightness.light : Brightness.dark,
     ),
     actions: [
-      IconButton(
-        icon: Icon(
-          Icons.notifications_none_outlined,
-          color: iconColor,
+      if (isDashboardAppBar == true)
+        IconButton(
+          icon: Icon(
+            Icons.notifications_none_outlined,
+            color: iconColor,
+          ),
+          onPressed: () {
+            onNotificationPressed?.call();
+          },
         ),
-        onPressed: () {
-          onNotificationPressed?.call();
-        },
-      ),
-      IconButton(
-        icon: Icon(
-          Icons.language,
-          color: iconColor,
+      if (isDashboardAppBar == true)
+        IconButton(
+          icon: Icon(
+            Icons.language,
+            color: iconColor,
+          ),
+          onPressed: () {
+            onLanguagePressed?.call();
+          },
         ),
-        onPressed: () {
-          onLanguagePressed?.call();
-        },
-      ),
     ],
     bottom: bottom,
   );
