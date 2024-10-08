@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
+import 'package:school_app/src/modules/user_dashboard/model/schedule_item.dart';
 import 'package:school_app/src/modules/user_dashboard/model/study_item.dart';
+
 import '../model/study_result_item.dart';
 
 class UserDashboardController extends GetxController {
@@ -506,6 +508,99 @@ class UserDashboardController extends GetxController {
               grade: "C",
             ),
           ],
+        ),
+      ];
+
+  List<ScheduleItem> get scheduleItemList => [
+        ScheduleItem(
+          id: 0,
+          image:
+              "https://miro.medium.com/v2/resize:fit:4800/format:webp/1*J38nYZU7gzu-4lQmtjlSUw.jpeg",
+          title: "Data Structures and Algorithms",
+          subTitle: "D1IT-A. SeT",
+          roomName: "507 (B)",
+          date: "Apr 01, 2024",
+        ),
+        ScheduleItem(
+          id: 1,
+          image:
+              "https://upload.wikimedia.org/wikipedia/en/9/92/Windows_11_Desktop.png",
+          title: "Operating Systems",
+          subTitle: "D1IT-B. Mr. Smith",
+          roomName: "304 (A)",
+          date: "Apr 02, 2024",
+        ),
+        ScheduleItem(
+          id: 2,
+          image:
+              "https://www.techtarget.com/rms/onlineimages/app_arch-software_dev_lifecycle-f_mobile.png",
+          title: "Software Engineering",
+          subTitle: "D1IT-C. Dr. Johnson",
+          roomName: "205 (C)",
+          date: "Apr 03, 2024",
+        ),
+        ScheduleItem(
+          id: 3,
+          image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlKKBS-HlJjFJpXp89i524xTRaIUiZyiZu_qfTcNVl40Juj8U5",
+          title: "Database Management Systems",
+          subTitle: "D1IT-D. Prof. Lee",
+          roomName: "502 (B)",
+          date: "Apr 04, 2024",
+        ),
+        ScheduleItem(
+          id: 4,
+          image:
+              "https://www.lifewire.com/thmb/TXVRTtkHvRpTjnRObQ3xm2VlsD0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/WirelessNetwork-5994852003f4020011db5333.jpg",
+          title: "Computer Networks",
+          subTitle: "D1IT-E. Dr. Patel",
+          roomName: "301 (A)",
+          date: "Apr 05, 2024",
+        ),
+        ScheduleItem(
+          id: 5,
+          image:
+              "https://cdn.mos.cms.futurecdn.net/VFLt5vHV7aCoLrLGjP9Qwm-1200-80.jpg",
+          title: "Artificial Intelligence",
+          subTitle: "D1IT-F. Ms. Wilson",
+          roomName: "408 (B)",
+          date: "Apr 06, 2024",
+        ),
+        ScheduleItem(
+          id: 6,
+          image:
+              "https://media.bitcot.com/wp-content/uploads/2023/06/best-web-development-languages.webp",
+          title: "Web Development",
+          subTitle: "D1IT-G. Mr. Clark",
+          roomName: "509 (C)",
+          date: "Apr 07, 2024",
+        ),
+        ScheduleItem(
+          id: 7,
+          image:
+              "https://www.techmango.net/wp-content/uploads/2022/04/mobile-app-development.png",
+          title: "Mobile Application Development",
+          subTitle: "D1IT-H. Dr. Parker",
+          roomName: "202 (A)",
+          date: "Apr 08, 2024",
+        ),
+        ScheduleItem(
+          id: 8,
+          image:
+              "https://www.ingenious.co.uk/wp-content/uploads/2023/08/What-is-Cloud-Computing-and-How-Can-it-Benefit-Our-Company-1024x512.jpeg",
+          title: "Cloud Computing",
+          subTitle: "D1IT-I. Mr. Garcia",
+          roomName: "401 (B)",
+          date: "Apr 09, 2024",
+        ),
+        ScheduleItem(
+          id: 9,
+          image:
+              "https://www.theforage.com/blog/wp-content/uploads/2022/12/what-is-cybersecurity.jpg",
+          title: "Cybersecurity",
+          subTitle: "D1IT-J. Ms. Davis",
+          roomName: "602 (C)",
+          date: "Apr 10, 2024",
         ),
       ];
 }

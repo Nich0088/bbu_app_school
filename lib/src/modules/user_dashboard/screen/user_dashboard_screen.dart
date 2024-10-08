@@ -4,6 +4,8 @@ import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
 import 'package:school_app/src/utils/widgets/custom_app_bar.dart';
 import 'package:school_app/src/widgets/user_dashboard/study_item_widget.dart';
+
+import '../../../widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../widgets/user_dashboard/study_result_item_widget.dart';
 
 class UserDashboardScreen extends StatefulWidget {
@@ -107,14 +109,19 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   }
 
   Widget _scheduleTab() {
-    return Center(
-      child: Text(
-        'Schedule',
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(color: AppColor.primaryColor),
-      ),
+    return ListView.builder(
+      itemCount: _userDashboardController.scheduleItemList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return ScheduleItemWidget(
+          item: _userDashboardController.scheduleItemList[index],
+          isLastItem:
+              index == _userDashboardController.scheduleItemList.length - 1,
+          onClick: () {
+            debugPrint("${_userDashboardController.scheduleItemList[index]}");
+          },
+        );
+      },
     );
   }
 
