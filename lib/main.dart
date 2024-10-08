@@ -11,6 +11,8 @@ import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
+import 'package:school_app/src/modules/location/screen/location_screen.dart';
+import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
 import 'package:school_app/src/utils/helpers/local_storage.dart';
 
 void main() async {
@@ -57,6 +59,14 @@ final GoRouter _goRouter = GoRouter(
     GoRoute(
       path: AppScreen.contactScreen.path,
       builder: (context, state) => const ContactScreen(),
+),
+    GoRoute(
+      path: AppScreen.locationScreen.path,
+      builder: (context, state) => const LocationScreen(),
+    ),
+    GoRoute(
+      path: AppScreen.userDashboardScreen.path,
+      builder: (context, state) => const UserDashboardScreen(),
     ),
   ],
 );
@@ -66,10 +76,12 @@ enum AppScreen {
   splashScreen("/splash"),
   roleSelectionScreen("/role-selection"),
   loginScreen("/login"),
-  scholarshipScreen("/scholarship-screen"),
-  aboutUsScreen("/aboutUs-screen"),
-  eventsScreen("/events-screen"),
-  contactScreen("/contact-screen");
+  contactScreen("/contact-screen"),
+  scholarshipScreen("/scholarship"),
+  aboutUsScreen("/about-us"),
+  eventsScreen("/events"),
+  userDashboardScreen("/user-dashboard"),
+  locationScreen("/location");
 
   final String path;
   const AppScreen(this.path);

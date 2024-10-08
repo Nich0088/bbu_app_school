@@ -8,7 +8,7 @@ class AppColor {
   static const infoColor = Color(0xFF78C3FB);
   static const successColor = Color(0xFF9586A8);
   static const textPrimaryColor = Color(0xFFFFFFFF);
-  static const textSecondaryColor = Color(0xFF9586A8);
+  static const textSecondaryColor = Color(0x80000000);
   static const cardColor = Color(0xFFFAFDFF);
   static const disableColor = Color(0xFFB8C5D0);
   static const unselectedColor = Color(0xFFF2F2F2);
