@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
 
+import '../../../modules/dashboard/models/user_type.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -10,7 +12,10 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(
       const Duration(milliseconds: 3000),
       () {
-        context.go(AppScreen.loginScreen.path);
+        context.go(
+          AppScreen.dashboardScreen.path,
+          extra: UserType.loggedInUser,
+        );
       },
     );
     return Scaffold(

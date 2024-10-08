@@ -56,7 +56,7 @@ class DashboardScreen extends StatelessWidget {
                 right: AppStyle.horizontalPadding,
               ),
               decoration: const BoxDecoration(
-                color: AppColor.cardColor,
+                color: AppColor.background,
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               height: 300,
@@ -82,6 +82,8 @@ class DashboardScreen extends StatelessWidget {
                         // context.go("");
                         case HomeGridItemType.forEnrollment:
                         // context.go("");
+                        case HomeGridItemType.contact:
+                        context.go(AppScreen.contactScreen.path);
                         case HomeGridItemType.checkIn:
                         // context.go("");
                         case HomeGridItemType.campus:
@@ -93,11 +95,11 @@ class DashboardScreen extends StatelessWidget {
                         case HomeGridItemType.scholarship:
                           context.go(AppScreen.scholarshipScreen.path);
                         case HomeGridItemType.aboutUs:
-                        // context.go("");
+                          context.go(AppScreen.aboutUsScreen.path);
                         case HomeGridItemType.study:
                         // context.go("");
                         case HomeGridItemType.event:
-                        // context.go("");
+                          context.go(AppScreen.eventsScreen.path);
                       }
                     },
                   );
@@ -106,10 +108,10 @@ class DashboardScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
+                left: 20,
+                right: 20,
                 top: AppStyle.horizontalPadding,
-                bottom: 12,
+                bottom: 18,
               ),
               child: Text(
                 "Certificate format",
@@ -120,11 +122,11 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               height: 115,
               decoration: const BoxDecoration(
-                color: AppColor.cardColor,
+                color: AppColor.background,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
               ),
               child: ListView.builder(
@@ -144,10 +146,10 @@ class DashboardScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: AppStyle.horizontalPadding,
-                bottom: 12,
+                left: 20,
+                top: 20,
+                right: 20,
+                bottom: 18,
               ),
               child: Text(
                 "Message",
@@ -158,7 +160,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               height: 196,
               child: ListView.builder(
@@ -179,10 +181,10 @@ class DashboardScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: AppStyle.horizontalPadding,
-                bottom: 12,
+                left: 20,
+                top: 20,
+                right: 20,
+                bottom: 18,
               ),
               child: Text(
                 "Slide Show",

@@ -23,28 +23,31 @@ class CertificateFormatItemWidget extends StatelessWidget {
         bottom: 12,
         left: index == 0 ? 12 : 0,
       ),
-      decoration: BoxDecoration(
-        color: const Color(
-          0xFFC2DBFF,
-        ),
-        boxShadow: [
-          AppStyle.boxShadow,
-        ],
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            item.image,
-            width: 40,
-            height: 40,
-            fit: BoxFit.cover,
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColor.cardColor, // Border color
+                width: 2, // Border width
+              ),
+              borderRadius: BorderRadius.circular(3), // Rounded corners
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(3), // Clip image corners
+              child: Image.asset(
+                item.image,
+                width: 45,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 5),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               item.title,
               textAlign: TextAlign.center,

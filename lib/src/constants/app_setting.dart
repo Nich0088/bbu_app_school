@@ -12,6 +12,7 @@ class AppColor {
   static const cardColor = Color(0xFFFAFDFF);
   static const disableColor = Color(0xFFB8C5D0);
   static const unselectedColor = Color(0xFFF2F2F2);
+  static const background = Color(0x20FFFFFF);
 }
 
 class AppLogo {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/configs/theme/theme.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/contact_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/events_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
@@ -53,6 +54,10 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.eventsScreen.path,
       builder: (context, state) => const EventsScreen(),
     ),
+    GoRoute(
+      path: AppScreen.contactScreen.path,
+      builder: (context, state) => const ContactScreen(),
+    ),
   ],
 );
 
@@ -63,7 +68,8 @@ enum AppScreen {
   loginScreen("/login"),
   scholarshipScreen("/scholarship-screen"),
   aboutUsScreen("/aboutUs-screen"),
-  eventsScreen("/events-screen");
+  eventsScreen("/events-screen"),
+  contactScreen("/contact-screen");
 
   final String path;
   const AppScreen(this.path);

@@ -17,15 +17,12 @@ class MessageItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: 16,
-        right: isLastItem ? 16 : 0,
+        left: 0,
+        right: isLastItem ? 0 : 12,
       ),
       width: 170,
       decoration: BoxDecoration(
         color: AppColor.cardColor,
-        boxShadow: [
-          AppStyle.boxShadow,
-        ],
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
       child: Column(
@@ -40,18 +37,12 @@ class MessageItemWidget extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              bottom: 16,
+              left: 12,
+              right: 12,
+              bottom: 0,
             ),
-            padding: const EdgeInsets.only(
-              bottom: 4,
-            ),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xFFE5E5E5),
-              borderRadius: BorderRadius.all(Radius.circular(6)),
-            ),
+
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

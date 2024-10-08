@@ -18,9 +18,7 @@ class HomeGridItemWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(
-            0xFFC2DBFF,
-          ),
+          color: AppColor.cardColor,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           boxShadow: [AppStyle.boxShadow],
         ),

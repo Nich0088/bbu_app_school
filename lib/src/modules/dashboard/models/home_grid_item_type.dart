@@ -9,4 +9,5 @@ enum HomeGridItemType {
   aboutUs,
   study,
   attendant,
+  contact,
 }
