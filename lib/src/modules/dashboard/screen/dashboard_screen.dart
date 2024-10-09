@@ -70,6 +70,7 @@ class DashboardScreen extends StatelessWidget {
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                 ),
+                scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 // itemCount: getIt<DashboardController>().homeGridItemList.length,
                 itemCount: dashboardController.homeGridItemList.length,
