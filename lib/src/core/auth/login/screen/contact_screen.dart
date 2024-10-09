@@ -10,7 +10,23 @@ class ContactScreen extends StatefulWidget {
   State<ContactScreen> createState() => _ContactScreenState();
 }
 
-class _ContactScreenState extends State<ContactScreen> {
+class _ContactScreenState extends State<ContactScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging) {
+        debugPrint("Tab changed to: ${_tabController.index}");
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,16 +57,18 @@ class _ContactScreenState extends State<ContactScreen> {
                 )),
           ],
         ),
-        backgroundColor: AppColor.primaryColor, // Customize AppBar color
-        centerTitle: true, // Center the title
-        bottom: const TabBar(
-          tabs: [
+        backgroundColor: AppColor.primaryColor,
+        // Customize AppBar color
+        centerTitle: true,
+        // Center the title
+        bottom:  TabBar(
+          controller: _tabController,
+          tabs: const [
             Tab(icon: Icon(Icons.directions_car)),
             Tab(icon: Icon(Icons.directions_transit)),
             Tab(icon: Icon(Icons.directions_bike)),
           ],
         ),
-
       ),
     );
   }
