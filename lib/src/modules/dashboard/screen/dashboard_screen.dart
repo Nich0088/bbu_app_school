@@ -16,6 +16,7 @@ import 'package:school_app/src/widgets/dashboard/message_item_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key, this.userType});
+
   final UserType? userType;
 
   @override
@@ -79,27 +80,38 @@ class DashboardScreen extends StatelessWidget {
                       switch (
                           dashboardController.homeGridItemList[index].type) {
                         case HomeGridItemType.attendant:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.forEnrollment:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.contact:
-                        context.go(AppScreen.contactScreen.path);
+                          context.go(AppScreen.contactScreen.path);
+                          break;
                         case HomeGridItemType.checkIn:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.campus:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.location:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.billing:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.scholarship:
                           context.go(AppScreen.scholarshipScreen.path);
+                          break;
                         case HomeGridItemType.aboutUs:
                           context.go(AppScreen.aboutUsScreen.path);
+                          break;
                         case HomeGridItemType.study:
-                        // context.go("");
+                          // context.go("");
+                          break;
                         case HomeGridItemType.event:
                           context.go(AppScreen.eventsScreen.path);
+                          break;
                       }
                     },
                   );
