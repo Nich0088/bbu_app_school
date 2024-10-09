@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/app_setting.dart';
@@ -13,7 +12,6 @@ class ContactScreen extends StatefulWidget {
 class _ContactScreenState extends State<ContactScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
 
   @override
   void initState() {
@@ -61,7 +59,7 @@ class _ContactScreenState extends State<ContactScreen>
         // Customize AppBar color
         centerTitle: true,
         // Center the title
-        bottom:  TabBar(
+        bottom: TabBar(
           controller: _tabController,
           tabs: const [
             Tab(icon: Icon(Icons.directions_car)),
@@ -69,6 +67,9 @@ class _ContactScreenState extends State<ContactScreen>
             Tab(icon: Icon(Icons.directions_bike)),
           ],
         ),
+      ),
+      body: Column(
+        children: [],
       ),
     );
   }
