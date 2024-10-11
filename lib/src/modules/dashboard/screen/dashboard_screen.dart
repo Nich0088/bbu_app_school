@@ -64,11 +64,11 @@ class DashboardScreen extends StatelessWidget {
               width: double.infinity,
               child: GridView.builder(
                 padding: const EdgeInsets.all(AppStyle.horizontalPadding),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  childAspectRatio: 1.0,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
+                  mainAxisExtent: (MediaQuery.of(context).size.width - 96) / 3,
                 ),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
