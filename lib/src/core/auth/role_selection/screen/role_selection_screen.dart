@@ -30,7 +30,7 @@ class RoleSelectionScreen extends StatelessWidget {
             ),
             child: FilledButton(
               onPressed: () {
-                context.go(AppScreen.loginScreen.path);
+                context.push(AppScreen.loginScreen.path);
               },
               child: Text(
                 "User",
@@ -45,7 +45,7 @@ class RoleSelectionScreen extends StatelessWidget {
             ),
             child: FilledButton(
               onPressed: () {
-                context.go(
+                context.push(
                   AppScreen.dashboardScreen.path,
                   extra: UserType.guest,
                 );

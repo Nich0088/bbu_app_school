@@ -43,7 +43,6 @@ class LoginScreen extends StatelessWidget {
                     //
                   },
                   label: "Email",
-
                 ),
               ),
               const SizedBox(height: 24),
@@ -58,7 +57,6 @@ class LoginScreen extends StatelessWidget {
                     context.pop();
                   },
                   label: "Password",
-
                 ),
               ),
               const SizedBox(height: 12),
@@ -84,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: FilledButton(
                   onPressed: () {
-                    context.go(
+                    context.push(
                       AppScreen.dashboardScreen.path,
                       extra: UserType.loggedInUser,
                     );

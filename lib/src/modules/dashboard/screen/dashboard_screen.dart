@@ -81,37 +81,37 @@ class DashboardScreen extends StatelessWidget {
                       switch (
                           dashboardController.homeGridItemList[index].type) {
                         case HomeGridItemType.attendant:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.forEnrollment:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.contact:
-                          context.go(AppScreen.contactScreen.path);
+                          context.push(AppScreen.contactScreen.path);
                           break;
                         case HomeGridItemType.checkIn:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.campus:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.location:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.billing:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.scholarship:
-                          context.go(AppScreen.scholarshipScreen.path);
+                          context.push(AppScreen.scholarshipScreen.path);
                           break;
                         case HomeGridItemType.aboutUs:
-                          context.go(AppScreen.aboutUsScreen.path);
+                          context.push(AppScreen.aboutUsScreen.path);
                           break;
                         case HomeGridItemType.study:
-                          // context.go("");
+                          // context.push("");
                           break;
                         case HomeGridItemType.event:
-                          context.go(AppScreen.eventsScreen.path);
+                          context.push(AppScreen.eventsScreen.path);
                           break;
                       }
                     },
