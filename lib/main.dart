@@ -59,7 +59,7 @@ final GoRouter _goRouter = GoRouter(
     GoRoute(
       path: AppScreen.contactScreen.path,
       builder: (context, state) => const ContactScreen(),
-),
+    ),
     GoRoute(
       path: AppScreen.locationScreen.path,
       builder: (context, state) => const LocationScreen(),
@@ -84,6 +84,7 @@ enum AppScreen {
   locationScreen("/location");
 
   final String path;
+
   const AppScreen(this.path);
 }
 

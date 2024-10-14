@@ -17,9 +17,11 @@ class HomeGridItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: double.infinity, // Set the width of the container
+        height: double.infinity,
         decoration: BoxDecoration(
           color: AppColor.cardColor,
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [AppStyle.boxShadow],
         ),
         child: Column(
@@ -28,8 +30,8 @@ class HomeGridItemWidget extends StatelessWidget {
           children: [
             Image.asset(
               item.image,
-              width: 50,
-              height: 50,
+              width: 55,
+              height: 55,
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 4),

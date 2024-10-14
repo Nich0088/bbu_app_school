@@ -108,7 +108,7 @@ class DashboardScreen extends StatelessWidget {
                           context.push(AppScreen.aboutUsScreen.path);
                           break;
                         case HomeGridItemType.study:
-                          // context.push("");
+                          context.push(AppScreen.userDashboardScreen.path);
                           break;
                         case HomeGridItemType.event:
                           context.push(AppScreen.eventsScreen.path);
