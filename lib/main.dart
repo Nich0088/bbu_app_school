@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:school_app/src/configs/theme/theme.dart';
+import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/contact_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/events_screen.dart';
@@ -9,17 +10,32 @@ import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
+import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
+import 'package:school_app/src/modules/registration_application/screen/registration_application_screen.dart';
 import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
 import 'package:school_app/src/utils/helpers/local_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await LocalStorage.init();
   configurationDependencies();
-  runApp(const MyApp());
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('km', 'KH'),
+      ],
+      startLocale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
+      path: 'assets/translations',
+      child: const MyApp(),
+    ),
+  );
 }
 
 final GoRouter _goRouter = GoRouter(
@@ -68,6 +84,10 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.userDashboardScreen.path,
       builder: (context, state) => const UserDashboardScreen(),
     ),
+    GoRoute(
+      path: AppScreen.registrationApplicationScreen.path,
+      builder: (context, state) => const RegistrationApplicationScreen(),
+    ),
   ],
 );
 
@@ -81,6 +101,7 @@ enum AppScreen {
   aboutUsScreen("/about-us"),
   eventsScreen("/events"),
   userDashboardScreen("/user-dashboard"),
+  registrationApplicationScreen("/registration-application"),
   locationScreen("/location");
 
   final String path;
@@ -94,9 +115,80 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       routerConfig: _goRouter,
-      theme: themeData,
+      theme: ThemeData(
+        fontFamily:
+            Language.getLanguage(languageKey: context.locale.languageCode) ==
+                    Language.english
+                ? 'sourceSansThree'
+                : 'notoSansKhmer',
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: AppColor.textPrimaryColor),
+          backgroundColor: Colors.white,
+          elevation: 5,
+          shadowColor: Color(0x1A000000),
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: AppColor.textPrimaryColor,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: AppColor.textPrimaryColor),
+        primaryColor: AppColor.primaryColor,
+        cardColor: AppColor.cardColor,
+        disabledColor: AppColor.textPrimaryColor,
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 26,
+            color: AppColor.textPrimaryColor,
+          ),
+          displayMedium: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 24,
+            color: AppColor.textPrimaryColor,
+          ),
+          displaySmall: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 22,
+            color: AppColor.textPrimaryColor,
+          ),
+          headlineMedium: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 20,
+            color: AppColor.textPrimaryColor,
+          ),
+          headlineSmall: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 18,
+            color: AppColor.textPrimaryColor,
+          ),
+          titleLarge: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            color: AppColor.textPrimaryColor,
+          ),
+          bodyLarge: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: AppColor.textPrimaryColor,
+          ),
+          bodyMedium: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+            color: AppColor.textPrimaryColor,
+          ),
+          bodySmall: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 10,
+            color: AppColor.textPrimaryColor,
+          ),
+        ),
+      ),
     );
   }
 }

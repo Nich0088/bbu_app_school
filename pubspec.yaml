@@ -22,6 +22,10 @@ dependencies:
   cached_network_image: ^3.4.1
   injectable: ^2.4.4
   carousel_slider: ^5.0.0
+  http: ^1.2.2
+  lottie: ^2.2.0
+  flutter_svg: ^2.0.10+1
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -40,8 +44,45 @@ flutter:
   assets:
     - assets/
     - assets/dashboard/
+    - assets/loading.json
+    - assets/translations/
 
   fonts:
-    - family: sourcesanspro
+    - family: sourceSansThree
       fonts:
-        - asset: assets/fonts/source_sans_pro.ttf
+        - asset: assets/fonts/source_sans_3/SourceSans3-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/source_sans_3/SourceSans3-Light.ttf
+          weight: 300
+        - asset: assets/fonts/source_sans_3/SourceSans3-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/source_sans_3/SourceSans3-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/source_sans_3/SourceSans3-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/source_sans_3/SourceSans3-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/source_sans_3/SourceSans3-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/source_sans_3/SourceSans3-Black.ttf
+          weight: 900
+    - family: notoSansKhmer
+      fonts:
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Light.ttf
+          weight: 300
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/noto_sans_khmer/NotoSansKhmer-Black.ttf
+          weight: 900

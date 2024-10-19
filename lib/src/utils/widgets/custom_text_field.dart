@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? initialValue;
   final String? hintText;
   final String? label;
-  final Widget? labelWidget;
   final bool? obscureText;
   final Widget? prefix;
   final Widget? prefixIcon;
@@ -23,10 +22,10 @@ class CustomTextField extends StatefulWidget {
   final int? maxLength;
   final VoidCallback? onEditingComplete;
   final GestureTapCallback? onTap;
-  final bool? isValidate;
+  final bool? isShowError;
   final bool? isRequired;
   final TextEditingController? controller;
-  final String? validateDescription;
+  final String? errorDescription;
   final Color? validateColor;
   final IconData? validateIcon;
   final TextStyle? validateDescriptionStyle;
@@ -38,20 +37,20 @@ class CustomTextField extends StatefulWidget {
   final Color? focusedBorderColor;
   final bool? isShowMaxLength;
   final FocusNode? focusNode;
+
   const CustomTextField({
     super.key,
     this.hintText,
     this.padding,
     this.controller,
     this.label,
-    this.labelWidget ,
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
     this.isRequired = false,
     this.prefix,
     this.suffix,
-    this.isValidate = false,
+    this.isShowError = false,
     this.inputFormatters,
     this.onEditingComplete,
     this.validator,
@@ -61,7 +60,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.maxLength,
     this.initialValue,
-    this.validateDescription,
+    this.errorDescription,
     this.validateColor = const Color(0xFFFF4444),
     this.validateIcon,
     this.validateDescriptionStyle,
@@ -91,7 +90,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
           initialValue: widget.initialValue,
           controller: widget.controller,
           style: widget.textFormFieldStyle ??
-              Theme.of(context).textTheme.bodyMedium,
+              Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: AppColor.textSecondaryColor),
           scrollPadding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
@@ -128,41 +130,36 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintStyle:
                 widget.hintStyle ?? Theme.of(context).textTheme.bodyLarge,
             label: (() {
-              if (widget.labelWidget != null) {
-                return widget.labelWidget;
-              } else {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                    color: widget.controller?.text == ''
-                        ? const Color(0xffF2F2F2)
-                        : AppColor.cardColor,
-                  ),
-                  width: widget.isRequired == true
-                      ? ((widget.label?.length ?? 0) * 12)
-                      : (widget.label?.length ?? 0) * 8,
-                  child: Row(
-                    children: [
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(6)),
+                  color: widget.controller?.text == ''
+                      ? const Color(0xffF2F2F2)
+                      : AppColor.cardColor,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.label != null ? '${widget.label}' : '',
+                      style: widget.labelStyle ??
+                          Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                color: AppColor.primaryColor,
+                              ),
+                    ),
+                    if (widget.isRequired == true)
                       Text(
-                        widget.label != null ? '${widget.label}' : '',
-                        style: widget.labelStyle ??
+                        ' *',
+                        style: widget.requiredSignStyle ??
                             Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: AppColor.successColor,
+                                  color: widget.validateColor ??
+                                      const Color(0xFFFF4444),
                                 ),
                       ),
-                      if (widget.isRequired == true)
-                        Text(
-                          ' *',
-                          style: widget.requiredSignStyle ??
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: widget.validateColor ??
-                                        const Color(0xFFFF4444),
-                                  ),
-                        ),
-                    ],
-                  ),
-                );
-              }
+                  ],
+                ),
+              );
             }()),
             labelStyle: widget.labelStyle ??
                 Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -181,7 +178,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
               borderSide: BorderSide(
                 width: 1,
-                color: widget.isValidate == false
+                color: widget.isShowError == false
                     ? isNull == true
                         ? const Color(0xffF2F2F2)
                         : const Color(0xffE0E0E0)
@@ -210,7 +207,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           },
           onSaved: widget.onSavedTextField,
         ),
-        if (widget.isValidate == true || widget.maxLength != null)
+        if (widget.isShowError == true || widget.maxLength != null)
           Padding(
             padding: const EdgeInsets.only(
               left: 5,
@@ -219,7 +216,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             child: Row(
               children: [
                 (() {
-                  if (widget.isValidate == true) {
+                  if (widget.isShowError == true) {
                     if (widget.validateIcon != null) {
                       return Icon(
                         widget.validateIcon,
@@ -248,13 +245,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   }
                 }()),
                 SizedBox(
-                  width: widget.isValidate == true ? 9 : 0,
+                  width: widget.isShowError == true ? 8 : 0,
                 ),
-                if (widget.isValidate == true)
+                if (widget.isShowError == true)
                   Expanded(
                     child: Text(
-                      widget.validateDescription != null
-                          ? widget.validateDescription!
+                      widget.errorDescription != null
+                          ? "${widget.errorDescription}"
                           : "",
                       style: widget.validateDescriptionStyle ??
                           Theme.of(context).textTheme.displayLarge!.copyWith(

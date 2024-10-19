@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
+import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/message_item.dart';
 
 class DashboardController extends GetxController {
@@ -134,4 +135,10 @@ class DashboardController extends GetxController {
         "https://cdn.mos.cms.futurecdn.net/29pFDaXVUj4Kb8PkUqu6uJ.jpg",
         "https://i.ytimg.com/vi/iWbuLClZpRg/maxresdefault.jpg",
       ];
+
+  var selectedLanguage = Language.english.obs;
+
+  void setSelectedLanguage(Language language) {
+    selectedLanguage.value = language;
+  }
 }
