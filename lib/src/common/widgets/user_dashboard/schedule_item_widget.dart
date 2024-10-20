@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/app_setting.dart';
-import '../../modules/user_dashboard/model/schedule_item.dart';
+import '../../../constants/app_setting.dart';
+import '../../../modules/user_dashboard/model/schedule_item.dart';
 
 class ScheduleItemWidget extends StatelessWidget {
   final bool isLastItem;
@@ -84,7 +84,7 @@ class ScheduleItemWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              // const SizedBox(width: 20),
+              const SizedBox(width: 20),
               Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

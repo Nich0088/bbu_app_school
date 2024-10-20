@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/campus_screen.dart';
@@ -18,7 +19,6 @@ import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
 import 'package:school_app/src/modules/registration_application/screen/registration_application_screen.dart';
 import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
-import 'package:school_app/src/utils/helpers/local_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

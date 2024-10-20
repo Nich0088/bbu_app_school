@@ -10,11 +10,12 @@ import 'package:school_app/src/modules/dashboard/controller/dashboard_controller
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
-import 'package:school_app/src/utils/widgets/custom_app_bar.dart';
-import 'package:school_app/src/utils/widgets/custom_button.dart';
-import 'package:school_app/src/widgets/dashboard/certificate_format_item_widget.dart';
-import 'package:school_app/src/widgets/dashboard/home_grid_item_widget.dart';
-import 'package:school_app/src/widgets/dashboard/message_item_widget.dart';
+
+import '../../../common/widgets/custom_app_bar.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/dashboard/certificate_format_item_widget.dart';
+import '../../../common/widgets/dashboard/home_grid_item_widget.dart';
+import '../../../common/widgets/dashboard/message_item_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen(

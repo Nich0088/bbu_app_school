@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_app/src/constants/app_setting.dart';
-import 'package:school_app/src/utils/widgets/custom_app_bar.dart';
 
+import '../../../../common/widgets/custom_app_bar.dart';
 import '../../../../modules/user_dashboard/controller/contact_controller.dart';
 
 class ContactScreen extends StatefulWidget {
