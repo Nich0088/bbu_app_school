@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:school_app/src/common/helpers/app_dialog_helper.dart';
 
 import '../../../../common/api_endpoint.dart';
+import '../../../../common/helpers/local_storage.dart';
+import '../model/login_result.dart';
 
 class LoginController extends GetxController {
   static const int _usernameMaxLength = 4;
@@ -39,7 +41,7 @@ class LoginController extends GetxController {
     isInvalidPassword.value = false;
   }
 
-  Future<void> loginUser() async {
+  Future<void> loginUser({required VoidCallback onSuccess}) async {
     if (usernameTextEditingController.value.text.length < _usernameMaxLength) {
       invalidUsernameDescription.value = "Please enter username";
       isInvalidUsername.value = true;
@@ -69,15 +71,25 @@ class LoginController extends GetxController {
       }),
     );
     _setLoadingState(false);
-    // var loginResult = LoginResult.fromJson(json)
-    //
-    // if (response.statusCode == 200) {
-    //   //
-    // } else {
-    //   _appDialogHelper?.showErrorDialog(errorMessage: response.body., errorCode: errorCode)
-    // }
+    var loginResult = LoginResult.fromJson(jsonDecode(response.body));
+    debugPrint(jsonEncode(loginResult));
+    if (response.statusCode == 200) {
+      if (loginResult.data?.token != null) {
+        await LocalStorage.storeData(
+          key: 'token',
+          value: loginResult.data?.token,
+        );
+        onSuccess.call();
+      } else {
+        _appDialogHelper?.showErrorDialog(
+          errorMessage: loginResult.message ?? '',
+          errorCode: loginResult.code?.toString() ?? '',
+        );
+      }
+      return;
+    }
   }
-
+  
   void _setLoadingState(bool isLoading) {
     isShowLoading = isLoading;
     update();

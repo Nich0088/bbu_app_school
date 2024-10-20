@@ -9,13 +9,25 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-      const Duration(milliseconds: 3000),
-      () {
+    return _displaySplashScreenAndDoAction(
+      context: context,
+      action: () {
         context.go(
           AppScreen.roleSelectionScreen.path,
           extra: UserType.loggedInUser,
         );
+      },
+    );
+  }
+
+  Widget _displaySplashScreenAndDoAction({
+    required BuildContext context,
+    required VoidCallback action,
+  }) {
+    Future.delayed(
+      const Duration(milliseconds: 3000),
+      () {
+        action.call();
       },
     );
     return Scaffold(
