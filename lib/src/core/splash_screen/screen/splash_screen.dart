@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
+import 'package:school_app/src/core/splash_screen/controller/splash_controller.dart';
 
 import '../../../modules/dashboard/models/user_type.dart';
 
@@ -9,12 +11,23 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SplashController controller = Get.put(SplashController());
     return _displaySplashScreenAndDoAction(
       context: context,
       action: () {
-        context.go(
-          AppScreen.roleSelectionScreen.path,
-          extra: UserType.loggedInUser,
+        controller.determineRoute(
+          actionOnTokenExist: () {
+            context.go(
+              AppScreen.dashboardScreen.path,
+              extra: UserType.loggedInUser,
+            );
+          },
+          actionOnTokenNotExist: () {
+            context.push(
+              AppScreen.roleSelectionScreen.path,
+              extra: UserType.loggedInUser,
+            );
+          },
         );
       },
     );

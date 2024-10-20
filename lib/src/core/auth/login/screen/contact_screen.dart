@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
 import '../../../../modules/user_dashboard/controller/contact_controller.dart';
@@ -10,10 +11,10 @@ class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
 
   @override
-  State<ContactScreen> createState() => _UserDashboardScreenState();
+  State<ContactScreen> createState() => _ContactScreenState();
 }
 
-class _UserDashboardScreenState extends State<ContactScreen>
+class _ContactScreenState extends State<ContactScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ContactController _contactController = Get.put(ContactController());
@@ -21,7 +22,7 @@ class _UserDashboardScreenState extends State<ContactScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
 
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
@@ -130,43 +131,48 @@ class _UserDashboardScreenState extends State<ContactScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(250),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        // Set a background color if needed
-                        border: Border.all(
-                          color: AppColor.textSecondaryColor
-                              .withOpacity(0.4), // Border color
-                        ),
-                        borderRadius: BorderRadius.circular(250),
-                        // Rounded corners for the border
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            // Shadow color
-                            blurRadius: 6.0,
-                            // Softness of the shadow
-                            spreadRadius: 2.0,
-                            // Size of the shadow
-                            offset: const Offset(
-                                0, 4), // Position of the shadow (x, y)
+                GestureDetector(
+                  onTap: () {
+                    _openUrl("https://www.youtube.com/watch?v=1_NVaujWgBg");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(250),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // Set a background color if needed
+                          border: Border.all(
+                            color: AppColor.textSecondaryColor
+                                .withOpacity(0.4), // Border color
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(250),
-                        // Ensure the image also has rounded corners
-                        child: Image.asset(
-                          "assets/dashboard/communication .png",
-                          width: 40,
-                          height: 40,
-                          fit: BoxFit.cover,
+                          borderRadius: BorderRadius.circular(250),
+                          // Rounded corners for the border
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              // Shadow color
+                              blurRadius: 6.0,
+                              // Softness of the shadow
+                              spreadRadius: 2.0,
+                              // Size of the shadow
+                              offset: const Offset(
+                                  0, 4), // Position of the shadow (x, y)
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(250),
+                          // Ensure the image also has rounded corners
+                          child: Image.asset(
+                            "assets/dashboard/communication.png",
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -290,7 +296,6 @@ class _UserDashboardScreenState extends State<ContactScreen>
                 const SizedBox(height: 4),
                 ...item.phoneNumberList.map(
                   (phoneNumber) => Row(
-                    // crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 4, right: 44),
@@ -301,13 +306,19 @@ class _UserDashboardScreenState extends State<ContactScreen>
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Text(
-                        phoneNumber,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColor.primaryColor,
-                              fontSize: 32,
-                            ),
+                      GestureDetector(
+                        onTap: () {
+                          _dialPhoneNumber(phoneNumber);
+                        },
+                        child: Text(
+                          phoneNumber,
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppColor.primaryColor,
+                                    fontSize: 32,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
@@ -320,14 +331,31 @@ class _UserDashboardScreenState extends State<ContactScreen>
       },
     );
   }
+
+  void _dialPhoneNumber(String phoneNumber) async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    }
+  }
+
+  void _openUrl(String url) async {
+    final Uri webUri = Uri.parse(url);
+    await launchUrl(
+      webUri,
+    );
+  }
 }
 
 class ContactItemWidget extends StatelessWidget {
   final ContactItem item;
   final GestureTapCallback onPressed;
 
-  const ContactItemWidget(
-      {super.key, required this.item, required this.onPressed});
+  const ContactItemWidget({
+    super.key,
+    required this.item,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -341,31 +369,32 @@ class ContactItemWidget extends StatelessWidget {
           width: double.infinity,
           height: 70,
           decoration: BoxDecoration(
-              color: AppColor.textPrimaryColor, // Background color
-              borderRadius: BorderRadius.circular(16.0),
-              border: Border.all(
-                color: AppColor.textSecondaryColor.withOpacity(0.1),
+            color: AppColor.textPrimaryColor, // Background color
+            borderRadius: BorderRadius.circular(16.0),
+            border: Border.all(
+              color: AppColor.textSecondaryColor.withOpacity(0.1),
+            ),
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.1),
+                blurRadius: 25,
+                spreadRadius: -5,
+                offset: Offset(
+                  0,
+                  20,
+                ),
               ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.1),
-                  blurRadius: 25,
-                  spreadRadius: -5,
-                  offset: Offset(
-                    0,
-                    20,
-                  ),
+              BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 0.04),
+                blurRadius: 10,
+                spreadRadius: -5,
+                offset: Offset(
+                  0,
+                  10,
                 ),
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.04),
-                  blurRadius: 10,
-                  spreadRadius: -5,
-                  offset: Offset(
-                    0,
-                    10,
-                  ),
-                ),
-              ]),
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -390,11 +419,9 @@ class ContactItemWidget extends StatelessWidget {
                       item.title,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            // color: AppColor.primaryColor,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 20.0,
-                            // Make the text bold
                           ),
                     ),
                     Row(
@@ -410,7 +437,7 @@ class ContactItemWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
+                          width: MediaQuery.of(context).size.width - 186,
                           child: Text(
                             item.phoneNumberList.join(", "),
                             textAlign: TextAlign.center,

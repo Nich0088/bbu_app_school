@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
+  static const String tokenKey = "token";
+
   static SharedPreferences? _prefs;
 
   // initial SharedPreferences
@@ -28,19 +30,19 @@ class LocalStorage {
 
   // function for get data from local storage
 
-  static Future<int> getIntValue({String? key}) async {
-    return (_prefs!.getInt(key!) ?? 0);
+  static Future<int?> getIntValue({String? key}) async {
+    return _prefs!.getInt(key!);
   }
 
-  static Future<String> getStringValue({String? key}) async {
-    return (_prefs!.getString(key!) ?? "");
+  static Future<String?> getStringValue({String? key}) async {
+    return _prefs!.getString(key!);
   }
 
-  static Future<bool> getBooleanValue({String? key}) async {
-    return (_prefs!.getBool(key!) ?? false);
+  static Future<bool?> getBooleanValue({String? key}) async {
+    return _prefs!.getBool(key!);
   }
 
-  static Future<double> getDoubleValue({String? key}) async {
-    return (_prefs!.getDouble(key!) ?? 0.0);
+  static Future<double?> getDoubleValue({String? key}) async {
+    return _prefs!.getDouble(key!);
   }
 }

@@ -76,7 +76,7 @@ class LoginController extends GetxController {
     if (response.statusCode == 200) {
       if (loginResult.data?.token != null) {
         await LocalStorage.storeData(
-          key: 'token',
+          key: LocalStorage.tokenKey,
           value: loginResult.data?.token,
         );
         onSuccess.call();
@@ -89,7 +89,7 @@ class LoginController extends GetxController {
       return;
     }
   }
-  
+
   void _setLoadingState(bool isLoading) {
     isShowLoading = isLoading;
     update();
