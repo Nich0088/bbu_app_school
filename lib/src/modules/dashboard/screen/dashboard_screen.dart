@@ -40,212 +40,209 @@ class DashboardScreen extends StatelessWidget {
 
   Widget _setupViewForLoggedInUser(BuildContext context) {
     DashboardController dashboardController = Get.put(DashboardController());
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: AppColor.primaryColor,
+      appBar: CustomAppBar(
+        context,
         backgroundColor: AppColor.primaryColor,
-        appBar: CustomAppBar(
-          context,
-          backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: true,
-          username: "Srey Nich",
-          imageUrl:
-              "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
-          onLanguagePressed: () {
-            _showBottomSheet(context);
-          },
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(
-                  top: AppStyle.horizontalPadding,
-                  left: AppStyle.horizontalPadding,
-                  right: AppStyle.horizontalPadding,
+        isDashboardAppBar: true,
+        username: "Srey Nich",
+        imageUrl:
+            "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
+        onLanguagePressed: () {
+          _showBottomSheet(context);
+        },
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                top: AppStyle.horizontalPadding,
+                left: AppStyle.horizontalPadding,
+                right: AppStyle.horizontalPadding,
+              ),
+              decoration: const BoxDecoration(
+                color: AppColor.background,
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              height: 300,
+              width: double.infinity,
+              child: GridView.builder(
+                padding: const EdgeInsets.all(AppStyle.horizontalPadding),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  mainAxisExtent: (MediaQuery.of(context).size.width - 96) / 3,
                 ),
-                decoration: const BoxDecoration(
-                  color: AppColor.background,
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                ),
-                height: 300,
-                width: double.infinity,
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(AppStyle.horizontalPadding),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    mainAxisExtent:
-                        (MediaQuery.of(context).size.width - 96) / 3,
-                  ),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  // itemCount: getIt<DashboardController>().homeGridItemList.length,
-                  itemCount: dashboardController.homeGridItemList.length,
-                  itemBuilder: (context, index) {
-                    return HomeGridItemWidget(
-                      item: dashboardController.homeGridItemList[index],
-                      onTap: () {
-                        switch (
-                            dashboardController.homeGridItemList[index].type) {
-                          case HomeGridItemType.attendant:
-                            // context.push("");
-                            break;
-                          case HomeGridItemType.forEnrollment:
-                            // context.push("");
-                            break;
-                          case HomeGridItemType.contact:
-                            context.push(AppScreen.contactScreen.path);
-                            break;
-                          case HomeGridItemType.checkIn:
-                            // context.push("");
-                            break;
-                          case HomeGridItemType.campus:
-                            context.push(AppScreen.campusScreen.path);
-                            break;
-                          case HomeGridItemType.location:
-                            context.push(AppScreen.locationScreen.path);
-                            break;
-                          case HomeGridItemType.billing:
-                            // context.push("");
-                            break;
-                          case HomeGridItemType.scholarship:
-                            context.push(AppScreen.scholarshipScreen.path);
-                            break;
-                          case HomeGridItemType.aboutUs:
-                            context.push(AppScreen.aboutUsScreen.path);
-                            break;
-                          case HomeGridItemType.study:
-                            context.push(AppScreen.userDashboardScreen.path);
-                            break;
-                          case HomeGridItemType.event:
-                            context.push(AppScreen.eventsScreen.path);
-                            break;
-                          case HomeGridItemType.video:
-                            context.push(AppScreen.videoScreen.path);
-                            break;
-                        }
-                      },
-                    );
-                  },
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                // itemCount: getIt<DashboardController>().homeGridItemList.length,
+                itemCount: dashboardController.homeGridItemList.length,
+                itemBuilder: (context, index) {
+                  return HomeGridItemWidget(
+                    item: dashboardController.homeGridItemList[index],
+                    onTap: () {
+                      switch (
+                          dashboardController.homeGridItemList[index].type) {
+                        case HomeGridItemType.attendant:
+                          // context.push("");
+                          break;
+                        case HomeGridItemType.forEnrollment:
+                          // context.push("");
+                          break;
+                        case HomeGridItemType.contact:
+                          context.push(AppScreen.contactScreen.path);
+                          break;
+                        case HomeGridItemType.checkIn:
+                          // context.push("");
+                          break;
+                        case HomeGridItemType.campus:
+                          context.push(AppScreen.campusScreen.path);
+                          break;
+                        case HomeGridItemType.location:
+                          context.push(AppScreen.locationScreen.path);
+                          break;
+                        case HomeGridItemType.billing:
+                          // context.push("");
+                          break;
+                        case HomeGridItemType.scholarship:
+                          context.push(AppScreen.scholarshipScreen.path);
+                          break;
+                        case HomeGridItemType.aboutUs:
+                          context.push(AppScreen.aboutUsScreen.path);
+                          break;
+                        case HomeGridItemType.study:
+                          context.push(AppScreen.userDashboardScreen.path);
+                          break;
+                        case HomeGridItemType.event:
+                          context.push(AppScreen.eventsScreen.path);
+                          break;
+                        case HomeGridItemType.video:
+                          context.push(AppScreen.videoScreen.path);
+                          break;
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: AppStyle.horizontalPadding,
+                bottom: 18,
+              ),
+              child: Text(
+                "Certificate format",
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              height: 115,
+              decoration: const BoxDecoration(
+                color: AppColor.background,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dashboardController.certificateFormatList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return CertificateFormatItemWidget(
+                    index: index,
+                    item: dashboardController.certificateFormatList[index],
+                    onTap: () {
+                      //
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                top: 20,
+                right: 20,
+                bottom: 18,
+              ),
+              child: Text(
+                "Message",
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              height: 196,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dashboardController.messageList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return MessageItemWidget(
+                    item: dashboardController.messageList[index],
+                    isLastItem:
+                        index == dashboardController.messageList.length - 1,
+                    onTap: () {
+                      //
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                top: 20,
+                right: 20,
+                bottom: 18,
+              ),
+              child: Text(
+                "Slide Show",
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 16,
+              ),
+              child: CarouselSlider.builder(
+                itemCount: dashboardController.imageSlideList.length,
+                itemBuilder: (context, index, realIndex) {
+                  return ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: CachedNetworkImage(
+                      width: double.infinity,
+                      imageUrl: dashboardController.imageSlideList[index],
+                      fit: BoxFit.fill,
+                    ),
+                  );
+                },
+                options: CarouselOptions(
+                  height: 240,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 2),
+                  viewportFraction: 0.9,
+                  enlargeCenterPage: true,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: AppStyle.horizontalPadding,
-                  bottom: 18,
-                ),
-                child: Text(
-                  "Certificate format",
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 115,
-                decoration: const BoxDecoration(
-                  color: AppColor.background,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: dashboardController.certificateFormatList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return CertificateFormatItemWidget(
-                      index: index,
-                      item: dashboardController.certificateFormatList[index],
-                      onTap: () {
-                        //
-                      },
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  top: 20,
-                  right: 20,
-                  bottom: 18,
-                ),
-                child: Text(
-                  "Message",
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 196,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: dashboardController.messageList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return MessageItemWidget(
-                      item: dashboardController.messageList[index],
-                      isLastItem:
-                          index == dashboardController.messageList.length - 1,
-                      onTap: () {
-                        //
-                      },
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  top: 20,
-                  right: 20,
-                  bottom: 18,
-                ),
-                child: Text(
-                  "Slide Show",
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 16,
-                ),
-                child: CarouselSlider.builder(
-                  itemCount: dashboardController.imageSlideList.length,
-                  itemBuilder: (context, index, realIndex) {
-                    return ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: CachedNetworkImage(
-                        width: double.infinity,
-                        imageUrl: dashboardController.imageSlideList[index],
-                        fit: BoxFit.fill,
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: 240,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 2),
-                    viewportFraction: 0.9,
-                    enlargeCenterPage: true,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
