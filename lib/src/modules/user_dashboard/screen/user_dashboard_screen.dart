@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
-import 'package:school_app/src/utils/widgets/custom_app_bar.dart';
-import 'package:school_app/src/widgets/user_dashboard/study_item_widget.dart';
 
-import '../../../widgets/user_dashboard/schedule_item_widget.dart';
-import '../../../widgets/user_dashboard/study_result_item_widget.dart';
+import '../../../common/widgets/custom_app_bar.dart';
+import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
+import '../../../common/widgets/user_dashboard/study_item_widget.dart';
+import '../../../common/widgets/user_dashboard/study_result_item_widget.dart';
 
 class UserDashboardScreen extends StatefulWidget {
   const UserDashboardScreen({super.key});
