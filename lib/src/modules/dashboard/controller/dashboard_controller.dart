@@ -77,12 +77,12 @@ class DashboardController extends GetxController {
           "assets/dashboard/call.png",
           HomeGridItemType.contact,
         ),
-        // HomeGridItem(
-        //   11,
-        //   "Attendant",
-        //   "assets/dashboard/calendar.png",
-        //   HomeGridItemType.attendant,
-        // ),
+        HomeGridItem(
+          11,
+          "Video",
+          "assets/dashboard/play-button.png",
+          HomeGridItemType.video,
+        ),
       ];
 
   List<CertificateFormatItem> get certificateFormatList => [

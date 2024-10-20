@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../constants/app_setting.dart';
+import '../../../../utils/widgets/custom_app_bar.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -8,35 +9,12 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 120,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: () {
-                  // Action for more options
-                },
-              ),
-            ),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 100),
-                margin: const EdgeInsets.only(top: 24),
-                child: const Text(
-                  'About Us',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold, // Set text to italic
-                  ),
-                )),
-          ],
-        ),
-        backgroundColor: AppColor.primaryColor, // Customize AppBar color
-        centerTitle: true, // Center the title
+      appBar: CustomAppBar(
+        context,
+        backgroundColor: AppColor.primaryColor,
+        isDashboardAppBar: false,
+        title: "About Us",
+        isCenterTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

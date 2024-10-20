@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/campus_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/contact_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/events_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/video_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
@@ -88,6 +90,14 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.registrationApplicationScreen.path,
       builder: (context, state) => const RegistrationApplicationScreen(),
     ),
+    GoRoute(
+      path: AppScreen.campusScreen.path,
+      builder: (context, state) => const CampusScreen(),
+    ),
+    GoRoute(
+      path: AppScreen.videoScreen.path,
+      builder: (context, state) => const VideoScreen(),
+    ),
   ],
 );
 
@@ -102,7 +112,9 @@ enum AppScreen {
   eventsScreen("/events"),
   userDashboardScreen("/user-dashboard"),
   registrationApplicationScreen("/registration-application"),
-  locationScreen("/location");
+  locationScreen("/location"),
+  campusScreen("/campus"),
+  videoScreen("/video");
 
   final String path;
 

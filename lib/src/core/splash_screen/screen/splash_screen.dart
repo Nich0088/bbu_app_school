@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       const Duration(milliseconds: 3000),
       () {
         context.go(
-          AppScreen.contactScreen.path,
+          AppScreen.roleSelectionScreen.path,
           extra: UserType.loggedInUser,
         );
       },

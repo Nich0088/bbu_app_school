@@ -10,14 +10,11 @@ class ContactController extends GetxController {
           id: 0,
           image: "assets/app_logo.png",
           title: "Phnom Penh Campus",
-          phoneNumber: "023 987 700, 012 682...",
-          subTitle: "subTitle",
-        ),
-        ContactItem(
-          id: 1,
-          image: "assets/app_logo.png",
-          title: "Phnom Penh Campus",
-          phoneNumber: "023 987 700, 012 682...",
+          phoneNumberList: [
+            "023 987 700",
+            "023 987 700",
+            "023 987 700",
+          ],
           subTitle: "subTitle",
         ),
         // ContactItem(
@@ -35,13 +32,13 @@ class ContactItem {
   final String image;
   final String title;
   final String subTitle;
-  final String phoneNumber;
+  final List<String> phoneNumberList;
 
   ContactItem({
     required this.id,
     required this.image,
     required this.title,
     required this.subTitle,
-    required this.phoneNumber,
+    required this.phoneNumberList,
   });
 }

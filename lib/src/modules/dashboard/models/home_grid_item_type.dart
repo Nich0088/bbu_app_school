@@ -10,4 +10,5 @@ enum HomeGridItemType {
   study,
   attendant,
   contact,
+  video,
 }

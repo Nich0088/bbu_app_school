@@ -46,7 +46,7 @@ class DashboardScreen extends StatelessWidget {
           context,
           backgroundColor: AppColor.primaryColor,
           isDashboardAppBar: true,
-          username: "Elon Musk",
+          username: "Srey Nich",
           imageUrl:
               "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
           onLanguagePressed: () {
@@ -101,10 +101,10 @@ class DashboardScreen extends StatelessWidget {
                             // context.push("");
                             break;
                           case HomeGridItemType.campus:
-                            // context.push("");
+                            context.push(AppScreen.campusScreen.path);
                             break;
                           case HomeGridItemType.location:
-                            // context.push("");
+                            context.push(AppScreen.locationScreen.path);
                             break;
                           case HomeGridItemType.billing:
                             // context.push("");
@@ -120,6 +120,9 @@ class DashboardScreen extends StatelessWidget {
                             break;
                           case HomeGridItemType.event:
                             context.push(AppScreen.eventsScreen.path);
+                            break;
+                          case HomeGridItemType.video:
+                            context.push(AppScreen.videoScreen.path);
                             break;
                         }
                       },

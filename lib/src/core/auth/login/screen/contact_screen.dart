@@ -81,6 +81,10 @@ class _UserDashboardScreenState extends State<ContactScreen>
       itemBuilder: (context, index) {
         return ContactItemWidget(
           item: _contactController.contactItemList[index],
+          onPressed: () {
+            _showBottomSheet(
+                context, _contactController.contactItemList[index]);
+          },
         );
       },
     );
@@ -155,7 +159,7 @@ class _UserDashboardScreenState extends State<ContactScreen>
                         borderRadius: BorderRadius.circular(250),
                         // Ensure the image also has rounded corners
                         child: Image.asset(
-                          "assets/dashboard/facebook.webp",
+                          "assets/dashboard/communication .png",
                           width: 40,
                           height: 40,
                           fit: BoxFit.cover,
@@ -163,20 +167,91 @@ class _UserDashboardScreenState extends State<ContactScreen>
                       ),
                     ),
                   ),
-                )
-
-                // Image.asset(
-                //   "assets/dashboard/youtube.webp",
-                //   width: 40,
-                //   height: 40,
-                //   fit: BoxFit.cover,
-                // ),
-                // Image.asset(
-                //   "assets/dashboard/call1.png",
-                //   width: 33,
-                //   height: 33,
-                //   fit: BoxFit.cover,
-                // ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(250),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        // Set a background color if needed
+                        border: Border.all(
+                          color: AppColor.textSecondaryColor
+                              .withOpacity(0.4), // Border color
+                        ),
+                        borderRadius: BorderRadius.circular(250),
+                        // Rounded corners for the border
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            // Shadow color
+                            blurRadius: 6.0,
+                            // Softness of the shadow
+                            spreadRadius: 2.0,
+                            // Size of the shadow
+                            offset:
+                                Offset(0, 4), // Position of the shadow (x, y)
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(250),
+                        // Ensure the image also has rounded corners
+                        child: Image.asset(
+                          "assets/dashboard/youtube.png",
+                          width: 10,
+                          height: 10,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(250),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        // Set a background color if needed
+                        border: Border.all(
+                          color: AppColor.textSecondaryColor
+                              .withOpacity(0.4), // Border color
+                        ),
+                        borderRadius: BorderRadius.circular(250),
+                        // Rounded corners for the border
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            // Shadow color
+                            blurRadius: 6.0,
+                            // Softness of the shadow
+                            spreadRadius: 2.0,
+                            // Size of the shadow
+                            offset:
+                                Offset(0, 4), // Position of the shadow (x, y)
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(250),
+                        // Ensure the image also has rounded corners
+                        child: Image.asset(
+                          "assets/dashboard/call1.png",
+                          width: 0,
+                          height: 0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
@@ -184,116 +259,179 @@ class _UserDashboardScreenState extends State<ContactScreen>
       ),
     );
   }
-}
 
-class ContactItemWidget extends StatelessWidget {
-  final ContactItem item;
-
-  const ContactItemWidget({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: double.infinity,
-        height: 70,
-        decoration: BoxDecoration(
-            color: AppColor.textPrimaryColor, // Background color
-            borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(
-              color: AppColor.textSecondaryColor.withOpacity(0.1),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.1),
-                blurRadius: 25,
-                spreadRadius: -5,
-                offset: Offset(
-                  0,
-                  20,
-                ),
-              ),
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.04),
-                blurRadius: 10,
-                spreadRadius: -5,
-                offset: Offset(
-                  0,
-                  10,
-                ),
-              ),
-            ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(250),
-                child: Container(
-                  width: 35,
-                  height: 35,
-                  child: Image.asset(
-                    item.image,
-                    width: 400,
-                    height: 400,
-                    fit: BoxFit.cover,
+  void _showBottomSheet(BuildContext context, ContactItem item) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  width: 60,
+                  height: 5,
+                  decoration: const BoxDecoration(
+                    color: Color(0x617C7C7C),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                 ),
-              ),
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.only(left: 0, right: 45, top: 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    item.title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          // color: AppColor.primaryColor,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                          // Make the text bold
-                        ),
-                  ),
-                  Row(
+                const SizedBox(height: 4),
+                ...item.phoneNumberList.map(
+                  (phoneNumber) => Row(
+                    // crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 6, right: 1),
+                        padding: const EdgeInsets.only(left: 4, right: 44),
                         child: Image.asset(
                           "assets/dashboard/call.png",
-                          width: 13,
-                          height: 13,
+                          width: 22,
+                          height: 22,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Text(
-                        item.phoneNumber,
+                        phoneNumber,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.black,
-                              fontSize: 18.0,
+                              color: AppColor.primaryColor,
+                              fontSize: 32,
                             ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 14),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 0, right: 20, bottom: 0),
-              child: Image.asset(
-                "assets/dashboard/right-arrow.png",
-                width: 15,
-                height: 15,
-                fit: BoxFit.cover,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ContactItemWidget extends StatelessWidget {
+  final ContactItem item;
+  final GestureTapCallback onPressed;
+
+  const ContactItemWidget(
+      {super.key, required this.item, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onPressed();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: double.infinity,
+          height: 70,
+          decoration: BoxDecoration(
+              color: AppColor.textPrimaryColor, // Background color
+              borderRadius: BorderRadius.circular(16.0),
+              border: Border.all(
+                color: AppColor.textSecondaryColor.withOpacity(0.1),
               ),
-            ),
-          ],
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.1),
+                  blurRadius: 25,
+                  spreadRadius: -5,
+                  offset: Offset(
+                    0,
+                    20,
+                  ),
+                ),
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.04),
+                  blurRadius: 10,
+                  spreadRadius: -5,
+                  offset: Offset(
+                    0,
+                    10,
+                  ),
+                ),
+              ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 0),
+                child: ClipOval(
+                  child: Image.asset(
+                    item.image,
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.only(left: 0, right: 45, top: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            // color: AppColor.primaryColor,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            // Make the text bold
+                          ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 26, right: 1),
+                          child: Image.asset(
+                            "assets/dashboard/call.png",
+                            width: 13,
+                            height: 13,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Text(
+                            item.phoneNumberList.join(", "),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18.0,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 0, right: 20, bottom: 0),
+                child: Image.asset(
+                  "assets/dashboard/right-arrow.png",
+                  width: 15,
+                  height: 15,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -62,7 +62,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
               text: "Result",
             ),
             Tab(
-              text: "Schedule",
+              text: "Class",
             ),
             Tab(
               text: "Chat",
@@ -75,7 +75,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
         children: [
           _studyTab(),
           _resultTab(),
-          _scheduleTab(),
+          _classTab(),
           _chatTab(),
         ],
       ),
@@ -108,7 +108,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
     );
   }
 
-  Widget _scheduleTab() {
+  Widget _classTab() {
     return ListView.builder(
       itemCount: _userDashboardController.scheduleItemList.length,
       shrinkWrap: true,

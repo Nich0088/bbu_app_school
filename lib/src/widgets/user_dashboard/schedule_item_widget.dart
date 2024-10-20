@@ -84,7 +84,7 @@ class ScheduleItemWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const SizedBox(width: 20),
+              // const SizedBox(width: 20),
               Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
