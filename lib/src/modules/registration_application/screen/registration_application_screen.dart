@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/custom_button.dart';
@@ -29,6 +30,9 @@ class _RegistrationApplicationScreenState
         isDashboardAppBar: false,
         title: "Registration Application",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
       backgroundColor: Colors.white,
       body: Stack(

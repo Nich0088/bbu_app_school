@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
 import '../../../../constants/app_setting.dart';
@@ -20,6 +21,9 @@ class _CampusScreenState extends State<CampusScreen> {
         isDashboardAppBar: false,
         title: "Campus",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
     );
   }

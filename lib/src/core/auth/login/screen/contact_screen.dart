@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
@@ -43,6 +44,9 @@ class _UserDashboardScreenState extends State<ContactScreen>
         backgroundColor: AppColor.primaryColor,
         isDashboardAppBar: false,
         title: "Contact",
+        onPressedBack: () {
+          context.pop();
+        },
         isCenterTitle: true,
         bottom: TabBar(
           controller: _tabController,
@@ -105,14 +109,14 @@ class _UserDashboardScreenState extends State<ContactScreen>
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               "Phnom Penh  Campus, Corner Street 1003 & 1988(Building A and Corner Street 1003 & 1992 (Building B), Sangkat Phnom Penh Thmey, Khan Sensok, Phnom Penh",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: 18, color: Colors.black.withOpacity(0.6)),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               "Follow Us On",
               textAlign: TextAlign.center,
@@ -122,7 +126,7 @@ class _UserDashboardScreenState extends State<ContactScreen>
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            SizedBox(height: 18),
+            const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -150,8 +154,8 @@ class _UserDashboardScreenState extends State<ContactScreen>
                             // Softness of the shadow
                             spreadRadius: 2.0,
                             // Size of the shadow
-                            offset:
-                                Offset(0, 4), // Position of the shadow (x, y)
+                            offset: const Offset(
+                                0, 4), // Position of the shadow (x, y)
                           ),
                         ],
                       ),
@@ -192,8 +196,10 @@ class _UserDashboardScreenState extends State<ContactScreen>
                             // Softness of the shadow
                             spreadRadius: 2.0,
                             // Size of the shadow
-                            offset:
-                                Offset(0, 4), // Position of the shadow (x, y)
+                            offset: const Offset(
+                              0,
+                              4,
+                            ), // Position of the shadow (x, y)
                           ),
                         ],
                       ),
@@ -234,8 +240,8 @@ class _UserDashboardScreenState extends State<ContactScreen>
                             // Softness of the shadow
                             spreadRadius: 2.0,
                             // Size of the shadow
-                            offset:
-                                Offset(0, 4), // Position of the shadow (x, y)
+                            offset: const Offset(
+                                0, 4), // Position of the shadow (x, y)
                           ),
                         ],
                       ),
