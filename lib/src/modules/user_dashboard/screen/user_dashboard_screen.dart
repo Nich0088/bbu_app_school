@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
 
@@ -48,6 +49,9 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
         isDashboardAppBar: false,
         title: "User Dashboard",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
         bottom: TabBar(
           controller: _tabController,
           labelColor: AppColor.textPrimaryColor,

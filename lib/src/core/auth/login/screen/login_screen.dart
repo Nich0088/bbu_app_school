@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
 
+import '../../../../../main.dart';
 import '../../../../common/widgets/custom_text_field.dart';
 import '../../../../common/widgets/loading_container_widget.dart';
+import '../../../../modules/dashboard/models/user_type.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,10 +17,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FocusNode _usernameFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
   final LoginController _loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
+    _loginController.register(context);
+
     return GetBuilder<LoginController>(
       builder: (controller) {
         return LoadingContainerWidget(
@@ -47,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           horizontal: AppStyle.horizontalPadding,
                         ),
                         child: CustomTextField(
+                          focusNode: _usernameFocusNode,
                           errorDescription:
                               _loginController.invalidUsernameDescription.value,
                           isShowError: _loginController.isInvalidUsername.value,
@@ -64,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           horizontal: AppStyle.horizontalPadding,
                         ),
                         child: CustomTextField(
+                          focusNode: _passwordFocusNode,
                           errorDescription:
                               _loginController.invalidPasswordDescription.value,
                           isShowError: _loginController.isInvalidPassword.value,
@@ -109,16 +117,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: FilledButton(
                           onPressed: () async {
-                            // AppDialogHelper().showErrorDialog(
-                            //   context,
-                            //   errorCode: "errorCode",
-                            //   errorMessage: "errorMessage",
-                            // );
-                            await _loginController.loginUser();
-                            // context.push(
-                            //   AppScreen.dashboardScreen.path,
-                            //   extra: UserType.loggedInUser,
-                            // );
+                            _usernameFocusNode.unfocus();
+                            _passwordFocusNode.unfocus();
+                            await _loginController.loginUser(
+                              onSuccess: () {
+                                context.go(
+                                  AppScreen.dashboardScreen.path,
+                                  extra: UserType.loggedInUser,
+                                );
+                              },
+                            );
                           },
                           child: Text(
                             "Login",

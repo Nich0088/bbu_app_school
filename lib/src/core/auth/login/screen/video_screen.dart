@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
 import '../../../../constants/app_setting.dart';
@@ -20,6 +21,9 @@ class _VideoScreenState extends State<VideoScreen> {
         isDashboardAppBar: false,
         title: "Video",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

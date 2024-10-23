@@ -18,6 +18,18 @@ class SplashScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _displaySplashScreenAndDoAction({
+    required BuildContext context,
+    required VoidCallback action,
+  }) {
+    Future.delayed(
+      const Duration(milliseconds: 3000),
+      () {
+        action.call();
+      },
+    );
     return Scaffold(
       body: SizedBox(
         width: double.infinity,

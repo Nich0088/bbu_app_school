@@ -45,7 +45,6 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-</dict>
 <key>NSAppTransportSecurity</key>
 <dict>
   <key>NSAllowsArbitraryLoads</key>
@@ -56,4 +55,5 @@
 	<string>en</string>
 	<string>km</string>
 </array>
+</dict>
 </plist>

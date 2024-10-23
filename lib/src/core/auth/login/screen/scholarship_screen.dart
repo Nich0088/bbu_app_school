@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
@@ -15,6 +16,9 @@ class ScholarshipScreen extends StatelessWidget {
         isDashboardAppBar: false,
         title: "Scholarship",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
       body: Center(
         child: ClipRRect(

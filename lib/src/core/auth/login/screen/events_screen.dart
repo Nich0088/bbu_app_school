@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common/widgets/custom_app_bar.dart';
 import '../../../../constants/app_setting.dart';
@@ -20,6 +21,9 @@ class _EventsScreenState extends State<EventsScreen> {
         isDashboardAppBar: false,
         title: "Events",
         isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,7 +43,7 @@ class _EventsScreenState extends State<EventsScreen> {
                       color: Colors.black.withOpacity(0.2), // Shadow color
                       spreadRadius: 2, // Spread radius
                       blurRadius: 5, // Blur radius
-                      offset: Offset(0, 3), // Offset in x, y
+                      offset: const Offset(0, 3), // Offset in x, y
                     ),
                   ],
                 ),
@@ -50,17 +54,17 @@ class _EventsScreenState extends State<EventsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
                           child: Image.asset(
                             'assets/events1.png',
                             fit: BoxFit.fill,
                           ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 4),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -70,8 +74,8 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 2),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 2),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -84,26 +88,26 @@ class _EventsScreenState extends State<EventsScreen> {
                       ],
                     ),
                     Positioned(
+                      top: 16,
+                      right: -10,
                       child: Container(
-                        padding: EdgeInsets.only(left: 4, right: 4),
-                        child: Text(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: const Text(
                           "24.08.15",
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                        ),
                       ),
-                      top: 16,
-                      right: -10,
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
                 width: double.infinity,
                 height: 300,
@@ -115,7 +119,7 @@ class _EventsScreenState extends State<EventsScreen> {
                       color: Colors.black.withOpacity(0.2), // Shadow color
                       spreadRadius: 2, // Spread radius
                       blurRadius: 5, // Blur radius
-                      offset: Offset(0, 3), // Offset in x, y
+                      offset: const Offset(0, 3), // Offset in x, y
                     ),
                   ],
                 ),
@@ -126,17 +130,17 @@ class _EventsScreenState extends State<EventsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
                           child: Image.asset(
                             'assets/events1.png',
                             fit: BoxFit.fill,
                           ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 4),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -146,8 +150,8 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 2),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 2),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -160,26 +164,26 @@ class _EventsScreenState extends State<EventsScreen> {
                       ],
                     ),
                     Positioned(
+                      top: 16,
+                      right: -10,
                       child: Container(
-                        padding: EdgeInsets.only(left: 4, right: 4),
-                        child: Text(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: const Text(
                           "24.08.15",
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                        ),
                       ),
-                      top: 16,
-                      right: -10,
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
                 width: double.infinity,
                 height: 300,
@@ -191,7 +195,7 @@ class _EventsScreenState extends State<EventsScreen> {
                       color: Colors.black.withOpacity(0.2), // Shadow color
                       spreadRadius: 2, // Spread radius
                       blurRadius: 5, // Blur radius
-                      offset: Offset(0, 3), // Offset in x, y
+                      offset: const Offset(0, 3), // Offset in x, y
                     ),
                   ],
                 ),
@@ -202,17 +206,17 @@ class _EventsScreenState extends State<EventsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
                           child: Image.asset(
                             'assets/events1.png',
                             fit: BoxFit.fill,
                           ),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 4),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 4),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -222,8 +226,8 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0, top: 2),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 12.0, top: 2),
                           child: Text(
                             'ការលើកកម្ពស់ការយល់ដឹងអំពីភាពជាអ្នកដឹកនាំ...',
                             textAlign: TextAlign.start,
@@ -236,21 +240,21 @@ class _EventsScreenState extends State<EventsScreen> {
                       ],
                     ),
                     Positioned(
+                      top: 16,
+                      right: -10,
                       child: Container(
-                        padding: EdgeInsets.only(left: 4, right: 4),
-                        child: Text(
+                        padding: const EdgeInsets.only(left: 4, right: 4),
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                        child: const Text(
                           "24.08.15",
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                        ),
                       ),
-                      top: 16,
-                      right: -10,
                     )
                   ],
                 ),

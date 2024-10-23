@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:school_app/src/common/helpers/app_dialog_helper.dart';
 
 import '../../../../common/api_endpoint.dart';
+import '../../../../common/helpers/local_storage.dart';
+import '../model/login_result.dart';
 
 class LoginController extends GetxController {
   static const int _usernameMaxLength = 4;
@@ -57,7 +59,7 @@ class LoginController extends GetxController {
     String urlString =
         ApiEndpoint.loginBaseUrl + ApiEndpoint.appHelperAuthorizeLogin;
     var url = Uri.parse(urlString);
-    // _setLoadingState(true);
+    _setLoadingState(true);
     var response = await http.post(
       url,
       headers: {
@@ -68,7 +70,7 @@ class LoginController extends GetxController {
         "password": passwordTextEditingController.value.text,
       }),
     );
-    // _setLoadingState(false);
+    _setLoadingState(false);
     // var loginResult = LoginResult.fromJson(json)
     //
     // if (response.statusCode == 200) {
