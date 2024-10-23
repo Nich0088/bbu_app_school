@@ -57,7 +57,7 @@ class LoginController extends GetxController {
     String urlString =
         ApiEndpoint.loginBaseUrl + ApiEndpoint.appHelperAuthorizeLogin;
     var url = Uri.parse(urlString);
-    _setLoadingState(true);
+    // _setLoadingState(true);
     var response = await http.post(
       url,
       headers: {
@@ -68,7 +68,7 @@ class LoginController extends GetxController {
         "password": passwordTextEditingController.value.text,
       }),
     );
-    _setLoadingState(false);
+    // _setLoadingState(false);
     // var loginResult = LoginResult.fromJson(json)
     //
     // if (response.statusCode == 200) {
