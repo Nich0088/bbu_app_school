@@ -57,14 +57,14 @@ class ScheduleItemWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 160,
-                    child: Text(
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 176) * 0.6,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
                       item.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -73,38 +73,46 @@ class ScheduleItemWidget extends StatelessWidget {
                           .titleLarge
                           ?.copyWith(color: Colors.black),
                     ),
-                  ),
-                  Text(
-                    item.subTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: Colors.black),
-                  ),
-                ],
+                    Text(
+                      item.subTitle,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
               const Spacer(),
               const SizedBox(width: 20),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    item.date,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: Colors.black),
-                  ),
-                  Text(
-                    "Room: ${item.roomName}",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: Colors.black),
-                  ),
-                ],
+              SizedBox(
+                width: (MediaQuery.of(context).size.width - 176) * 0.4,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      item.date,
+                      textAlign: TextAlign.right,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      "Room: ${item.roomName}",
+                      textAlign: TextAlign.right,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
