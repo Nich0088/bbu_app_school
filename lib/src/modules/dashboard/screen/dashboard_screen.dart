@@ -123,6 +123,9 @@ class DashboardScreen extends StatelessWidget {
                         case HomeGridItemType.video:
                           context.push(AppScreen.videoScreen.path);
                           break;
+                        case HomeGridItemType.apply:
+                          context.push(AppScreen.applyScreen.path);
+                          break;
                       }
                     },
                   );

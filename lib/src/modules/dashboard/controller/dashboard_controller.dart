@@ -83,6 +83,12 @@ class DashboardController extends GetxController {
           "assets/dashboard/play-button.png",
           HomeGridItemType.video,
         ),
+        HomeGridItem(
+          12,
+          "Apply",
+          "assets/dashboard/web-browser.png",
+          HomeGridItemType.apply,
+        ),
       ];
 
   List<CertificateFormatItem> get certificateFormatList => [

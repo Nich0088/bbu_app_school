@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/apply_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/campus_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/contact_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/events_screen.dart';
@@ -98,6 +99,10 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.videoScreen.path,
       builder: (context, state) => const VideoScreen(),
     ),
+    GoRoute(
+      path: AppScreen.applyScreen.path,
+      builder: (context, state) => const ApplyScreen(),
+    ),
   ],
 );
 
@@ -114,7 +119,8 @@ enum AppScreen {
   registrationApplicationScreen("/registration-application"),
   locationScreen("/location"),
   campusScreen("/campus"),
-  videoScreen("/video");
+  videoScreen("/video"),
+  applyScreen("/apply");
 
   final String path;
 
