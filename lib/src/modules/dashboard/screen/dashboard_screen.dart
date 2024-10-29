@@ -91,7 +91,8 @@ class DashboardScreen extends StatelessWidget {
                           // context.push("");
                           break;
                         case HomeGridItemType.forEnrollment:
-                          // context.push("");
+                          context.push(
+                              AppScreen.registrationApplicationScreen.path);
                           break;
                         case HomeGridItemType.contact:
                           context.push(AppScreen.contactScreen.path);
