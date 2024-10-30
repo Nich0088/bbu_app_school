@@ -88,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                       switch (
                           dashboardController.homeGridItemList[index].type) {
                         case HomeGridItemType.attendant:
-                          // context.push("");
+                          context.push(AppScreen.attendantScreen.path);
                           break;
                         case HomeGridItemType.forEnrollment:
                           context.push(

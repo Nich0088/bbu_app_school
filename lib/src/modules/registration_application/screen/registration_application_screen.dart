@@ -298,7 +298,7 @@ class _RegistrationApplicationScreenState
           label ?? '',
           style: labelTextStyle ??
               Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColor.successColor,
+                    color: AppColor.textTertiaryColor,
                   ),
         ),
         const SizedBox(height: 4),
@@ -406,7 +406,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           widget.label ?? '',
           style: widget.labelStyle ??
               Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColor.successColor,
+                    color: AppColor.textTertiaryColor,
                   ),
         ),
         const SizedBox(height: 4),

@@ -14,6 +14,7 @@ import 'package:school_app/src/core/auth/login/screen/video_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
+import 'package:school_app/src/modules/attendant/screen/attendant_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
@@ -103,6 +104,10 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.applyScreen.path,
       builder: (context, state) => const ApplyScreen(),
     ),
+    GoRoute(
+      path: AppScreen.attendantScreen.path,
+      builder: (context, state) => const AttendantScreen(),
+    ),
   ],
 );
 
@@ -120,7 +125,8 @@ enum AppScreen {
   locationScreen("/location"),
   campusScreen("/campus"),
   videoScreen("/video"),
-  applyScreen("/apply");
+  applyScreen("/apply"),
+  attendantScreen("/attendant");
 
   final String path;
 

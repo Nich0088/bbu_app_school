@@ -73,21 +73,48 @@ class LoginController extends GetxController {
     _setLoadingState(false);
     var loginResult = LoginResult.fromJson(jsonDecode(response.body));
     debugPrint(jsonEncode(loginResult));
-    if (response.statusCode == 200) {
-      if (loginResult.data?.token != null) {
-        await LocalStorage.storeData(
-          key: LocalStorage.tokenKey,
-          value: loginResult.data?.token,
-        );
-        onSuccess.call();
-      } else {
+    switch (response.statusCode) {
+      case 200:
+        if (loginResult.data?.token != null) {
+          await LocalStorage.storeData(
+            key: LocalStorage.tokenKey,
+            value: loginResult.data?.token,
+          );
+          onSuccess.call();
+        }
+        break;
+      case 400:
         _appDialogHelper?.showErrorDialog(
-          errorMessage: loginResult.message ?? '',
-          errorCode: loginResult.code?.toString() ?? '',
+          errorMessage: 'Username or password is incorrect!',
+          errorCode: '400',
         );
-      }
-      return;
+        break;
+      case 401:
+        _appDialogHelper?.showErrorDialog(
+          errorMessage: 'Unauthorized',
+          errorCode: '401',
+        );
+        break;
+      case 404:
+        _appDialogHelper?.showErrorDialog(
+          errorMessage: 'Not Found',
+          errorCode: '404',
+        );
+        break;
+      case 409:
+        _appDialogHelper?.showErrorDialog(
+          errorMessage: 'Duplicate data',
+          errorCode: '409',
+        );
+        break;
+      default:
+        _appDialogHelper?.showErrorDialog(
+          errorMessage: 'Internal Server Error',
+          errorCode: '500',
+        );
+        break;
     }
+    return;
   }
 
   void _setLoadingState(bool isLoading) {
