@@ -45,9 +45,10 @@ flutter:
   assets:
     - assets/
     - assets/dashboard/
-    - assets/loading.json
-    - assets/translations/
+    - assets/attendant/
     - assets/registration_application/
+    - assets/translations/
+    - assets/loading.json
 
   fonts:
     - family: sourceSansThree
