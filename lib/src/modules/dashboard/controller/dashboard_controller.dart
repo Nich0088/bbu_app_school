@@ -1,10 +1,18 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/message_item.dart';
+import 'package:school_app/src/modules/dashboard/models/slide_banner.dart';
+
+import '../../../common/api_endpoint.dart';
+import '../../../common/helpers/app_dialog_helper.dart';
 
 class DashboardController extends GetxController {
   @factoryMethod
@@ -14,13 +22,13 @@ class DashboardController extends GetxController {
         HomeGridItem(
           0,
           "Events",
-          "assets/dashboard/event.png",
+          "assets/dashboard/events.png",
           HomeGridItemType.event,
         ),
         HomeGridItem(
           1,
           "For Enrollment",
-          "assets/dashboard/enrollment.png",
+          "assets/dashboard/enrollments.png",
           HomeGridItemType.forEnrollment,
         ),
         HomeGridItem(
@@ -38,7 +46,7 @@ class DashboardController extends GetxController {
         HomeGridItem(
           4,
           "Location",
-          "assets/dashboard/map.png",
+          "assets/dashboard/maps.png",
           HomeGridItemType.location,
         ),
         HomeGridItem(
@@ -50,7 +58,7 @@ class DashboardController extends GetxController {
         HomeGridItem(
           6,
           "Scholarship",
-          "assets/dashboard/scholarship.png",
+          "assets/dashboard/scholarships.png",
           HomeGridItemType.scholarship,
         ),
         HomeGridItem(
@@ -80,7 +88,7 @@ class DashboardController extends GetxController {
         HomeGridItem(
           11,
           "Video",
-          "assets/dashboard/play-button.png",
+          "assets/dashboard/videos.png",
           HomeGridItemType.video,
         ),
         HomeGridItem(
@@ -88,6 +96,12 @@ class DashboardController extends GetxController {
           "Apply",
           "assets/dashboard/web-browser.png",
           HomeGridItemType.apply,
+        ),
+        HomeGridItem(
+          13,
+          "Calendar",
+          "assets/dashboard/calendars.png",
+          HomeGridItemType.calendar,
         ),
       ];
 
@@ -143,8 +157,48 @@ class DashboardController extends GetxController {
       ];
 
   var selectedLanguage = Language.english.obs;
+  var slideBannerList = SlideBanner().obs;
+  var isShowLoading = false;
+  AppDialogHelper? _appDialogHelper;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await _getBannerList();
+  }
+
+  void register(BuildContext context) {
+    _appDialogHelper = AppDialogHelper(context: context);
+  }
 
   void setSelectedLanguage(Language language) {
     selectedLanguage.value = language;
+  }
+
+  Future<void> _getBannerList() async {
+    String urlString = ApiEndpoint.unAuthorizeBastUrl + ApiEndpoint.bannerList;
+    debugPrint("$urlString");
+    var url = Uri.parse(urlString);
+    _setLoadingState(true);
+    var response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    if (response.statusCode == 200) {
+      slideBannerList.value = SlideBanner.fromJson(jsonDecode(response.body));
+    } else {
+      _appDialogHelper?.showErrorDialog(
+        errorMessage: 'something when wrong',
+        errorCode: '',
+      );
+    }
+    _setLoadingState(false);
+  }
+
+  void _setLoadingState(bool isLoading) {
+    isShowLoading = isLoading;
+    update();
   }
 }

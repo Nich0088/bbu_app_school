@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/modules/contact/controller/contact_controller.dart';
+import 'package:school_app/src/modules/contact/model/contact.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../common/widgets/custom_app_bar.dart';
-import '../../../../modules/user_dashboard/controller/contact_controller.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -39,6 +40,7 @@ class _ContactScreenState extends State<ContactScreen>
 
   @override
   Widget build(BuildContext context) {
+    _contactController.register(context);
     return Scaffold(
       appBar: CustomAppBar(
         context,
@@ -80,19 +82,32 @@ class _ContactScreenState extends State<ContactScreen>
   }
 
   Widget _callUsTab() {
-    return ListView.builder(
-      itemCount: _contactController.contactItemList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return ContactItemWidget(
-          item: _contactController.contactItemList[index],
-          onPressed: () {
-            _showBottomSheet(
-                context, _contactController.contactItemList[index]);
+    return Obx(() {
+      if (_contactController.contactList.value.data == null) {
+        return const SizedBox();
+      } else {
+        return ListView.builder(
+          itemCount: _contactController.contactList.value.data?.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            ContactData? item =
+                _contactController.contactList.value.data?[index];
+
+            if (item == null) return const SizedBox();
+
+            return ContactItemWidget(
+              item: item,
+              onPressed: () {
+                _showBottomSheet(
+                  context,
+                  item,
+                );
+              },
+            );
           },
         );
-      },
-    );
+      }
+    });
   }
 
   Widget _ourSocialTab() {
@@ -272,7 +287,7 @@ class _ContactScreenState extends State<ContactScreen>
     );
   }
 
-  void _showBottomSheet(BuildContext context, ContactItem item) {
+  void _showBottomSheet(BuildContext context, ContactData item) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -294,35 +309,37 @@ class _ContactScreenState extends State<ContactScreen>
                   ),
                 ),
                 const SizedBox(height: 4),
-                ...item.phoneNumberList.map(
-                  (phoneNumber) => Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4, right: 44),
-                        child: Image.asset(
-                          "assets/dashboard/call.png",
-                          width: 22,
-                          height: 22,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          _dialPhoneNumber(phoneNumber);
-                        },
-                        child: Text(
-                          phoneNumber,
-                          textAlign: TextAlign.center,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                ...?item.phone?.split(',').map(
+                      (phoneNumber) => Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 4, right: 44),
+                            child: Image.asset(
+                              "assets/dashboard/call.png",
+                              width: 22,
+                              height: 22,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              _dialPhoneNumber(phoneNumber);
+                            },
+                            child: Text(
+                              phoneNumber,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
                                     color: AppColor.primaryColor,
                                     fontSize: 32,
                                   ),
-                        ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
                 const SizedBox(height: 14),
               ],
             ),
@@ -348,7 +365,7 @@ class _ContactScreenState extends State<ContactScreen>
 }
 
 class ContactItemWidget extends StatelessWidget {
-  final ContactItem item;
+  final ContactData item;
   final GestureTapCallback onPressed;
 
   const ContactItemWidget({
@@ -359,114 +376,172 @@ class ContactItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
         onPressed();
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      child: Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        clipBehavior: Clip.antiAlias,
+        elevation: 8.0,
+        margin: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
         child: Container(
-          width: double.infinity,
-          height: 70,
-          decoration: BoxDecoration(
-            color: AppColor.textPrimaryColor, // Background color
-            borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(
-              color: AppColor.textSecondaryColor.withOpacity(0.1),
-            ),
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.1),
-                blurRadius: 25,
-                spreadRadius: -5,
-                offset: Offset(
-                  0,
-                  20,
+          decoration: const BoxDecoration(color: Colors.white),
+          child: ListTile(
+              minVerticalPadding: height * 0.02,
+              leading: Container(
+                height: height * 0.06,
+                padding: const EdgeInsets.only(right: 12.0),
+                decoration: const BoxDecoration(
+                    border: Border(
+                        right: BorderSide(width: 1.0, color: Colors.white24))),
+                child: CircleAvatar(
+                  radius: height * 0.02,
+                  backgroundColor: Colors.indigo,
+                  backgroundImage: const AssetImage("assets/app_logo.png"),
                 ),
               ),
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.04),
-                blurRadius: 10,
-                spreadRadius: -5,
-                offset: Offset(
-                  0,
-                  10,
-                ),
+              title: Text(
+                item.campus ?? "",
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: height * 0.023,
+                    ),
               ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16, right: 0),
-                child: ClipOval(
-                  child: Image.asset(
-                    item.image,
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.cover,
+              subtitle: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.call,
+                    color: Colors.green,
+                    size: height * 0.023,
                   ),
-                ),
+                  Expanded(
+                    child: Text(item.phone ?? '',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black, fontSize: height * 0.02)),
+                  )
+                ],
               ),
-              const SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsets.only(left: 0, right: 45, top: 8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.title,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 26, right: 1),
-                          child: Image.asset(
-                            "assets/dashboard/call.png",
-                            width: 13,
-                            height: 13,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width - 186,
-                          child: Text(
-                            item.phoneNumberList.join(", "),
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
-                                    ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 0, right: 20, bottom: 0),
-                child: Image.asset(
-                  "assets/dashboard/right-arrow.png",
-                  width: 15,
-                  height: 15,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
+              trailing: Icon(Icons.keyboard_arrow_right,
+                  color: Colors.black, size: height * 0.04)),
         ),
       ),
+      // child: Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: Container(
+      //     width: double.infinity,
+      //     height: 70,
+      //     decoration: BoxDecoration(
+      //       color: AppColor.textPrimaryColor, // Background color
+      //       borderRadius: BorderRadius.circular(16.0),
+      //       border: Border.all(
+      //         color: AppColor.textSecondaryColor.withOpacity(0.1),
+      //       ),
+      //       boxShadow: const [
+      //         BoxShadow(
+      //           color: Color.fromRGBO(0, 0, 0, 0.1),
+      //           blurRadius: 25,
+      //           spreadRadius: -5,
+      //           offset: Offset(
+      //             0,
+      //             20,
+      //           ),
+      //         ),
+      //         BoxShadow(
+      //           color: Color.fromRGBO(0, 0, 0, 0.04),
+      //           blurRadius: 10,
+      //           spreadRadius: -5,
+      //           offset: Offset(
+      //             0,
+      //             10,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //     child: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       children: [
+      //         Padding(
+      //           padding: const EdgeInsets.only(left: 12, right: 0),
+      //           child: CircleAvatar(
+      //             radius: height * 0.02,
+      //             backgroundColor: Colors.indigo,
+      //             backgroundImage:
+      //                 const AssetImage("assets/dashboard/app_logo.png"),
+      //           ),
+      //           // child: ClipOval(
+      //           //   child: Image.asset(
+      //           //     'assets/dashboard/app_logo.png',
+      //           //     width: 30,
+      //           //     height: 30,
+      //           //     fit: BoxFit.cover,
+      //           //   ),
+      //           // ),
+      //         ),
+      //         const SizedBox(height: 4),
+      //         Padding(
+      //           padding: const EdgeInsets.only(left: 0, right: 40, top: 8),
+      //           child: Column(
+      //             mainAxisAlignment: MainAxisAlignment.start,
+      //             children: [
+      //               Text(
+      //                 item.campus ?? "",
+      //                 textAlign: TextAlign.start,
+      //                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
+      //                       color: Colors.black,
+      //                       fontWeight: FontWeight.bold,
+      //                       fontSize: height*0.023,
+      //                     ),
+      //               ),
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.start,
+      //                 children: [
+      //                   Padding(
+      //                     padding: const EdgeInsets.only(left: 16, right: 1),
+      //                     child: Image.asset(
+      //                       "assets/dashboard/call.png",
+      //                       width: 13,
+      //                       height: 13,
+      //                       fit: BoxFit.cover,
+      //                     ),
+      //                   ),
+      //                   SizedBox(
+      //                     width: MediaQuery.of(context).size.width - 186,
+      //                     child: Text(
+      //                       item.phone ?? '',
+      //                       textAlign: TextAlign.center,
+      //                       overflow: TextOverflow.ellipsis,
+      //                       style:
+      //                           Theme.of(context).textTheme.bodySmall?.copyWith(
+      //                                 color: Colors.black,
+      //                                 fontSize: 18.0,
+      //                               ),
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //         Padding(
+      //           padding: const EdgeInsets.only(left: 0, right: 20, bottom: 0),
+      //           child: Image.asset(
+      //             "assets/dashboard/right-arrow.png",
+      //             width: 15,
+      //             height: 15,
+      //             fit: BoxFit.cover,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

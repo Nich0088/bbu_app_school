@@ -5,8 +5,8 @@ import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/about_us_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/apply_screen.dart';
+import 'package:school_app/src/core/auth/login/screen/calendar_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/campus_screen.dart';
-import 'package:school_app/src/core/auth/login/screen/contact_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/events_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/login/screen/scholarship_screen.dart';
@@ -15,6 +15,7 @@ import 'package:school_app/src/core/auth/role_selection/screen/role_selection_sc
 import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
 import 'package:school_app/src/modules/attendant/screen/attendant_screen.dart';
+import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
@@ -105,6 +106,10 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const ApplyScreen(),
     ),
     GoRoute(
+      path: AppScreen.calendarScreen.path,
+      builder: (context, state) => const CalendarScreen(),
+    ),
+    GoRoute(
       path: AppScreen.attendantScreen.path,
       builder: (context, state) => const AttendantScreen(),
     ),
@@ -126,6 +131,7 @@ enum AppScreen {
   campusScreen("/campus"),
   videoScreen("/video"),
   applyScreen("/apply"),
+  calendarScreen("/calendar"),
   attendantScreen("/attendant");
 
   final String path;

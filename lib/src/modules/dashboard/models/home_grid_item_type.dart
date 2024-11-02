@@ -12,4 +12,5 @@ enum HomeGridItemType {
   contact,
   video,
   apply,
+  calendar,
 }
