@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../common/widgets/custom_app_bar.dart';
-import '../../../../constants/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
+import '../../../constants/app_setting.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});

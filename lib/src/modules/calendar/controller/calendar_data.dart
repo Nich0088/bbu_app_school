@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../modules/dashboard/models/calendar_model_res.dart';
-import '../api_endpoint.dart';
+import '../../../common/api_endpoint.dart';
+import '../model/calendar_model_res.dart';
 
 class CalendarData {
   //List<CalendarModel> list = [];

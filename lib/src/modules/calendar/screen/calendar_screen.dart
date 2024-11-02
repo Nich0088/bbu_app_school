@@ -4,9 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../common/helpers/calendar_data.dart';
-import '../../../../modules/dashboard/models/calendar_model_res.dart';
-import '../../../../modules/dashboard/models/calendar_untils.dart';
+import '../controller/calendar_data.dart';
+import '../model/calendar_model_res.dart';
+import 'calendar_untils.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
