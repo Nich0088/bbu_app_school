@@ -42,11 +42,14 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _setupViewForLoggedInUser(BuildContext context) {
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     DashboardController dashboardController = Get.put(DashboardController());
     return GetBuilder<DashboardController>(builder: (controller) {
       return LoadingContainerWidget(
         isShowLoading: controller.isShowLoading,
         child: Scaffold(
+          key: scaffoldKey,
           backgroundColor: AppColor.primaryColor,
           appBar: CustomAppBar(
             context,
@@ -58,6 +61,221 @@ class DashboardScreen extends StatelessWidget {
             onLanguagePressed: () async {
               _showBottomSheet(context);
             },
+            onViewProfile: () {
+              scaffoldKey.currentState?.openDrawer();
+            },
+            automaticallyImplyLeading: false,
+          ),
+          drawer: Drawer(
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        AppLogo.appLogo,
+                      ),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
+                          width: 56,
+                          height: 56,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Text(
+                        "Srey Nich",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(color: AppColor.textSecondaryColor),
+                      ),
+                      Text(
+                        "070 168 168",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: AppColor.textSecondaryColor),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "ID",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "PP45454",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Name in Khmer",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "កៅ ស្រីនិច្ច",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: AppColor.textSecondaryColor,
+                        fontFamily: 'notoSansKhmer',
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Name in English",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "Kao Sreynich",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Gender",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "Female",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Date of Birth",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "21/03/1998",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Place of Birth",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "Phnom Penh",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Phone Number",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "0969108106",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Gmail",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                Text(
+                  "KaoSreynich@gmail.com",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Manage Enrollment",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "About Us",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Version: ....",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: AppColor.textSecondaryColor),
+                ),
+              ],
+            ),
           ),
           body: SingleChildScrollView(
             child: Column(

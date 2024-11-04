@@ -19,11 +19,13 @@ PreferredSizeWidget CustomAppBar(
   GestureTapCallback? onNotificationPressed,
   GestureTapCallback? onLanguagePressed,
   Color? colorTitle,
+  bool automaticallyImplyLeading = true,
   PreferredSizeWidget? bottom,
 }) {
   return AppBar(
     backgroundColor: backgroundColor,
     elevation: elevation,
+    automaticallyImplyLeading: automaticallyImplyLeading,
     leading: (() {
       if (isDashboardAppBar == false) {
         return IconButton(
@@ -39,43 +41,45 @@ PreferredSizeWidget CustomAppBar(
     }()),
     title: (() {
       if (isDashboardAppBar) {
-        return Row(
-          children: [
-            const SizedBox(
-              width: AppStyle.horizontalPadding,
-            ),
-            ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 56,
-                height: 56,
-                fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            onViewProfile?.call();
+          },
+          child: Row(
+            children: [
+              const SizedBox(
+                width: AppStyle.horizontalPadding,
               ),
-            ),
-            const SizedBox(
-              width: AppStyle.horizontalPadding,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  username,
-                  style: Theme.of(context).textTheme.bodyLarge,
+              ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  width: 56,
+                  height: 56,
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(
-                  height: 4,
-                ),
-                GestureDetector(
-                  onTap: onViewProfile,
-                  child: Text(
+              ),
+              const SizedBox(
+                width: AppStyle.horizontalPadding,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    username,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
                     "View Profile >",
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         );
       } else if (title.isNotEmpty) {
         return Text(
