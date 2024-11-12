@@ -326,7 +326,7 @@ class _ContactScreenState extends State<ContactScreen>
                               _dialPhoneNumber(phoneNumber);
                             },
                             child: Text(
-                              phoneNumber,
+                              phoneNumber.trim(),
                               textAlign: TextAlign.center,
                               style: Theme.of(context)
                                   .textTheme
