@@ -16,6 +16,7 @@ import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
+import 'package:school_app/src/modules/event/screen/event_detail_screen.dart';
 import 'package:school_app/src/modules/event/screen/events_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
 import 'package:school_app/src/modules/registration_application/screen/registration_application_screen.dart';
@@ -113,6 +114,15 @@ final GoRouter _goRouter = GoRouter(
       path: AppScreen.attendantScreen.path,
       builder: (context, state) => const AttendantScreen(),
     ),
+    GoRoute(
+      path: AppScreen.eventDetailScreen.path,
+      builder: (context, state) {
+        final String? description = state.extra as String?;
+        return EventDetailScreen(
+          description: description,
+        );
+      },
+    ),
   ],
 );
 
@@ -132,7 +142,8 @@ enum AppScreen {
   videoScreen("/video"),
   applyScreen("/apply"),
   calendarScreen("/calendar"),
-  attendantScreen("/attendant");
+  attendantScreen("/attendant"),
+  eventDetailScreen("/event-detail");
 
   final String path;
 

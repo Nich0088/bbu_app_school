@@ -1,9 +1,11 @@
 //import 'dart:collection';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../common/widgets/custom_app_bar.dart';
+import '../../../constants/app_setting.dart';
 import '../controller/calendar_data.dart';
 import '../model/calendar_model_res.dart';
 import 'calendar_untils.dart';
@@ -145,21 +147,15 @@ class _NewCalendarScreenState extends State<CalendarScreen>
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: height * 0.06,
-        backgroundColor: Colors.indigo[900],
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-            size: height * 0.03,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          "calendar".tr().toString(),
-          style: TextStyle(fontSize: height * 0.03),
-        ),
+      appBar: CustomAppBar(
+        context,
+        backgroundColor: AppColor.primaryColor,
+        isDashboardAppBar: false,
+        title: "Calendar",
+        isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
       ),
       body: Column(
         children: [

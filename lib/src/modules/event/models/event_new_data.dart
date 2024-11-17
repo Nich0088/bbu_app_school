@@ -41,6 +41,7 @@ class Data {
     this.description,
     this.longDescription,
     this.thumbnail,
+    this.urlEventnews,
   });
 
   @JsonKey(name: 'image')
@@ -55,6 +56,8 @@ class Data {
   final String? longDescription;
   @JsonKey(name: 'thumbnail')
   final List<Thumbnail>? thumbnail;
+  @JsonKey(name: 'url_eventnews')
+  final String? urlEventnews;
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 

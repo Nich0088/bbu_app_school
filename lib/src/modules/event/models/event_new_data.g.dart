@@ -33,6 +33,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       thumbnail: (json['thumbnail'] as List<dynamic>?)
           ?.map((e) => Thumbnail.fromJson(e as Map<String, dynamic>))
           .toList(),
+      urlEventnews: json['url_eventnews'] as String?,
     );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
@@ -42,4 +43,5 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'description': instance.description,
       'long_description': instance.longDescription,
       'thumbnail': instance.thumbnail,
+      'url_eventnews': instance.urlEventnews,
     };
