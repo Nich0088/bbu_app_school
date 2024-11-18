@@ -6,14 +6,15 @@ part of 'event_new_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EventList _$EventListFromJson(Map<String, dynamic> json) => EventList(
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
+EventResult _$EventResultFromJson(Map<String, dynamic> json) => EventResult(
+      eventData: (json['data'] as List<dynamic>?)
+          ?.map((e) => EventData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$EventListToJson(EventList instance) => <String, dynamic>{
-      'data': instance.data,
+Map<String, dynamic> _$EventResultToJson(EventResult instance) =>
+    <String, dynamic>{
+      'data': instance.eventData,
     };
 
 Thumbnail _$ThumbnailFromJson(Map<String, dynamic> json) => Thumbnail(
@@ -24,7 +25,7 @@ Map<String, dynamic> _$ThumbnailToJson(Thumbnail instance) => <String, dynamic>{
       'image': instance.image,
     };
 
-Data _$DataFromJson(Map<String, dynamic> json) => Data(
+EventData _$EventDataFromJson(Map<String, dynamic> json) => EventData(
       image: json['image'] as String?,
       title: json['title'] as String?,
       date: json['date'] as String?,
@@ -36,7 +37,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       urlEventnews: json['url_eventnews'] as String?,
     );
 
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
+Map<String, dynamic> _$EventDataToJson(EventData instance) => <String, dynamic>{
       'image': instance.image,
       'title': instance.title,
       'date': instance.date,

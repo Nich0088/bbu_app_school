@@ -13,7 +13,7 @@ class EventController extends GetxController {
   @factoryMethod
   static init() => Get.put(EventController());
 
-  var events = EventList().obs;
+  var eventResult = EventResult().obs;
   var isShowLoading = false;
   AppDialogHelper? _appDialogHelper;
 
@@ -42,7 +42,7 @@ class EventController extends GetxController {
     debugPrint("${jsonDecode(response.body)}");
     debugPrint("${jsonDecode(response.statusCode.toString())}");
     if (response.statusCode == 200) {
-      events.value = EventList.fromJson(jsonDecode(response.body));
+      eventResult.value = EventResult.fromJson(jsonDecode(response.body));
     } else {
       _appDialogHelper?.showErrorDialog(
         errorMessage: 'something when wrong',

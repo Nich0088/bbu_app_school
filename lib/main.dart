@@ -16,6 +16,7 @@ import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
+import 'package:school_app/src/modules/event/models/event_new_data.dart';
 import 'package:school_app/src/modules/event/screen/event_detail_screen.dart';
 import 'package:school_app/src/modules/event/screen/events_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
@@ -117,9 +118,9 @@ final GoRouter _goRouter = GoRouter(
     GoRoute(
       path: AppScreen.eventDetailScreen.path,
       builder: (context, state) {
-        final String? description = state.extra as String?;
+        final EventData? eventData = state.extra as EventData?;
         return EventDetailScreen(
-          description: description,
+          eventData: eventData,
         );
       },
     ),

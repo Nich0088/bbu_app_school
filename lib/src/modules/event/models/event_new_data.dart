@@ -3,18 +3,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'event_new_data.g.dart';
 
 @JsonSerializable()
-class EventList {
-  EventList({
-    this.data,
+class EventResult {
+  EventResult({
+    this.eventData,
   });
 
   @JsonKey(name: 'data')
-  final List<Data>? data;
+  final List<EventData>? eventData;
 
-  factory EventList.fromJson(Map<String, dynamic> json) =>
-      _$EventListFromJson(json);
+  factory EventResult.fromJson(Map<String, dynamic> json) =>
+      _$EventResultFromJson(json);
 
-  Map<String, dynamic> toJson() => _$EventListToJson(this);
+  Map<String, dynamic> toJson() => _$EventResultToJson(this);
 }
 
 @JsonSerializable()
@@ -33,8 +33,8 @@ class Thumbnail {
 }
 
 @JsonSerializable()
-class Data {
-  Data({
+class EventData {
+  EventData({
     this.image,
     this.title,
     this.date,
@@ -59,7 +59,8 @@ class Data {
   @JsonKey(name: 'url_eventnews')
   final String? urlEventnews;
 
-  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  factory EventData.fromJson(Map<String, dynamic> json) =>
+      _$EventDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$EventDataToJson(this);
 }

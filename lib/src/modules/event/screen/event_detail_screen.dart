@@ -1,17 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/src/modules/event/models/event_new_data.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../constants/app_setting.dart';
 
 class EventDetailScreen extends StatelessWidget {
-  const EventDetailScreen({super.key, this.description});
+  const EventDetailScreen({super.key, this.eventData});
 
-  final String? description;
+  final EventData? eventData;
 
   @override
   Widget build(BuildContext context) {
+    String? displayLongDescription = eventData?.longDescription
+        ?.replaceAll('src="/ckfinder', 'src="https://bbu.edu.kh/ckfinder');
+    debugPrint(displayLongDescription);
+
     return Scaffold(
       appBar: CustomAppBar(
         context,
@@ -23,7 +29,49 @@ class EventDetailScreen extends StatelessWidget {
           context.pop();
         },
       ),
-      body: description != null ? Html(data: description) : const SizedBox(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CachedNetworkImage(
+              imageUrl: eventData?.image ?? '',
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 8,
+                left: 8,
+                right: 8,
+              ),
+              child: Text(
+                eventData?.title ?? '',
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall
+                    ?.copyWith(color: AppColor.textSecondaryColor),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+              ),
+              child: Text(
+                eventData?.date ?? '',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: AppColor.textSecondaryColor),
+              ),
+            ),
+            Html(
+              data: displayLongDescription,
+              anchorKey: GlobalKey(),
+              shrinkWrap: true,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

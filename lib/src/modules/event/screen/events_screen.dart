@@ -21,28 +21,29 @@ class _EventsScreenState extends State<EventsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          context,
-          backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: false,
-          title: "Events",
-          isCenterTitle: true,
-          onPressedBack: () {
-            context.pop();
-          },
-        ),
-        body: Obx(() {
-          if (_eventsController.events.value.data == null) {
+      appBar: CustomAppBar(
+        context,
+        backgroundColor: AppColor.primaryColor,
+        isDashboardAppBar: false,
+        title: "Events",
+        isCenterTitle: true,
+        onPressedBack: () {
+          context.pop();
+        },
+      ),
+      body: Obx(
+        () {
+          if (_eventsController.eventResult.value.eventData == null) {
             return const SizedBox();
           } else {
             return ListView.builder(
-              itemCount: _eventsController.events.value.data?.length,
+              itemCount: _eventsController.eventResult.value.eventData?.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
-                  context.go(
+                  context.push(
                     AppScreen.eventDetailScreen.path,
                     extra:
-                        _eventsController.events.value.data?[index].description,
+                        _eventsController.eventResult.value.eventData?[index],
                   );
                 },
                 child: Container(
@@ -55,11 +56,8 @@ class _EventsScreenState extends State<EventsScreen> {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.2),
-                        // Shadow color
                         spreadRadius: 2,
-                        // Spread radius
                         blurRadius: 5,
-                        // Blur radius
                         offset: const Offset(0, 3), // Offset in x, y
                       ),
                     ],
@@ -76,8 +74,8 @@ class _EventsScreenState extends State<EventsScreen> {
                               topRight: Radius.circular(16),
                             ),
                             child: CachedNetworkImage(
-                              imageUrl: _eventsController
-                                      .events.value.data?[index].image ??
+                              imageUrl: _eventsController.eventResult.value
+                                      .eventData?[index].image ??
                                   "",
                               fit: BoxFit.fill,
                               width: double.infinity,
@@ -87,8 +85,8 @@ class _EventsScreenState extends State<EventsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 11.0, top: 4),
                             child: Text(
-                              _eventsController
-                                      .events.value.data?[index].title ??
+                              _eventsController.eventResult.value
+                                      .eventData?[index].title ??
                                   "",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -102,8 +100,8 @@ class _EventsScreenState extends State<EventsScreen> {
                           Padding(
                             padding: const EdgeInsets.only(left: 12.0, top: 2),
                             child: Text(
-                              _eventsController
-                                      .events.value.data?[index].description ??
+                              _eventsController.eventResult.value
+                                      .eventData?[index].description ??
                                   "",
                               textAlign: TextAlign.start,
                               maxLines: 1,
@@ -125,7 +123,8 @@ class _EventsScreenState extends State<EventsScreen> {
                             color: Colors.blue,
                           ),
                           child: Text(
-                            _eventsController.events.value.data?[index].date ??
+                            _eventsController
+                                    .eventResult.value.eventData?[index].date ??
                                 "",
                             style: const TextStyle(
                               fontSize: 14,
@@ -140,6 +139,8 @@ class _EventsScreenState extends State<EventsScreen> {
               ),
             );
           }
-        }));
+        },
+      ),
+    );
   }
 }
