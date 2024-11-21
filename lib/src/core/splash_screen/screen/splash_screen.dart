@@ -23,7 +23,7 @@ class SplashScreen extends StatelessWidget {
             );
           },
           actionOnTokenNotExist: () {
-            context.push(
+            context.go(
               AppScreen.roleSelectionScreen.path,
             );
           },
