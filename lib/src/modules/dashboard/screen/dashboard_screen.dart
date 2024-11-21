@@ -449,39 +449,40 @@ class DashboardScreen extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 16,
-                  ),
-                  child: CarouselSlider.builder(
-                    itemCount:
-                        dashboardController.slideBannerList.value.data?.length,
-                    itemBuilder: (context, index, realIndex) {
-                      String? imageUrl = dashboardController
-                          .slideBannerList.value.data?[index].image;
-                      if (imageUrl != null) {
-                        return ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(10)),
-                          child: CachedNetworkImage(
-                            width: double.infinity,
-                            imageUrl: imageUrl,
-                            fit: BoxFit.fill,
-                          ),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                    options: CarouselOptions(
-                      height: 240,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 2),
-                      viewportFraction: 0.9,
-                      enlargeCenterPage: true,
+                if (dashboardController.slideBannerList.value.data != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
+                    child: CarouselSlider.builder(
+                      itemCount: dashboardController
+                          .slideBannerList.value.data?.length,
+                      itemBuilder: (context, index, realIndex) {
+                        String? imageUrl = dashboardController
+                            .slideBannerList.value.data?[index].image;
+                        if (imageUrl != null) {
+                          return ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            child: CachedNetworkImage(
+                              width: double.infinity,
+                              imageUrl: imageUrl,
+                              fit: BoxFit.fill,
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                      options: CarouselOptions(
+                        height: 240,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 2),
+                        viewportFraction: 0.9,
+                        enlargeCenterPage: true,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
