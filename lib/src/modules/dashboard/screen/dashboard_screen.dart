@@ -434,21 +434,22 @@ class DashboardScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    top: 20,
-                    right: 20,
-                    bottom: 18,
+                if (dashboardController.slideBannerList.value.data != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      top: 20,
+                      right: 20,
+                      bottom: 18,
+                    ),
+                    child: Text(
+                      "Slide Show",
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  child: Text(
-                    "Slide Show",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
                 if (dashboardController.slideBannerList.value.data != null)
                   Padding(
                     padding: const EdgeInsets.only(
