@@ -148,14 +148,6 @@ class DashboardController extends GetxController {
         )
       ];
 
-  List<String> get imageSlideList => [
-        "https://queenstudios.shop/cdn/shop/products/iron_man_mk85_620x.jpg?v=1655287340",
-        "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/2/22/Thor_in_LoveAndThunder_Poster.jpg/revision/latest/scale-to-width-down/1200?cb=20231021012616",
-        "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5359769168001/0a823cb0-01a9-4835-a348-c64187783ccb/d37cb96c-805c-4aa2-9f2f-e62d9eb814c7/1280x720/match/image.jpg",
-        "https://cdn.mos.cms.futurecdn.net/29pFDaXVUj4Kb8PkUqu6uJ.jpg",
-        "https://i.ytimg.com/vi/iWbuLClZpRg/maxresdefault.jpg",
-      ];
-
   var selectedLanguage = Language.english.obs;
   var slideBannerList = SlideBanner().obs;
   var isShowLoading = false;
