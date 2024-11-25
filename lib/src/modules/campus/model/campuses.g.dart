@@ -8,7 +8,7 @@ part of 'campuses.dart';
 
 Campuses _$CampusesFromJson(Map<String, dynamic> json) => Campuses(
       campuses: (json['campuses'] as List<dynamic>?)
-          ?.map((e) => Campuses.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => CampusesData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

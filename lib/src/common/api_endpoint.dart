@@ -9,4 +9,5 @@ class ApiEndpoint {
   static const String scholarship = "api/scholarship_v1";
   static const String viewVideo = "api/view_video";
   static const String viewLocation = "api/view_location";
+  static const String viewCampuses = "api/view_campuses";
 }

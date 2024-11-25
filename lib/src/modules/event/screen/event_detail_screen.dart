@@ -15,7 +15,8 @@ class EventDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? displayLongDescription = eventData?.longDescription
-        ?.replaceAll('src="/ckfinder', 'src="https://bbu.edu.kh/ckfinder');
+        ?.replaceAll('src="/ckfinder', 'src="https://bbu.edu.kh/ckfinder')
+        .replaceAll('style="width:100%"', '');
     debugPrint(displayLongDescription);
 
     return Scaffold(
@@ -64,11 +65,8 @@ class EventDetailScreen extends StatelessWidget {
                     ?.copyWith(color: AppColor.textSecondaryColor),
               ),
             ),
-            Html(
-              data: displayLongDescription,
-              anchorKey: GlobalKey(),
-              shrinkWrap: true,
-            ),
+            if (displayLongDescription != null)
+              Html(data: displayLongDescription)
           ],
         ),
       ),

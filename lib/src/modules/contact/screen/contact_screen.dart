@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/contact/controller/contact_controller.dart';
 import 'package:school_app/src/modules/contact/model/contact.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
+import '../../../utils/helpers/utility_function.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -148,7 +148,7 @@ class _ContactScreenState extends State<ContactScreen>
               children: [
                 GestureDetector(
                   onTap: () {
-                    _openUrl("https://www.youtube.com/watch?v=1_NVaujWgBg");
+                    openUrl("https://www.youtube.com/watch?v=1_NVaujWgBg");
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 0),
@@ -323,7 +323,7 @@ class _ContactScreenState extends State<ContactScreen>
                           ),
                           GestureDetector(
                             onTap: () {
-                              _dialPhoneNumber(phoneNumber);
+                              dialPhoneNumber(phoneNumber);
                             },
                             child: Text(
                               phoneNumber.trim(),
@@ -346,20 +346,6 @@ class _ContactScreenState extends State<ContactScreen>
           ),
         );
       },
-    );
-  }
-
-  void _dialPhoneNumber(String phoneNumber) async {
-    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneUri)) {
-      await launchUrl(phoneUri);
-    }
-  }
-
-  void _openUrl(String url) async {
-    final Uri webUri = Uri.parse(url);
-    await launchUrl(
-      webUri,
     );
   }
 }
