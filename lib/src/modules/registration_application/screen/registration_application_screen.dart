@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/custom_button.dart';
@@ -26,6 +29,20 @@ class _RegistrationApplicationScreenState
   final FocusNode _firstNameInLatinFocusNode = FocusNode();
   final FocusNode _lastNameInLatinFocusNode = FocusNode();
   final FocusNode _phoneNumberFocusNode = FocusNode();
+
+  final ImagePicker _picker =
+      ImagePicker(); // Create an instance of ImagePicker
+  File? _selectedImage;
+
+  Future<void> _getImage(ImageSource source) async {
+    final XFile? pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,28 +94,33 @@ class _RegistrationApplicationScreenState
                             ),
                             child: Stack(
                               children: [
-                                Image.asset(
-                                  "assets/registration_application/user.png",
-                                  height: 140,
-                                  width: 140,
-                                  fit: BoxFit.contain,
-                                ),
+                                _selectedImage != null
+                                    ? Image.file(
+                                        _selectedImage!,
+                                        width: 200,
+                                        height: 200,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : const Text("No image selected"),
                                 Positioned(
-                                  bottom: 4,
-                                  right: 4,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: const BoxDecoration(
-                                      color: Colors.blue,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(
-                                      Icons.edit,
-                                      size: 24,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
+                                    bottom: 4,
+                                    right: 4,
+                                    child: Container(
+                                        padding: const EdgeInsets.all(0),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.blue,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: IconButton(
+                                          onPressed: () =>
+                                              _getImage(ImageSource.gallery),
+                                          icon: const Icon(
+                                            Icons.edit,
+                                            // color: Colors.blue,
+                                            size:
+                                                26.0, // Optional: Set the size
+                                          ),
+                                        )))
                               ],
                             ),
                           ),

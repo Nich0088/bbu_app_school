@@ -110,21 +110,29 @@ class DashboardController extends GetxController {
           id: 0,
           title: "Associate's Degree",
           image: "assets/app_logo.png",
+          imageUrl:
+              "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Associate%20of%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 1,
           title: "Bachelor's Degree",
           image: "assets/app_logo.png",
+          imageUrl:
+              "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Bachelor%20of%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 2,
           title: "Master's Degree",
           image: "assets/app_logo.png",
+          imageUrl:
+              "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Master%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 3,
           title: "Doctoral Degree",
           image: "assets/app_logo.png",
+          imageUrl:
+              "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Master%20IT.jpg",
         ),
         // CertificateFormatItem(
         //   id: 4,
@@ -144,7 +152,7 @@ class DashboardController extends GetxController {
           id: 1,
           title: "President",
           subTitle: "Assoc. Prof. Diep Seiha",
-          image: "assets/dashboard/president.png",
+          image: "assets/dashboard/message_master.png",
         )
       ];
 

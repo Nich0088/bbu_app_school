@@ -16,48 +16,53 @@ class CertificateFormatItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 12,
-        right: 12,
-        bottom: 12,
-        left: index == 0 ? 12 : 0,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColor.cardColor, // Border color
-                width: 2, // Border width
+    return GestureDetector(
+      onTap: () {
+        onTap.call();
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          top: 12,
+          right: 12,
+          bottom: 12,
+          left: index == 0 ? 12 : 0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: AppColor.cardColor, // Border color
+                  width: 2, // Border width
+                ),
+                borderRadius: BorderRadius.circular(3), // Rounded corners
               ),
-              borderRadius: BorderRadius.circular(3), // Rounded corners
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(3), // Clip image corners
-              child: Image.asset(
-                item.image,
-                width: 45,
-                height: 60,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(3), // Clip image corners
+                child: Image.asset(
+                  item.image,
+                  width: 45,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              item.title,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: Colors.black),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                item.title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Colors.black),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

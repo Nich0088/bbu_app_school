@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final FocusNode _usernameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final LoginController _loginController = Get.put(LoginController());
 
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Obx(
                 () => GestureDetector(
                   onTap: () {
-                    _usernameFocusNode.unfocus();
+                    _emailFocusNode.unfocus();
                     _passwordFocusNode.unfocus();
                   },
                   child: SingleChildScrollView(
@@ -58,17 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             horizontal: AppStyle.horizontalPadding,
                           ),
                           child: CustomTextField(
-                            focusNode: _usernameFocusNode,
-                            errorDescription: _loginController
-                                .invalidUsernameDescription.value,
-                            isShowError:
-                                _loginController.isInvalidUsername.value,
+                            focusNode: _emailFocusNode,
+                            errorDescription:
+                                _loginController.invalidEmailDescription.value,
+                            isShowError: _loginController.isInvalidEmail.value,
                             controller: _loginController
-                                .usernameTextEditingController.value,
+                                .emailTextEditingController.value,
                             onChangeTextField: (value) {
                               _loginController.resetUsernameError();
                             },
-                            label: "Username",
+                            label: "email",
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -125,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: FilledButton(
                             onPressed: () async {
-                              _usernameFocusNode.unfocus();
+                              _emailFocusNode.unfocus();
                               _passwordFocusNode.unfocus();
                               await _loginController.loginUser(
                                 onSuccess: () {

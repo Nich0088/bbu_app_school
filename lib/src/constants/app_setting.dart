@@ -20,6 +20,7 @@ class AppLogo {
   static const appLogo = "assets/app_logo.png";
   static const scholarship = "assets/bbu_scholarship.png";
   static const events = "assets/events1.png";
+  static const bbucampus = "assets/bbu_building.jpeg";
 }
 
 class AppStyle {

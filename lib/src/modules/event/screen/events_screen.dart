@@ -109,6 +109,7 @@ class _EventsScreenState extends State<EventsScreen> {
                               style: const TextStyle(
                                 color: Colors.black, // Text color
                                 fontSize: 14,
+                                fontWeight: FontWeight.w100,
                               ),
                             ),
                           ),

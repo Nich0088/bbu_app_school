@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/contact/controller/contact_controller.dart';
 import 'package:school_app/src/modules/contact/model/contact.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../utils/helpers/utility_function.dart';
@@ -148,7 +149,7 @@ class _ContactScreenState extends State<ContactScreen>
               children: [
                 GestureDetector(
                   onTap: () {
-                    openUrl("https://www.youtube.com/watch?v=1_NVaujWgBg");
+                    openUrl("https://www.facebook.com/bbu.edu.kh/");
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16, right: 0),
@@ -193,87 +194,96 @@ class _ContactScreenState extends State<ContactScreen>
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(250),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        // Set a background color if needed
-                        border: Border.all(
-                          color: AppColor.textSecondaryColor
-                              .withOpacity(0.4), // Border color
-                        ),
-                        borderRadius: BorderRadius.circular(250),
-                        // Rounded corners for the border
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            // Shadow color
-                            blurRadius: 6.0,
-                            // Softness of the shadow
-                            spreadRadius: 2.0,
-                            // Size of the shadow
-                            offset: const Offset(
-                              0,
-                              4,
-                            ), // Position of the shadow (x, y)
+                GestureDetector(
+                  onTap: () {
+                    openUrl(
+                        "https://m.youtube.com/@BuildBrightUniversityOfficial");
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(250),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // Set a background color if needed
+                          border: Border.all(
+                            color: AppColor.textSecondaryColor
+                                .withOpacity(0.4), // Border color
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(250),
-                        // Ensure the image also has rounded corners
-                        child: Image.asset(
-                          "assets/dashboard/youtube.png",
-                          width: 10,
-                          height: 10,
-                          fit: BoxFit.cover,
+                          borderRadius: BorderRadius.circular(250),
+                          // Rounded corners for the border
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              // Shadow color
+                              blurRadius: 6.0,
+                              // Softness of the shadow
+                              spreadRadius: 2.0,
+                              // Size of the shadow
+                              offset: const Offset(
+                                  0, 4), // Position of the shadow (x, y)
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(250),
+                          // Ensure the image also has rounded corners
+                          child: Image.asset(
+                            "assets/dashboard/youtube.png",
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(250),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        // Set a background color if needed
-                        border: Border.all(
-                          color: AppColor.textSecondaryColor
-                              .withOpacity(0.4), // Border color
-                        ),
-                        borderRadius: BorderRadius.circular(250),
-                        // Rounded corners for the border
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            // Shadow color
-                            blurRadius: 6.0,
-                            // Softness of the shadow
-                            spreadRadius: 2.0,
-                            // Size of the shadow
-                            offset: const Offset(
-                                0, 4), // Position of the shadow (x, y)
+                GestureDetector(
+                  onTap: () {
+                    _showModalBottomSheet(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(250),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          // Set a background color if needed
+                          border: Border.all(
+                            color: AppColor.textSecondaryColor
+                                .withOpacity(0.4), // Border color
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(250),
-                        // Ensure the image also has rounded corners
-                        child: Image.asset(
-                          "assets/dashboard/call1.png",
-                          width: 0,
-                          height: 0,
-                          fit: BoxFit.cover,
+                          borderRadius: BorderRadius.circular(250),
+                          // Rounded corners for the border
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              // Shadow color
+                              blurRadius: 6.0,
+                              // Softness of the shadow
+                              spreadRadius: 2.0,
+                              // Size of the shadow
+                              offset: const Offset(
+                                  0, 4), // Position of the shadow (x, y)
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(250),
+                          // Ensure the image also has rounded corners
+                          child: Image.asset(
+                            "assets/dashboard/call1.png",
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -284,6 +294,89 @@ class _ContactScreenState extends State<ContactScreen>
           ],
         ),
       ),
+    );
+  }
+
+  void _showModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  width: 60,
+                  height: 5,
+                  decoration: const BoxDecoration(
+                    color: Color(0x617C7C7C),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 44),
+                      child: Image.asset(
+                        "assets/dashboard/call.png",
+                        width: 22,
+                        height: 22,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _dialPhoneNumberOnsocial("023 987 700");
+                      },
+                      child: Text(
+                        "023 987 700",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColor.primaryColor,
+                              fontSize: 32,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 44),
+                      child: Image.asset(
+                        "assets/dashboard/call.png",
+                        width: 22,
+                        height: 22,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _dialPhoneNumberOnsocial("012 682 777");
+                      },
+                      child: Text(
+                        "012 682 777",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColor.primaryColor,
+                              fontSize: 32,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -347,6 +440,13 @@ class _ContactScreenState extends State<ContactScreen>
         );
       },
     );
+  }
+
+  void _dialPhoneNumberOnsocial(String phoneNumber) async {
+    final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    }
   }
 }
 

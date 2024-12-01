@@ -49,7 +49,7 @@ class EventDetailScreen extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(color: AppColor.textSecondaryColor),
+                    ?.copyWith(color: Colors.black),
               ),
             ),
             const SizedBox(height: 10),
@@ -59,10 +59,10 @@ class EventDetailScreen extends StatelessWidget {
               ),
               child: Text(
                 eventData?.date ?? '',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: AppColor.textSecondaryColor),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w100,
+                    ),
               ),
             ),
             if (displayLongDescription != null)

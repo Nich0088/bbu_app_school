@@ -10,15 +10,15 @@ import '../../../../common/helpers/local_storage.dart';
 import '../model/login_result.dart';
 
 class LoginController extends GetxController {
-  static const int _usernameMaxLength = 4;
+  static const int _emailMaxLength = 4;
   static const int _passwordMaxLength = 4;
 
   AppDialogHelper? _appDialogHelper;
-  var usernameTextEditingController = TextEditingController().obs;
+  var emailTextEditingController = TextEditingController().obs;
   var passwordTextEditingController = TextEditingController().obs;
-  var isInvalidUsername = false.obs;
+  var isInvalidEmail = false.obs;
   var isInvalidPassword = false.obs;
-  var invalidUsernameDescription = "".obs;
+  var invalidEmailDescription = "".obs;
   var invalidPasswordDescription = "".obs;
   var isHidePassword = true.obs;
   var isShowLoading = false;
@@ -32,8 +32,8 @@ class LoginController extends GetxController {
   }
 
   void resetUsernameError() {
-    invalidUsernameDescription.value = "";
-    isInvalidUsername.value = false;
+    invalidEmailDescription.value = "";
+    isInvalidEmail.value = false;
   }
 
   void resetPasswordError() {
@@ -42,9 +42,9 @@ class LoginController extends GetxController {
   }
 
   Future<void> loginUser({required VoidCallback onSuccess}) async {
-    if (usernameTextEditingController.value.text.length < _usernameMaxLength) {
-      invalidUsernameDescription.value = "Please enter username";
-      isInvalidUsername.value = true;
+    if (emailTextEditingController.value.text.length < _emailMaxLength) {
+      invalidEmailDescription.value = "Please enter username";
+      isInvalidEmail.value = true;
     }
 
     if (passwordTextEditingController.value.text.length < _passwordMaxLength) {
@@ -52,7 +52,7 @@ class LoginController extends GetxController {
       isInvalidPassword.value = true;
     }
 
-    if (isInvalidUsername.value == true || isInvalidPassword.value == true) {
+    if (isInvalidEmail.value == true || isInvalidPassword.value == true) {
       return;
     }
 
@@ -66,7 +66,7 @@ class LoginController extends GetxController {
         "Content-Type": "application/json",
       },
       body: jsonEncode({
-        "username": usernameTextEditingController.value.text,
+        "email": emailTextEditingController.value.text,
         "password": passwordTextEditingController.value.text,
       }),
     );

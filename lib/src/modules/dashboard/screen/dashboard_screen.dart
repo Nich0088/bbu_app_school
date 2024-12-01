@@ -47,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
     DashboardController dashboardController = Get.put(DashboardController());
     return GetBuilder<DashboardController>(builder: (controller) {
       return LoadingContainerWidget(
-        isShowLoading: controller.isShowLoading,
+        // isShowLoading: controller.isShowLoading,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: AppColor.primaryColor,
@@ -57,7 +57,7 @@ class DashboardScreen extends StatelessWidget {
             isDashboardAppBar: true,
             username: "Srey Nich",
             imageUrl:
-                "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
+                "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAzL2ZyZWVpbWFnZXNjb21wYW55X3Bob3RvX29mX3lvdW5nX2luZGlhbl9naXJsX2hvbGRpbmdfc3R1ZGVudF9iYV8zN2QyNjU4Yi0yOWIwLTQyZmQtODhmYy04OGU3ZTcxYmVlNDcucG5n.png",
             onLanguagePressed: () async {
               _showBottomSheet(context);
             },
@@ -76,7 +76,7 @@ class DashboardScreen extends StatelessWidget {
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
-                        AppLogo.appLogo,
+                        AppLogo.bbucampus,
                       ),
                       fit: BoxFit.fill,
                     ),
@@ -88,7 +88,7 @@ class DashboardScreen extends StatelessWidget {
                       ClipOval(
                         child: CachedNetworkImage(
                           imageUrl:
-                              "https://www.nmspacemuseum.org/wp-content/uploads/2019/03/Elon_Musk.jpg",
+                              "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAzL2ZyZWVpbWFnZXNjb21wYW55X3Bob3RvX29mX3lvdW5nX2luZGlhbl9naXJsX2hvbGRpbmdfc3R1ZGVudF9iYV8zN2QyNjU4Yi0yOWIwLTQyZmQtODhmYy04OGU3ZTcxYmVlNDcucG5n.png",
                           width: 56,
                           height: 56,
                           fit: BoxFit.cover,
@@ -96,183 +96,314 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       Text(
                         "Srey Nich",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(color: AppColor.textSecondaryColor),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
                       ),
                       Text(
                         "070 168 168",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: AppColor.textSecondaryColor),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  "ID",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                Text(
-                  "PP45454",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Name in Khmer",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                Text(
-                  "កៅ ស្រីនិច្ច",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: AppColor.textSecondaryColor,
-                        fontFamily: 'notoSansKhmer',
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "ID :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
                       ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "PP45454",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Name in English",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Name in Khmer :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "កៅ ស្រីនិច្ច",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "Kao Sreynich",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Name in English :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "Kao Sreynich",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Gender",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Gender :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "Female",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "Female",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Date of Birth :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "12/01/1998",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Date of Birth",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Place of Birth :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "Phnom Penh",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "21/03/1998",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Phone Number :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "092 219287",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Place of Birth",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Gmail :",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 14),
+                      Text(
+                        "Kaosreynich01@gmail.com",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "Phnom Penh",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Manage Enrollment",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  "Phone Number",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "About Us",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
                 ),
-                Text(
-                  "0969108106",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Gmail",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                Text(
-                  "KaoSreynich@gmail.com",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Manage Enrollment",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "About Us",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Version: ....",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: AppColor.textSecondaryColor),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Version",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              // color: AppColor.textSecondaryColor,
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -393,7 +524,11 @@ class DashboardScreen extends StatelessWidget {
                         index: index,
                         item: dashboardController.certificateFormatList[index],
                         onTap: () {
-                          //
+                          context.push(
+                            AppScreen.certificateFormatScreen.path,
+                            extra: dashboardController
+                                .certificateFormatList[index],
+                          );
                         },
                       );
                     },

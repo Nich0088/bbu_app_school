@@ -8,7 +8,7 @@ class LoadingContainerWidget extends StatelessWidget {
   const LoadingContainerWidget({
     super.key,
     required this.child,
-    required this.isShowLoading,
+    this.isShowLoading = false,
   });
 
   @override
