@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:school_app/src/common/helpers/local_storage.dart';
+import 'package:school_app/src/core/auth/login/model/login_result.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
@@ -158,6 +160,7 @@ class DashboardController extends GetxController {
 
   var selectedLanguage = Language.english.obs;
   var slideBannerList = SlideBanner().obs;
+  var userProfileData = LoginResultData().obs;
   var isShowLoading = false;
   AppDialogHelper? _appDialogHelper;
 
@@ -165,6 +168,7 @@ class DashboardController extends GetxController {
   void onInit() async {
     super.onInit();
     await _getBannerList();
+    await _getUserProfileData();
   }
 
   void register(BuildContext context) {
@@ -195,6 +199,16 @@ class DashboardController extends GetxController {
       );
     }
     _setLoadingState(false);
+  }
+
+  Future<void> _getUserProfileData() async {
+    String? userProfileDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.userProfileData);
+
+    if (userProfileDataString == null) return;
+
+    userProfileData.value =
+        LoginResultData.fromJson(jsonDecode(userProfileDataString));
   }
 
   void _setLoadingState(bool isLoading) {

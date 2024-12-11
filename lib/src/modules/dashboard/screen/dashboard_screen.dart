@@ -47,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
     DashboardController dashboardController = Get.put(DashboardController());
     return GetBuilder<DashboardController>(builder: (controller) {
       return LoadingContainerWidget(
-        // isShowLoading: controller.isShowLoading,
+        isShowLoading: controller.isShowLoading,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: AppColor.primaryColor,
@@ -55,9 +55,9 @@ class DashboardScreen extends StatelessWidget {
             context,
             backgroundColor: AppColor.primaryColor,
             isDashboardAppBar: true,
-            username: "Srey Nich",
-            imageUrl:
-                "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAzL2ZyZWVpbWFnZXNjb21wYW55X3Bob3RvX29mX3lvdW5nX2luZGlhbl9naXJsX2hvbGRpbmdfc3R1ZGVudF9iYV8zN2QyNjU4Yi0yOWIwLTQyZmQtODhmYy04OGU3ZTcxYmVlNDcucG5n.png",
+            username:
+                '${dashboardController.userProfileData.value.firstname} ${dashboardController.userProfileData.value.lastname}',
+            imageUrl: dashboardController.userProfileData.value.photo ?? '',
             onLanguagePressed: () async {
               _showBottomSheet(context);
             },
@@ -88,14 +88,15 @@ class DashboardScreen extends StatelessWidget {
                       ClipOval(
                         child: CachedNetworkImage(
                           imageUrl:
-                              "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAzL2ZyZWVpbWFnZXNjb21wYW55X3Bob3RvX29mX3lvdW5nX2luZGlhbl9naXJsX2hvbGRpbmdfc3R1ZGVudF9iYV8zN2QyNjU4Yi0yOWIwLTQyZmQtODhmYy04OGU3ZTcxYmVlNDcucG5n.png",
+                              dashboardController.userProfileData.value.photo ??
+                                  '',
                           width: 56,
                           height: 56,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Text(
-                        "Srey Nich",
+                        '${dashboardController.userProfileData.value.firstname} ${dashboardController.userProfileData.value.lastname}',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
                               color: Colors.white,
@@ -103,7 +104,9 @@ class DashboardScreen extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        "070 168 168",
+                        dashboardController
+                                .userProfileData.value.contactPhone ??
+                            '',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
                               color: Colors.white,
@@ -131,7 +134,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "PP45454",
+                        dashboardController.userProfileData.value.id ?? '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -160,7 +163,8 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "កៅ ស្រីនិច្ច",
+                        dashboardController.userProfileData.value.fullNameKh ??
+                            '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -218,7 +222,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "Female",
+                        dashboardController.userProfileData.value.sex ?? '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -247,7 +251,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "12/01/1998",
+                        dashboardController.userProfileData.value.dob ?? '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -276,7 +280,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "Phnom Penh",
+                        '${dashboardController.userProfileData.value.pobVillage}, ${dashboardController.userProfileData.value.pobCommune}, ${dashboardController.userProfileData.value.pobDistrict}, ${dashboardController.userProfileData.value.pobProvince}',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -305,7 +309,9 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "092 219287",
+                        dashboardController
+                                .userProfileData.value.contactPhone ??
+                            '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -334,7 +340,8 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "Kaosreynich01@gmail.com",
+                        dashboardController.userProfileData.value.userName ??
+                            '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
