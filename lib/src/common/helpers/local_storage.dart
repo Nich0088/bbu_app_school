@@ -1,18 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  static const String tokenKey = "token";
+  static const String authorizeTokenData = "authorize.token.data";
+  static const String userProfileData = "user.profile.data";
 
   static SharedPreferences? _prefs;
-
-  // initial SharedPreferences
 
   static Future<SharedPreferences> init() async {
     _prefs = await SharedPreferences.getInstance();
     return _prefs!;
   }
-
-  // store data to local storage
 
   static Future<void> storeData({String? key, dynamic value}) async {
     if (value.runtimeType == String) {
@@ -27,8 +24,6 @@ class LocalStorage {
       _prefs!.setStringList(key!, value);
     }
   }
-
-  // function for get data from local storage
 
   static Future<int?> getIntValue({String? key}) async {
     return _prefs!.getInt(key!);

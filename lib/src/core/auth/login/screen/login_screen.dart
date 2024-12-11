@@ -5,6 +5,8 @@ import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
 
 import '../../../../../main.dart';
+import '../../../../common/model/custom_drop_down_menu_item.dart';
+import '../../../../common/widgets/custom_drop_down_picker.dart';
 import '../../../../common/widgets/custom_text_field.dart';
 import '../../../../common/widgets/loading_container_widget.dart';
 import '../../../../modules/dashboard/models/user_type.dart';
@@ -99,6 +101,36 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             label: "Password",
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppStyle.horizontalPadding,
+                          ),
+                          child: CustomDropDownPicker(
+                            errorDescription: _loginController
+                                .invalidUserTypeDescription.value,
+                            isShowError:
+                                _loginController.isInvalidUserType.value,
+                            controller: _loginController
+                                .userTypeTextEditingController.value,
+                            label: "User Type",
+                            onSelected: (item) {
+                              _loginController.userTypeTextEditingController
+                                  .value.text = item?.title ?? '';
+                              _loginController.resetUserTypeError();
+                              _loginController.selectedUserType = item;
+                            },
+                            dropDownMenuEntryList: _loginController.userTypeList
+                                .map(
+                                  (item) =>
+                                      DropdownMenuEntry<CustomDropDownMenuItem>(
+                                    value: item,
+                                    label: item.title,
+                                  ),
+                                )
+                                .toList(),
                           ),
                         ),
                         const SizedBox(height: 12),

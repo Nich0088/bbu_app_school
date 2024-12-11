@@ -11,7 +11,7 @@ LoginResult _$LoginResultFromJson(Map<String, dynamic> json) => LoginResult(
       message: json['message'] as String?,
       data: json['data'] == null
           ? null
-          : LoginData.fromJson(json['data'] as Map<String, dynamic>),
+          : LoginResultData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$LoginResultToJson(LoginResult instance) =>
@@ -21,20 +21,62 @@ Map<String, dynamic> _$LoginResultToJson(LoginResult instance) =>
       'data': instance.data,
     };
 
-LoginData _$LoginDataFromJson(Map<String, dynamic> json) => LoginData(
-      id: (json['id'] as num?)?.toInt(),
+LoginResultData _$LoginResultDataFromJson(Map<String, dynamic> json) =>
+    LoginResultData(
+      id: json['id'] as String?,
       userName: json['userName'] as String?,
-      email: json['email'] as String?,
-      token: json['token'] as String?,
-      createdDate: json['createdate'] as String?,
-      expiredDate: json['expireddate'] as String?,
+      firstname: json['firstname'] as String?,
+      lastname: json['lastname'] as String?,
+      fullNameKh: json['fullnamekh'] as String?,
+      sex: json['sex'] as String?,
+      ethnicity: json['ethicity'],
+      nationality: json['nationality'],
+      marriedStatus: json['marriedstatus'] as bool?,
+      departmentId: (json['departmentid'] as num?)?.toInt(),
+      dob: json['dob'] as String?,
+      photo: json['photo'] as String?,
+      position: json['position'] as String?,
+      workplace: json['workplace'],
+      contactPhone: json['contactphone'] as String?,
+      pobVillage: json['pob_village'],
+      pobCommune: json['pob_commune'],
+      pobDistrict: json['pob_district'],
+      pobProvince: json['pob_province'],
+      address: json['address'] as String?,
+      telegram: json['telegram'],
+      status: json['status'] as String?,
+      startDateWork: json['startdatework'],
+      nddfId: json['nddfid'],
+      nationalId: json['nationalid'] as String?,
+      govstaff: json['govstaff'] as bool?,
     );
 
-Map<String, dynamic> _$LoginDataToJson(LoginData instance) => <String, dynamic>{
+Map<String, dynamic> _$LoginResultDataToJson(LoginResultData instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'userName': instance.userName,
-      'email': instance.email,
-      'token': instance.token,
-      'createdate': instance.createdDate,
-      'expireddate': instance.expiredDate,
+      'firstname': instance.firstname,
+      'lastname': instance.lastname,
+      'fullnamekh': instance.fullNameKh,
+      'sex': instance.sex,
+      'ethicity': instance.ethnicity,
+      'nationality': instance.nationality,
+      'marriedstatus': instance.marriedStatus,
+      'departmentid': instance.departmentId,
+      'dob': instance.dob,
+      'photo': instance.photo,
+      'position': instance.position,
+      'workplace': instance.workplace,
+      'contactphone': instance.contactPhone,
+      'pob_village': instance.pobVillage,
+      'pob_commune': instance.pobCommune,
+      'pob_district': instance.pobDistrict,
+      'pob_province': instance.pobProvince,
+      'address': instance.address,
+      'telegram': instance.telegram,
+      'status': instance.status,
+      'startdatework': instance.startDateWork,
+      'nddfid': instance.nddfId,
+      'nationalid': instance.nationalId,
+      'govstaff': instance.govstaff,
     };

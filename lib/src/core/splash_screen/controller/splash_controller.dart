@@ -6,10 +6,10 @@ class SplashController extends GetxController {
   Future<void> determineRoute(
       {required VoidCallback actionOnTokenExist,
       required VoidCallback actionOnTokenNotExist}) async {
-    String? token =
-        await LocalStorage.getStringValue(key: LocalStorage.tokenKey);
+    String? userProfileData =
+        await LocalStorage.getStringValue(key: LocalStorage.userProfileData);
 
-    if (token != null) {
+    if (userProfileData != null) {
       actionOnTokenExist.call();
     } else {
       actionOnTokenNotExist.call();
