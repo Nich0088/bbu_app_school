@@ -133,14 +133,18 @@ class DashboardScreen extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(width: 14),
-                      Text(
-                        dashboardController.userProfileData.value.id ?? '',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              // color: AppColor.textSecondaryColor,
-                              color: Colors.black,
-                              fontSize: 16.0,
-                            ),
+                      Expanded(
+                        child: Text(
+                          dashboardController.userProfileData.value.id ?? '',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    // color: AppColor.textSecondaryColor,
+                                    color: Colors.black,
+                                    fontSize: 16.0,
+                                  ),
+                        ),
                       ),
                     ],
                   ),
