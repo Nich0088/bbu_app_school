@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:school_app/src/common/widgets/custom_drop_down_picker.dart';
 
+import '../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_text_field.dart';
 import '../../../constants/app_setting.dart';
 import '../controller/registration_application_controller.dart';
-import '../model/sex_menu_item.dart';
 
 class RegistrationApplicationScreen extends StatefulWidget {
   const RegistrationApplicationScreen({super.key});
@@ -30,18 +31,22 @@ class _RegistrationApplicationScreenState
   final FocusNode _lastNameInLatinFocusNode = FocusNode();
   final FocusNode _phoneNumberFocusNode = FocusNode();
 
-  final ImagePicker _picker =
-      ImagePicker(); // Create an instance of ImagePicker
-  File? _selectedImage;
+  final ImagePicker _picker = ImagePicker();
 
-  Future<void> _getImage(ImageSource source) async {
-    final XFile? pickedFile = await _picker.pickImage(source: source);
+  Future<void> _getImage() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      setState(() {
-        _selectedImage = File(pickedFile.path);
-      });
+      _registrationApplicationController.selectedImage.value =
+          File(pickedFile.path);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Get.delete<RegistrationApplicationController>();
   }
 
   @override
@@ -92,36 +97,50 @@ class _RegistrationApplicationScreenState
                               right: AppStyle.horizontalPadding,
                               left: AppStyle.horizontalPadding,
                             ),
-                            child: Stack(
-                              children: [
-                                _selectedImage != null
-                                    ? Image.file(
-                                        _selectedImage!,
-                                        width: 200,
-                                        height: 200,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : const Text("No image selected"),
-                                Positioned(
+                            child: GestureDetector(
+                              onTap: () async {
+                                await _getImage();
+                              },
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(8),
+                                    ),
+                                    child: _registrationApplicationController
+                                                .selectedImage.value !=
+                                            null
+                                        ? Image.file(
+                                            _registrationApplicationController
+                                                .selectedImage.value!,
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/registration_application/user.png',
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
+                                  Positioned(
                                     bottom: 4,
                                     right: 4,
                                     child: Container(
-                                        padding: const EdgeInsets.all(0),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.blue,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: IconButton(
-                                          onPressed: () =>
-                                              _getImage(ImageSource.gallery),
-                                          icon: const Icon(
-                                            Icons.edit,
-                                            // color: Colors.blue,
-                                            size:
-                                                26.0, // Optional: Set the size
-                                          ),
-                                        )))
-                              ],
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.blue,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           Padding(
@@ -195,8 +214,7 @@ class _RegistrationApplicationScreenState
                               left: AppStyle.horizontalPadding,
                               right: AppStyle.horizontalPadding,
                             ),
-                            child: _sexDropDownPicker(
-                              context,
+                            child: CustomDropDownPicker(
                               controller: _registrationApplicationController
                                   .sexTextEditingController.value,
                               label: "Sex",
@@ -208,8 +226,8 @@ class _RegistrationApplicationScreenState
                               },
                               dropDownMenuEntryList:
                                   _registrationApplicationController.sexesList
-                                      .map((item) =>
-                                          DropdownMenuEntry<SexMenuItem>(
+                                      .map((item) => DropdownMenuEntry<
+                                              CustomDropDownMenuItem>(
                                             value: item,
                                             label: item.title,
                                           ))
@@ -254,8 +272,7 @@ class _RegistrationApplicationScreenState
                               left: AppStyle.horizontalPadding,
                               right: AppStyle.horizontalPadding,
                             ),
-                            child: _sexDropDownPicker(
-                              context,
+                            child: CustomDropDownPicker(
                               controller: _registrationApplicationController
                                   .placeOfBirthTextEditingController.value,
                               label: "Place of birth",
@@ -268,8 +285,8 @@ class _RegistrationApplicationScreenState
                               dropDownMenuEntryList:
                                   _registrationApplicationController
                                       .placeOfBirthList
-                                      .map((item) =>
-                                          DropdownMenuEntry<SexMenuItem>(
+                                      .map((item) => DropdownMenuEntry<
+                                              CustomDropDownMenuItem>(
                                             value: item,
                                             label: item.title,
                                           ))
@@ -302,83 +319,6 @@ class _RegistrationApplicationScreenState
           ),
         ],
       ),
-    );
-  }
-
-  Widget _sexDropDownPicker(
-    BuildContext context, {
-    String? label,
-    TextStyle? labelTextStyle,
-    TextEditingController? controller,
-    ValueChanged<SexMenuItem?>? onSelected,
-    required List<DropdownMenuEntry<SexMenuItem>> dropDownMenuEntryList,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label ?? '',
-          style: labelTextStyle ??
-              Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColor.textTertiaryColor,
-                  ),
-        ),
-        const SizedBox(height: 4),
-        DropdownMenu<SexMenuItem>(
-          width: double.infinity,
-          controller: controller,
-          menuHeight: 100,
-          menuStyle: MenuStyle(
-            minimumSize: const WidgetStatePropertyAll(Size(200, 100)),
-            maximumSize: const WidgetStatePropertyAll(Size(200, 100)),
-            shape: WidgetStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppStyle.borderRadius),
-              ),
-            ),
-            elevation: const WidgetStatePropertyAll(2),
-          ),
-          textStyle: Theme.of(context)
-              .textTheme
-              .bodyLarge
-              ?.copyWith(color: AppColor.textSecondaryColor),
-          inputDecorationTheme: InputDecorationTheme(
-            suffixIconColor: AppColor.textSecondaryColor,
-            fillColor: controller?.text == ''
-                ? const Color(0xffF2F2F2)
-                : AppColor.cardColor,
-            filled: true,
-            border: OutlineInputBorder(
-              borderSide: const BorderSide(
-                color: Color(0xFFFF4444),
-              ),
-              borderRadius: BorderRadius.circular(AppStyle.borderRadius),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  AppStyle.borderRadius,
-                ),
-              ),
-              borderSide: BorderSide(
-                width: 1.5,
-                color: AppColor.primaryColor,
-              ),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(
-                width: 1.5,
-                color: AppColor.primaryColor,
-              ),
-            ),
-          ),
-          onSelected: (value) {
-            onSelected?.call(value);
-          },
-          dropdownMenuEntries: dropDownMenuEntryList,
-        ),
-      ],
     );
   }
 }
