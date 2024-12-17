@@ -16,6 +16,8 @@ class AttendantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AttendantController attendantController = Get.put(AttendantController());
 
+    attendantController.register(context);
+
     return GetBuilder<AttendantController>(
       builder: (controller) {
         return LoadingContainerWidget(
