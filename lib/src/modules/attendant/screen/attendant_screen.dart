@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/modules/attendant/controller/attendant_controller.dart';
+import 'package:school_app/src/modules/attendant/model/check_in_and_out_history_result.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
+import '../../../common/widgets/loading_container_widget.dart';
 import '../../../constants/app_setting.dart';
 
 class AttendantScreen extends StatelessWidget {
@@ -14,157 +16,193 @@ class AttendantScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AttendantController attendantController = Get.put(AttendantController());
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        context,
-        backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
-        title: "Attendant",
-        isCenterTitle: true,
-        onPressedBack: () {
-          context.pop();
-        },
-      ),
-      backgroundColor: AppColor.primaryColor,
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: AppStyle.horizontalPadding,
-              left: AppStyle.horizontalPadding,
-              right: AppStyle.horizontalPadding,
-            ),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: AppColor.cardColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    left: 10,
-                    right: 10,
-                  ),
-                  child: Text(
-                    'Attendant  Information',
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: AppColor.textSecondaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    top: 12,
-                    left: 16,
-                    right: 16,
-                  ),
-                  child: TextLabelWithValue(
-                    label: 'Day:',
-                    value: 'Monday',
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    top: 12,
-                    left: 16,
-                    right: 16,
-                  ),
-                  child: TextLabelWithValue(
-                    label: 'Date:',
-                    value: '15/9/2024',
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    top: 12,
-                    left: 16,
-                    right: 16,
-                  ),
-                  child: TextLabelWithValue(
-                    label: 'Time:',
-                    value: '7:00 pm',
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                  child: TextLabelWithValue(
-                    label: 'Subject:',
-                    value: 'subject code',
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: AppStyle.horizontalPadding,
-              left: AppStyle.horizontalPadding,
-              right: AppStyle.horizontalPadding,
-            ),
-            child: CustomButton(
-              onPressed: () {
-                debugPrint('Check In');
+    return GetBuilder<AttendantController>(
+      builder: (controller) {
+        return LoadingContainerWidget(
+          isShowLoading: controller.isShowLoading,
+          child: Scaffold(
+            appBar: CustomAppBar(
+              context,
+              backgroundColor: AppColor.primaryColor,
+              isDashboardAppBar: false,
+              title: "Attendant",
+              isCenterTitle: true,
+              onPressedBack: () {
+                context.pop();
               },
-              title: 'Check In',
-              buttonColor: AppColor.successColor,
             ),
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(
-                top: AppStyle.horizontalPadding,
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-              ),
-              child: Column(
+            backgroundColor: AppColor.primaryColor,
+            body: Obx(
+              () => Column(
                 children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: AppStyle.horizontalPadding,
+                      left: AppStyle.horizontalPadding,
+                      right: AppStyle.horizontalPadding,
+                    ),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: AppColor.cardColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 10,
+                            right: 10,
+                          ),
+                          child: Text(
+                            'Attendant  Information',
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                  color: AppColor.textSecondaryColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: TextLabelWithValue(
+                            label: 'Day:',
+                            value: 'Monday',
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: TextLabelWithValue(
+                            label: 'Date:',
+                            value: '15/9/2024',
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: TextLabelWithValue(
+                            label: 'Time:',
+                            value: '7:00 pm',
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          child: TextLabelWithValue(
+                            label: 'Subject:',
+                            value: 'subject code',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 10,
-                      left: 10,
-                      right: 10,
+                      top: AppStyle.horizontalPadding,
+                      left: AppStyle.horizontalPadding,
+                      right: AppStyle.horizontalPadding,
                     ),
-                    child: Text(
-                      'History',
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                color: AppColor.textSecondaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
+                    child: CustomButton(
+                      onPressed: () {
+                        debugPrint('Check In');
+                      },
+                      title: 'Check In',
+                      buttonColor: AppColor.successColor,
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: attendantController.attendantList.length,
-                      itemBuilder: (context, index) {
-                        return AttendantItemWidget(
-                          item: attendantController.attendantList[index],
-                          isLastItem: index ==
-                              attendantController.attendantList.length - 1,
-                        );
-                      },
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(
+                        top: AppStyle.horizontalPadding,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              left: 10,
+                              right: 10,
+                            ),
+                            child: Text(
+                              'History',
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                    color: AppColor.textSecondaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          if (attendantController.checkInAndOutHistoryResult
+                                  .value.checkInAndOutHistoryData !=
+                              null)
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: attendantController
+                                    .checkInAndOutHistoryResult
+                                    .value
+                                    .checkInAndOutHistoryData
+                                    ?.length,
+                                itemBuilder: (context, index) {
+                                  var checkInAndOutHistoryDataItem =
+                                      attendantController
+                                          .checkInAndOutHistoryResult
+                                          .value
+                                          .checkInAndOutHistoryData?[index];
+                                  if (checkInAndOutHistoryDataItem == null) {
+                                    return const SizedBox();
+                                  }
+
+                                  return AttendantItemWidget(
+                                    item: checkInAndOutHistoryDataItem,
+                                    isLastItem: index ==
+                                        (attendantController
+                                                    .checkInAndOutHistoryResult
+                                                    .value
+                                                    .checkInAndOutHistoryData
+                                                    ?.length ??
+                                                0) -
+                                            1,
+                                  );
+                                },
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -176,12 +214,20 @@ class AttendantItemWidget extends StatelessWidget {
     required this.isLastItem,
   });
 
-  final AttendantItem item;
+  final CheckInAndOutHistoryData item;
   final bool isLastItem;
 
   @override
   Widget build(BuildContext context) {
     double remainingWidth = MediaQuery.of(context).size.width - 122;
+    String time = '';
+    if (item.status == null) {
+      time = '';
+    } else if (item.status?.toLowerCase() == 'in') {
+      time = '${item.fromTime}';
+    } else if (item.status?.toLowerCase() == 'out') {
+      time = '${item.toTime}';
+    }
     return Container(
       margin: EdgeInsets.only(
         top: AppStyle.horizontalPadding,
@@ -204,7 +250,7 @@ class AttendantItemWidget extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(
-            item.isCheckIn == true
+            item.status?.toLowerCase() == 'in'
                 ? 'assets/attendant/check_in.png'
                 : 'assets/attendant/check_out.png',
             width: 30,
@@ -219,7 +265,7 @@ class AttendantItemWidget extends StatelessWidget {
               SizedBox(
                 width: remainingWidth,
                 child: Text(
-                  "item.subjectName sfdasdfasdfjkasdjhkfhkasdfkasdkfakhdfjkhskjd",
+                  item.subject ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: AppColor.textSecondaryColor,
@@ -233,7 +279,7 @@ class AttendantItemWidget extends StatelessWidget {
                   SizedBox(
                     width: (remainingWidth * 0.5) - 2,
                     child: Text(
-                      'Date: ${item.date}asdfasfasdfasdfasdf',
+                      'Date: ${item.date}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppColor.textSecondaryColor,
                             fontWeight: FontWeight.bold,
@@ -244,7 +290,7 @@ class AttendantItemWidget extends StatelessWidget {
                   SizedBox(
                     width: (remainingWidth * 0.5) - 2,
                     child: Text(
-                      'Time: ${item.time}asdghfhkasgdfhjkasdkhjfhkj',
+                      'Time: $time',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppColor.textSecondaryColor,
                             fontWeight: FontWeight.bold,

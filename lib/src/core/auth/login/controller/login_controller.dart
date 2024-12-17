@@ -59,7 +59,7 @@ class LoginController extends GetxController {
   }
 
   Future<void> getApiToken() async {
-    String urlString = ApiEndpoint.appBaseUrl + ApiEndpoint.authorizeToken;
+    String urlString = ApiEndpoint.appBaseUrl9 + ApiEndpoint.authorizeToken;
     var url = Uri.parse(urlString);
     var response = await http.post(
       url,
@@ -106,7 +106,7 @@ class LoginController extends GetxController {
     }
 
     String urlString =
-        '${ApiEndpoint.appBaseUrl}${ApiEndpoint.login}?languageRequest=km';
+        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.login}?languageRequest=km';
 
     _setLoadingState(true);
 

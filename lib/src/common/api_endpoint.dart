@@ -1,5 +1,6 @@
 class ApiEndpoint {
-  static const String appBaseUrl = "https://app9.bbu.edu.kh/";
+  static const String appBaseUrl9 = "https://app9.bbu.edu.kh/";
+  static const String appBaseUrl10 = "https://app10.bbu.edu.kh/";
   static const String unAuthorizeBastUrl = "https://bbu.edu.kh/bbu_app/";
   static const String authorizeToken = "api/AppHelperAuthorizeLogin";
   static const String login = "api/v1/usermanage/Login";
@@ -11,4 +12,5 @@ class ApiEndpoint {
   static const String viewVideo = "api/view_video";
   static const String viewLocation = "api/view_location";
   static const String viewCampuses = "api/view_campuses";
+  static const String checkList = "api/school/check-list";
 }
