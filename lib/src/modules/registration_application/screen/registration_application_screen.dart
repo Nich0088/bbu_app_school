@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:school_app/src/common/widgets/custom_drop_down_picker.dart';
+import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 
 import '../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../common/widgets/custom_app_bar.dart';
@@ -51,273 +52,282 @@ class _RegistrationApplicationScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        context,
-        backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
-        title: "Registration Application",
-        isCenterTitle: true,
-        onPressedBack: () {
-          context.pop();
-        },
-      ),
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Opacity(
-              opacity: 0.7,
-              child: Image.asset(
-                AppLogo.appLogo,
-                height: MediaQuery.of(context).size.height * 0.3,
-                fit: BoxFit.cover,
+    _registrationApplicationController.register(context);
+
+    return GetBuilder<RegistrationApplicationController>(
+      builder: (controller) => LoadingScaffoldWidget(
+        isShowLoading: controller.isShowLoading,
+        appBar: CustomAppBar(
+          context,
+          backgroundColor: AppColor.primaryColor,
+          isDashboardAppBar: false,
+          title: "Registration Application",
+          isCenterTitle: true,
+          onPressedBack: () {
+            context.pop();
+          },
+        ),
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Opacity(
+                opacity: 0.7,
+                child: Image.asset(
+                  AppLogo.appLogo,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Obx(
-            () => GestureDetector(
-              onTap: () {
-                _firstNameInKhmerFocusNode.unfocus();
-                _lastNameInKhmerFocusNode.unfocus();
-                _firstNameInLatinFocusNode.unfocus();
-                _lastNameInLatinFocusNode.unfocus();
-                _phoneNumberFocusNode.unfocus();
-              },
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                              left: AppStyle.horizontalPadding,
-                            ),
-                            child: GestureDetector(
-                              onTap: () async {
-                                await _getImage();
-                              },
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(8),
-                                    ),
-                                    child: _registrationApplicationController
-                                                .selectedImage.value !=
-                                            null
-                                        ? Image.file(
-                                            _registrationApplicationController
-                                                .selectedImage.value!,
-                                            width: 200,
-                                            height: 200,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.asset(
-                                            'assets/registration_application/user.png',
-                                            width: 200,
-                                            height: 200,
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
-                                  Positioned(
-                                    bottom: 4,
-                                    right: 4,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(8),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.blue,
-                                        shape: BoxShape.circle,
+            Obx(
+              () => GestureDetector(
+                onTap: () {
+                  _firstNameInKhmerFocusNode.unfocus();
+                  _lastNameInKhmerFocusNode.unfocus();
+                  _firstNameInLatinFocusNode.unfocus();
+                  _lastNameInLatinFocusNode.unfocus();
+                  _phoneNumberFocusNode.unfocus();
+                },
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                                left: AppStyle.horizontalPadding,
+                              ),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  await _getImage();
+                                },
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(8),
                                       ),
-                                      child: const Icon(
-                                        Icons.edit,
-                                        size: 24.0,
-                                      ),
+                                      child: _registrationApplicationController
+                                                  .selectedImage.value !=
+                                              null
+                                          ? Image.file(
+                                              _registrationApplicationController
+                                                  .selectedImage.value!,
+                                              width: 200,
+                                              height: 200,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/registration_application/user.png',
+                                              width: 200,
+                                              height: 200,
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
-                                  )
-                                ],
+                                    Positioned(
+                                      bottom: 4,
+                                      right: 4,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.blue,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(
+                                          Icons.edit,
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: AppStyle.horizontalPadding,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: AppStyle.horizontalPadding,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomTextField(
+                                focusNode: _firstNameInKhmerFocusNode,
+                                controller: _registrationApplicationController
+                                    .firstNameInKhmerTextEditingController
+                                    .value,
+                                onChangeTextField: (value) {
+                                  //
+                                },
+                                label: "First name in Khmer",
+                              ),
                             ),
-                            child: CustomTextField(
-                              focusNode: _firstNameInKhmerFocusNode,
-                              controller: _registrationApplicationController
-                                  .firstNameInKhmerTextEditingController.value,
-                              onChangeTextField: (value) {
-                                //
-                              },
-                              label: "First name in Khmer",
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomTextField(
+                                focusNode: _lastNameInKhmerFocusNode,
+                                controller: _registrationApplicationController
+                                    .lastNameInKhmerTextEditingController.value,
+                                onChangeTextField: (value) {
+                                  //
+                                },
+                                label: "Last name in Khmer",
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomTextField(
+                                focusNode: _firstNameInLatinFocusNode,
+                                controller: _registrationApplicationController
+                                    .firstNameInEnglishTextEditingController
+                                    .value,
+                                onChangeTextField: (value) {
+                                  //
+                                },
+                                label: "First name in Latin",
+                              ),
                             ),
-                            child: CustomTextField(
-                              focusNode: _lastNameInKhmerFocusNode,
-                              controller: _registrationApplicationController
-                                  .lastNameInKhmerTextEditingController.value,
-                              onChangeTextField: (value) {
-                                //
-                              },
-                              label: "Last name in Khmer",
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomTextField(
+                                focusNode: _lastNameInLatinFocusNode,
+                                controller: _registrationApplicationController
+                                    .lastNameInEnglishTextEditingController
+                                    .value,
+                                onChangeTextField: (value) {
+                                  //
+                                },
+                                label: "Last name in Latin",
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomTextField(
-                              focusNode: _firstNameInLatinFocusNode,
-                              controller: _registrationApplicationController
-                                  .firstNameInEnglishTextEditingController
-                                  .value,
-                              onChangeTextField: (value) {
-                                //
-                              },
-                              label: "First name in Latin",
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomTextField(
-                              focusNode: _lastNameInLatinFocusNode,
-                              controller: _registrationApplicationController
-                                  .lastNameInEnglishTextEditingController.value,
-                              onChangeTextField: (value) {
-                                //
-                              },
-                              label: "Last name in Latin",
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomDropDownPicker(
-                              controller: _registrationApplicationController
-                                  .sexTextEditingController.value,
-                              label: "Sex",
-                              onSelected: (item) {
-                                _registrationApplicationController
-                                    .sexTextEditingController
-                                    .value
-                                    .text = item?.title ?? '';
-                              },
-                              dropDownMenuEntryList:
-                                  _registrationApplicationController.sexesList
-                                      .map((item) => DropdownMenuEntry<
-                                              CustomDropDownMenuItem>(
-                                            value: item,
-                                            label: item.title,
-                                          ))
-                                      .toList(),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomDatePicker(
-                              label: 'Date of birth',
-                              controller: _registrationApplicationController
-                                  .dobTextEditingController.value,
-                              onDateSelected: (date) {
-                                _registrationApplicationController
-                                    .dobTextEditingController.value.text = date;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomTextField(
-                              focusNode: _phoneNumberFocusNode,
-                              controller: _registrationApplicationController
-                                  .phoneNumberTextEditingController.value,
-                              onChangeTextField: (value) {
-                                //
-                              },
-                              label: "Phone Number",
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 16,
-                              left: AppStyle.horizontalPadding,
-                              right: AppStyle.horizontalPadding,
-                            ),
-                            child: CustomDropDownPicker(
-                              controller: _registrationApplicationController
-                                  .placeOfBirthTextEditingController.value,
-                              label: "Place of birth",
-                              onSelected: (item) {
-                                _registrationApplicationController
-                                    .placeOfBirthTextEditingController
-                                    .value
-                                    .text = item?.title ?? '';
-                              },
-                              dropDownMenuEntryList:
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomDropDownPicker(
+                                controller: _registrationApplicationController
+                                    .sexTextEditingController.value,
+                                label: "Sex",
+                                onSelected: (item) {
                                   _registrationApplicationController
-                                      .placeOfBirthList
-                                      .map((item) => DropdownMenuEntry<
-                                              CustomDropDownMenuItem>(
-                                            value: item,
-                                            label: item.title,
-                                          ))
-                                      .toList(),
+                                      .sexTextEditingController
+                                      .value
+                                      .text = item?.title ?? '';
+                                },
+                                dropDownMenuEntryList:
+                                    _registrationApplicationController.sexesList
+                                        .map((item) => DropdownMenuEntry<
+                                                CustomDropDownMenuItem>(
+                                              value: item,
+                                              label: item.title,
+                                            ))
+                                        .toList(),
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: AppStyle.horizontalPadding,
-                          ),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomDatePicker(
+                                label: 'Date of birth',
+                                controller: _registrationApplicationController
+                                    .dobTextEditingController.value,
+                                onDateSelected: (date) {
+                                  _registrationApplicationController
+                                      .dobTextEditingController
+                                      .value
+                                      .text = date;
+                                },
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomTextField(
+                                focusNode: _phoneNumberFocusNode,
+                                controller: _registrationApplicationController
+                                    .phoneNumberTextEditingController.value,
+                                onChangeTextField: (value) {
+                                  //
+                                },
+                                label: "Phone Number",
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 16,
+                                left: AppStyle.horizontalPadding,
+                                right: AppStyle.horizontalPadding,
+                              ),
+                              child: CustomDropDownPicker(
+                                controller: _registrationApplicationController
+                                    .placeOfBirthTextEditingController.value,
+                                label: "Place of birth",
+                                onSelected: (item) {
+                                  _registrationApplicationController
+                                      .placeOfBirthTextEditingController
+                                      .value
+                                      .text = item?.title ?? '';
+                                },
+                                dropDownMenuEntryList:
+                                    _registrationApplicationController
+                                        .placeOfBirthList
+                                        .map((item) => DropdownMenuEntry<
+                                                CustomDropDownMenuItem>(
+                                              value: item,
+                                              label: item.title,
+                                            ))
+                                        .toList(),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: AppStyle.horizontalPadding,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: AppStyle.horizontalPadding,
-                      left: AppStyle.horizontalPadding,
-                      right: AppStyle.horizontalPadding,
-                    ),
-                    child: CustomButton(
-                      onPressed: () {
-                        debugPrint("Continue");
-                      },
-                      title: "Continue",
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: AppStyle.horizontalPadding,
+                        left: AppStyle.horizontalPadding,
+                        right: AppStyle.horizontalPadding,
+                      ),
+                      child: CustomButton(
+                        onPressed: () {
+                          debugPrint("Continue");
+                        },
+                        title: "Continue",
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

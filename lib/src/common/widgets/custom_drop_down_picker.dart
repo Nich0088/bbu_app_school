@@ -43,7 +43,7 @@ class CustomDropDownPicker extends StatelessWidget {
         DropdownMenu<CustomDropDownMenuItem>(
           width: double.infinity,
           controller: controller,
-          menuHeight: 100,
+          menuHeight: 200,
           menuStyle: MenuStyle(
             minimumSize: const WidgetStatePropertyAll(Size(200, 100)),
             maximumSize: const WidgetStatePropertyAll(Size(200, 100)),
