@@ -5,7 +5,6 @@ import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
-import 'package:school_app/src/core/service_locator/service_locator.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
 import 'package:school_app/src/modules/about_us/screen/about_us_screen.dart';
 import 'package:school_app/src/modules/apply/screen/apply_screen.dart';
@@ -31,7 +30,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await LocalStorage.init();
-  configurationDependencies();
 
   runApp(
     EasyLocalization(
