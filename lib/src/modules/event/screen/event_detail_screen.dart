@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/modules/event/models/event_new_data.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 
 class EventDetailScreen extends StatelessWidget {
   const EventDetailScreen({super.key, this.eventData});

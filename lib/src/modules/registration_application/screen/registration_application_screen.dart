@@ -11,7 +11,7 @@ import '../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_text_field.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 import '../controller/registration_application_controller.dart';
 
 class RegistrationApplicationScreen extends StatefulWidget {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/user_dashboard/model/study_item.dart';
 
 class StudyItemWidget extends StatelessWidget {
   final StudyItem item;
   final bool isLastItem;
+
   const StudyItemWidget(
       {super.key, required this.item, required this.isLastItem});
 

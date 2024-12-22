@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:school_app/src/common/model/custom_drop_down_menu_item.dart';
 
-import '../../constants/app_setting.dart';
+import '../app_setting.dart';
 
 class CustomDropDownPicker extends StatelessWidget {
   final String? label;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_setting.dart';
+import '../../app_setting.dart';
 import '../../../modules/user_dashboard/model/study_result_item.dart';
 
 class StudyResultItemWidget extends StatelessWidget {

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
 import 'package:school_app/src/common/widgets/loading_container_widget.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';

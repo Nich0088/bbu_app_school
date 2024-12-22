@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 
 class CertificateFormatScreen extends StatelessWidget {
   const CertificateFormatScreen({super.key, this.certificateFormatItem});

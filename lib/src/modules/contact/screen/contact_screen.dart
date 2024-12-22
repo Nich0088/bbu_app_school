@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/contact/controller/contact_controller.dart';
 import 'package:school_app/src/modules/contact/model/contact.dart';
 import 'package:url_launcher/url_launcher.dart';

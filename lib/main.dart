@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/helpers/local_storage.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';

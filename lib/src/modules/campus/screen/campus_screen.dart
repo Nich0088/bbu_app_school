@@ -6,7 +6,7 @@ import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/campus/controller/campus_controller.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 import '../../../utils/helpers/utility_function.dart';
 import '../model/campuses.dart';
 

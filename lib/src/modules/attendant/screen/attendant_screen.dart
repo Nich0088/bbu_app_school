@@ -7,7 +7,7 @@ import 'package:school_app/src/modules/attendant/model/check_in_and_out_history_
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/loading_container_widget.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 
 class AttendantScreen extends StatelessWidget {
   const AttendantScreen({super.key});

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/location/controller/location_controller.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';

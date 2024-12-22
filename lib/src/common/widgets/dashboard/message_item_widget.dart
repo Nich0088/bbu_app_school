@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_app/src/constants/app_setting.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/dashboard/models/message_item.dart';
 
 class MessageItemWidget extends StatelessWidget {
@@ -9,6 +9,7 @@ class MessageItemWidget extends StatelessWidget {
     required this.onTap,
     required this.isLastItem,
   });
+
   final MessageItem item;
   final GestureTapCallback onTap;
   final bool isLastItem;
@@ -21,9 +22,9 @@ class MessageItemWidget extends StatelessWidget {
         right: isLastItem ? 0 : 12,
       ),
       width: 170,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColor.cardColor,
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,8 +42,6 @@ class MessageItemWidget extends StatelessWidget {
               right: 12,
               bottom: 0,
             ),
-
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

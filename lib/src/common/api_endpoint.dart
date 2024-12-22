@@ -15,4 +15,5 @@ class ApiEndpoint {
   static const String viewCampuses = "api/view_campuses";
   static const String checkList = "api/school/check-list";
   static const String placeOfBirth = "api/v1/placeofbirth";
+  static const String classTimeSchedule = "api/SchTeacherGetTimeByScheduleID";
 }

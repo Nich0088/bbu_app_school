@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:school_app/src/common/app_constant.dart';
 import 'package:school_app/src/common/base_get_x_controller.dart';
 import 'package:school_app/src/modules/attendant/model/check_in_and_out_history_result.dart';
 import 'package:school_app/src/modules/dashboard/controller/dashboard_controller.dart';
@@ -22,12 +23,10 @@ class AttendantController extends BaseGetXController {
 
   Future<void> _getCheckInAndOutHistory() async {
     // String? studentId = _dashboardController.userProfileData.value.id;
-    String? studentId = '98';
-
-    if (studentId == null) return;
+    // if (studentId == null) return;
 
     String urlString =
-        '${ApiEndpoint.appBaseUrl10}${ApiEndpoint.checkList}/$studentId';
+        '${ApiEndpoint.appBaseUrl10}${ApiEndpoint.checkList}/${AppConstant.mockStudentId}';
     debugPrint("$urlString");
     var url = Uri.parse(urlString);
     setLoadingState(true);

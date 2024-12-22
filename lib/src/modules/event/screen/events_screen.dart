@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../main.dart';
 import '../../../common/widgets/custom_app_bar.dart';
-import '../../../constants/app_setting.dart';
+import '../../../common/app_setting.dart';
 import '../controller/event_controller.dart';
 
 class EventsScreen extends StatefulWidget {
