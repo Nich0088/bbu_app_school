@@ -8,9 +8,10 @@ enum HomeGridItemType {
   scholarship,
   aboutUs,
   study,
-  attendant,
   contact,
   video,
   apply,
   calendar,
+  faq,
+  attendant,
 }

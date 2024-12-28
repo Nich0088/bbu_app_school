@@ -3,6 +3,7 @@ class ApiEndpoint {
   static const String appBaseUrl10 = "https://app10.bbu.edu.kh/";
   static const String unAuthorizeBastUrl = "https://bbu.edu.kh/bbu_app/";
   static const String registerBastUrl = "http://register.bbu.edu.kh/";
+  static const String baseUrlStudentResult = "http://results.bbu.edu.kh";
   static const String authorizeToken = "api/AppHelperAuthorizeLogin";
   static const String login = "api/v1/usermanage/Login";
   static const String bannerList = "api/banner_v1";
@@ -16,4 +17,6 @@ class ApiEndpoint {
   static const String checkList = "api/school/check-list";
   static const String placeOfBirth = "api/v1/placeofbirth";
   static const String classTimeSchedule = "api/SchTeacherGetTimeByScheduleID";
+  static const String videoAccesskey = "/api/v1/videoaccesskey";
+  static const String faq = "api/view_faq";
 }

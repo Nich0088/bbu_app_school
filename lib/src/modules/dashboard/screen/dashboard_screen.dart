@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
-import 'package:school_app/src/common/widgets/loading_container_widget.dart';
 import 'package:school_app/src/common/app_setting.dart';
+import 'package:school_app/src/common/widgets/loading_container_widget.dart';
 import 'package:school_app/src/modules/dashboard/controller/dashboard_controller.dart';
-import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 
@@ -17,6 +16,7 @@ import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/dashboard/certificate_format_item_widget.dart';
 import '../../../common/widgets/dashboard/home_grid_item_widget.dart';
 import '../../../common/widgets/dashboard/message_item_widget.dart';
+import '../models/home_grid_item_type.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen(
@@ -47,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
     DashboardController dashboardController = Get.put(DashboardController());
     return GetBuilder<DashboardController>(builder: (controller) {
       return LoadingContainerWidget(
-        isShowLoading: controller.isShowLoading,
+        // isShowLoading: controller.isShowLoading,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: AppColor.primaryColor,
@@ -197,7 +197,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        "Kao Sreynich",
+                        "SIM SREY NUCH",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -284,14 +284,23 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        '${dashboardController.userProfileData.value.pobVillage}, ${dashboardController.userProfileData.value.pobCommune}, ${dashboardController.userProfileData.value.pobDistrict}, ${dashboardController.userProfileData.value.pobProvince}',
+                        "Disable",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
                               color: Colors.black,
                               fontSize: 16.0,
                             ),
                       ),
+                      // Text(
+                      //   '${dashboardController.userProfileData.value.pobVillage}, ${dashboardController.userProfileData.value.pobCommune}, ${dashboardController.userProfileData.value.pobDistrict}, ${dashboardController.userProfileData.value.pobProvince}',
+                      //   textAlign: TextAlign.center,
+                      //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      //         // color: AppColor.textSecondaryColor,
+                      //         color: Colors.black,
+                      //         fontSize: 16.0,
+                      //       ),
+                      // ),
                     ],
                   ),
                 ),
@@ -334,7 +343,7 @@ class DashboardScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Gmail :",
+                        "Email :",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               // color: AppColor.textSecondaryColor,
@@ -356,23 +365,13 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.only(
+                const Padding(
+                  padding: EdgeInsets.only(
                     left: 16,
                   ),
                   child: Row(
                     children: [
-                      Text(
-                        "Manage Enrollment",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              // color: AppColor.textSecondaryColor,
-                              color: Colors.black,
-                              fontSize: 16.0,
-                            ),
-                      ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                     ],
                   ),
                 ),
@@ -396,23 +395,47 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(
+                  height: 218,
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16,
-                  ),
-                  child: Row(
+                  padding: const EdgeInsets.only(left: 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      TextButton(
+                        onPressed: () {
+                          _logOutUser(action: () {
+                            context.go(AppScreen.loginScreen.path);
+                          });
+                        },
+                        child: Text(
+                          "Logout",
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Colors.red,
+                                    fontSize: 16.0,
+                                  ),
+                        ),
+                      ),
+                      // const SizedBox(height: 14.0),
+                      Image.asset(
+                        "assets/app_logo.png",
+                        // Replace with your image path
+                        width: 35, // Adjust size as needed
+                        height: 50,
+                      ),
+                      const SizedBox(height: 14.0),
+                      // Add spacing between the image and text
                       Text(
-                        "Version",
+                        "App Version: V 5.0.29",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              // color: AppColor.textSecondaryColor,
-                              color: Colors.black,
-                              fontSize: 16.0,
+                              color: Colors.black87,
+                              fontSize: 12,
                             ),
                       ),
-                      const SizedBox(width: 12),
                     ],
                   ),
                 ),
@@ -431,16 +454,18 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   decoration: const BoxDecoration(
                     color: AppColor.background,
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
                   ),
                   height: 300,
                   width: double.infinity,
                   child: GridView.builder(
-                    padding: const EdgeInsets.all(AppStyle.horizontalPadding),
+                    // padding: const EdgeInsets.all(AppStyle.horizontalPadding),
+                    padding: const EdgeInsets.only(
+                        left: 12, top: 12, bottom: 12, right: 10),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
                       mainAxisExtent:
                           (MediaQuery.of(context).size.width - 96) / 3,
                     ),
@@ -454,9 +479,6 @@ class DashboardScreen extends StatelessWidget {
                         onTap: () {
                           switch (dashboardController
                               .homeGridItemList[index].type) {
-                            case HomeGridItemType.attendant:
-                              context.push(AppScreen.attendantScreen.path);
-                              break;
                             case HomeGridItemType.forEnrollment:
                               context.push(
                                   AppScreen.registrationApplicationScreen.path);
@@ -465,7 +487,7 @@ class DashboardScreen extends StatelessWidget {
                               context.push(AppScreen.contactScreen.path);
                               break;
                             case HomeGridItemType.checkIn:
-                              // context.push("");
+                              context.push(AppScreen.checkInScreen.path);
                               break;
                             case HomeGridItemType.campus:
                               context.push(AppScreen.campusScreen.path);
@@ -497,6 +519,12 @@ class DashboardScreen extends StatelessWidget {
                             case HomeGridItemType.calendar:
                               context.push(AppScreen.calendarScreen.path);
                               break;
+                            case HomeGridItemType.faq:
+                              context.push(AppScreen.faqScreen.path);
+                              break;
+                            case HomeGridItemType.attendant:
+                              context.push(AppScreen.faqScreen.path);
+                              break;
                           }
                         },
                       );
@@ -512,10 +540,9 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   child: Text(
                     "Certificate format",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 Container(
@@ -560,24 +587,30 @@ class DashboardScreen extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  width: double.infinity,
-                  height: 196,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: dashboardController.messageList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return MessageItemWidget(
-                        item: dashboardController.messageList[index],
-                        isLastItem:
-                            index == dashboardController.messageList.length - 1,
-                        onTap: () {
-                          //
-                        },
-                      );
-                    },
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: SizedBox(
+                    // margin: const EdgeInsets.symmetric(horizontal: 20),
+                    width: double.infinity,
+                    height: 196,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: dashboardController.messageList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return MessageItemWidget(
+                          item: dashboardController.messageList[index],
+                          isLastItem: index ==
+                              dashboardController.messageList.length - 1,
+                          onTap: () {
+                            //
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
                 if (dashboardController.slideBannerList.value.data != null)
@@ -630,6 +663,7 @@ class DashboardScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                const SizedBox(height: 14.0),
               ],
             ),
           ),
@@ -826,5 +860,11 @@ class DashboardScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _logOutUser({required VoidCallback action}) async {
+    DashboardController controller = Get.put(DashboardController());
+    await controller.logOut();
+    action.call();
   }
 }

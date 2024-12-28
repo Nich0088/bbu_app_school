@@ -40,4 +40,9 @@ class LocalStorage {
   static Future<double?> getDoubleValue({String? key}) async {
     return _prefs!.getDouble(key!);
   }
+
+  static Future<void> clearLocalData() async {
+    await _prefs?.remove(LocalStorage.userProfileData);
+    await _prefs?.remove(LocalStorage.authorizeTokenData);
+  }
 }

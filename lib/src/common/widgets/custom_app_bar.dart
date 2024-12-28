@@ -48,13 +48,13 @@ PreferredSizeWidget CustomAppBar(
           child: Row(
             children: [
               const SizedBox(
-                width: AppStyle.horizontalPadding,
+                width: 3,
               ),
               ClipOval(
                 child: CachedNetworkImage(
                   imageUrl: imageUrl,
-                  width: 56,
-                  height: 56,
+                  width: 50,
+                  height: 50,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -70,7 +70,7 @@ PreferredSizeWidget CustomAppBar(
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(
-                    height: 4,
+                    height: 2,
                   ),
                   Text(
                     "View Profile >",
@@ -117,6 +117,9 @@ PreferredSizeWidget CustomAppBar(
             onLanguagePressed?.call();
           },
         ),
+      const SizedBox(
+        width: 6,
+      ),
     ],
     bottom: bottom,
   );

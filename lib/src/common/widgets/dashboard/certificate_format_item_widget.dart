@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 
 class CertificateFormatItemWidget extends StatelessWidget {
@@ -23,9 +22,9 @@ class CertificateFormatItemWidget extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(
           top: 12,
-          right: 12,
+          right: 0,
           bottom: 12,
-          left: index == 0 ? 12 : 0,
+          left: index == 0 ? 0 : 0,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,32 +32,32 @@ class CertificateFormatItemWidget extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColor.cardColor, // Border color
-                  width: 2, // Border width
-                ),
+                // border: Border.all(
+                //   color: AppColor.cardColor, // Border color
+                //   width: 1, // Border width
+                // ),
                 borderRadius: BorderRadius.circular(3), // Rounded corners
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(3), // Clip image corners
                 child: Image.asset(
                   item.image,
-                  width: 45,
+                  width: 60,
                   height: 60,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 7),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10.4),
               child: Text(
                 item.title,
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: Colors.black),
+                    ?.copyWith(color: Colors.white, fontSize: 9),
               ),
             ),
           ],

@@ -23,87 +23,93 @@ class DashboardController extends GetxController {
   List<HomeGridItem> get homeGridItemList => [
         HomeGridItem(
           0,
-          "Events",
-          "assets/dashboard/events.png",
-          HomeGridItemType.event,
-        ),
-        HomeGridItem(
-          1,
           "For Enrollment",
-          "assets/dashboard/enrollments.png",
+          "assets/dashboard/enrollment.png",
           HomeGridItemType.forEnrollment,
         ),
         HomeGridItem(
-          2,
-          "Check In",
-          "assets/dashboard/check_in.png",
-          HomeGridItemType.checkIn,
-        ),
-        HomeGridItem(
-          3,
+          1,
           "Campus",
           "assets/dashboard/campus.png",
           HomeGridItemType.campus,
         ),
         HomeGridItem(
+          2,
+          "Check In",
+          "assets/dashboard/checkIn.png",
+          HomeGridItemType.checkIn,
+        ),
+        HomeGridItem(
+          3,
+          "Events",
+          "assets/dashboard/events.png",
+          HomeGridItemType.event,
+        ),
+        HomeGridItem(
           4,
           "Location",
-          "assets/dashboard/maps.png",
+          "assets/dashboard/location.png",
           HomeGridItemType.location,
         ),
         HomeGridItem(
           5,
+          "Attendant",
+          "assets/dashboard/attendance.png",
+          HomeGridItemType.attendant,
+        ),
+        HomeGridItem(
+          6,
+          "Contact",
+          "assets/dashboard/contact.png",
+          HomeGridItemType.contact,
+        ),
+        HomeGridItem(
+          7,
+          "Calendar",
+          "assets/dashboard/calendar.png",
+          HomeGridItemType.calendar,
+        ),
+        HomeGridItem(
+          8,
           "Billing",
           "assets/dashboard/billing.png",
           HomeGridItemType.billing,
         ),
         HomeGridItem(
-          6,
-          "Scholarship",
-          "assets/dashboard/scholarships.png",
-          HomeGridItemType.scholarship,
-        ),
-        HomeGridItem(
-          7,
-          "About Us",
-          "assets/dashboard/about.png",
-          HomeGridItemType.aboutUs,
-        ),
-        HomeGridItem(
-          8,
+          11,
           "Study",
-          "assets/dashboard/control.png",
+          "assets/dashboard/study.png",
           HomeGridItemType.study,
         ),
         HomeGridItem(
           9,
-          "Attendant",
-          "assets/dashboard/calendar.png",
-          HomeGridItemType.attendant,
+          "Video",
+          "assets/dashboard/video.png",
+          HomeGridItemType.video,
         ),
         HomeGridItem(
           10,
-          "Contact",
-          "assets/dashboard/call.png",
-          HomeGridItemType.contact,
-        ),
-        HomeGridItem(
-          11,
-          "Video",
-          "assets/dashboard/videos.png",
-          HomeGridItemType.video,
+          "About Us",
+          "assets/dashboard/aboutUs.png",
+          HomeGridItemType.aboutUs,
         ),
         HomeGridItem(
           12,
           "Apply",
-          "assets/dashboard/web-browser.png",
+          "assets/dashboard/apply.png",
           HomeGridItemType.apply,
         ),
         HomeGridItem(
           13,
-          "Calendar",
-          "assets/dashboard/calendars.png",
-          HomeGridItemType.calendar,
+          "Scholarship",
+          "assets/dashboard/scholarship.png",
+          HomeGridItemType.scholarship,
+        ),
+        HomeGridItem(
+          14,
+          "FAQ",
+          "assets/dashboard/faq.png",
+          HomeGridItemType.faq,
         ),
       ];
 
@@ -111,36 +117,31 @@ class DashboardController extends GetxController {
         CertificateFormatItem(
           id: 0,
           title: "Associate's Degree",
-          image: "assets/app_logo.png",
+          image: "assets/dashboard/Associate.png",
           imageUrl:
               "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Associate%20of%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 1,
           title: "Bachelor's Degree",
-          image: "assets/app_logo.png",
+          image: "assets/dashboard/Associate.png",
           imageUrl:
               "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Bachelor%20of%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 2,
           title: "Master's Degree",
-          image: "assets/app_logo.png",
+          image: "assets/dashboard/Associate.png",
           imageUrl:
               "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Master%20IT.jpg",
         ),
         CertificateFormatItem(
           id: 3,
           title: "Doctoral Degree",
-          image: "assets/app_logo.png",
+          image: "assets/dashboard/doctoral.png",
           imageUrl:
               "https://www.bbu.edu.kh/ckfinder/userfiles/images/Certificat/Master%20IT.jpg",
         ),
-        // CertificateFormatItem(
-        //   id: 4,
-        //   title: "Diploma's Degree",
-        //   image: "assets/app_logo.png",
-        // ),
       ];
 
   List<MessageItem> get messageList => [
@@ -154,7 +155,7 @@ class DashboardController extends GetxController {
           id: 1,
           title: "President",
           subTitle: "Assoc. Prof. Diep Seiha",
-          image: "assets/dashboard/message_master.png",
+          image: "assets/dashboard/president.png",
         )
       ];
 
@@ -183,7 +184,7 @@ class DashboardController extends GetxController {
     String urlString = ApiEndpoint.unAuthorizeBastUrl + ApiEndpoint.bannerList;
     debugPrint("$urlString");
     var url = Uri.parse(urlString);
-    _setLoadingState(true);
+    // _setLoadingState(true);
     var response = await http.post(
       url,
       headers: {
@@ -199,6 +200,10 @@ class DashboardController extends GetxController {
       );
     }
     _setLoadingState(false);
+  }
+
+  Future<void> logOut() async {
+    await LocalStorage.clearLocalData();
   }
 
   Future<void> _getUserProfileData() async {

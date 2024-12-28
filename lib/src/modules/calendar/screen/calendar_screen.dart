@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 import '../controller/calendar_data.dart';
 import '../model/calendar_model_res.dart';
 import 'calendar_untils.dart';
@@ -21,8 +21,7 @@ class _NewCalendarScreenState extends State<CalendarScreen>
     with TickerProviderStateMixin {
   late final ValueNotifier<List<Event>> _selectedEvents;
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
-      .toggledOff; // Can be toggled on/off by longpressing a date
+  RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   DateTime? _rangeStart;
@@ -35,44 +34,23 @@ class _NewCalendarScreenState extends State<CalendarScreen>
   DateTime bbuLastDay = DateTime.now();
   int durationInt = 1;
   bool nextPreviese = false;
-
-  //Map<DateTime, List> _events={};
-  // //List<DateTime, String> listEvent;
   bool loading = false;
-
-  // //CalendarController _calendarController;
-  // late Map<DateTime, List> holidays;
   List<Calendar> _calendarList = [];
 
-  //Map<DateTime, List> _holidays={};
-  // Map<DateTime, List<Calendar>> _calendarListAllEvent={};
-  //late final ValueNotifier<List<Calendar>> _selectedEventCalandar;
   @override
   void initState() {
     loading = true;
     DateTime now = DateTime.now();
     getListEventDay(now.year.toString(), now.month.toString());
-
     super.initState();
-    // _events = {};
-    // //_calendarController = CalendarController();
 
-    // // _animationController = AnimationController(
-    // //   value: this,
-    // //   duration: const Duration(milliseconds: 400),
-    // // );
-    // // _animationController.forward();
     ///calandar
     bbuFirstDay = DateTime(bbuToday.year, bbuToday.month - 1, bbuToday.day);
     bbuLastDay = DateTime(bbuToday.year, bbuToday.month + 1, bbuToday.day);
-    /////////
 
     ///new block
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
-    //_selectedEventCalandar = ValueNotifier(_getEventsForDay(_selectedDay!));
-    //end new block
-    ////event first loading ======
   }
 
   @override
@@ -81,38 +59,27 @@ class _NewCalendarScreenState extends State<CalendarScreen>
     super.dispose();
   }
 
-////new calandar
-
   List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    //return kEvents[day] ?? [];
-
-    //var dateParse = DateTime.parse(date);
-    //getListEventDay("${day.year}", '${day.month}');
     return _bbuEventSourceAll[day] ?? [];
   }
 
   List<Event> _getEventsForRange(DateTime start, DateTime end) {
-    // Implementation example
     final days = daysInRange(start, end);
-
     return [
       for (final d in days) ..._getEventsForDay(d),
     ];
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    //getListEventDay("${selectedDay.year}", '${selectedDay.month}');
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
+        _rangeStart = null;
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
         nextPreviese = false;
       });
-
       _selectedEvents.value = _getEventsForDay(selectedDay);
     }
   }
@@ -151,6 +118,7 @@ class _NewCalendarScreenState extends State<CalendarScreen>
         context,
         backgroundColor: AppColor.primaryColor,
         isDashboardAppBar: false,
+        // colorTitle: Colors.white,
         title: "Calendar",
         isCenterTitle: true,
         onPressedBack: () {
@@ -179,10 +147,6 @@ class _NewCalendarScreenState extends State<CalendarScreen>
                   border: Border.all(width: 1),
                   shape: BoxShape.circle,
                   color: Colors.redAccent),
-              // outsideDecoration: BoxDecoration(
-              //     border: Border.all(width: 1),
-              //     shape: BoxShape.circle,
-              //     color: Colors.redAccent),
               weekendTextStyle: const TextStyle(color: Colors.blue),
               holidayTextStyle: const TextStyle(color: Colors.red),
               holidayDecoration: BoxDecoration(
@@ -206,50 +170,12 @@ class _NewCalendarScreenState extends State<CalendarScreen>
                 nextPreviese = true;
               });
             },
-
-            // daysOfWeekStyle: DaysOfWeekStyle(
-            //   weekendStyle: const TextStyle().copyWith(color: Colors.blue[600]),
-            // ),
             headerStyle: const HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
             ),
           ),
           const SizedBox(height: 8.0),
-
-          // ignore: unnecessary_null_comparison
-          //nextPreviese==false?
-          // Expanded(
-          //   child: ValueListenableBuilder<List<Event>>(
-          //     valueListenable: _selectedEvents,
-          //     builder: (context, value, _) {
-          //       return ListView.builder(
-          //         itemCount: value.length,
-          //         itemBuilder: (context, index) {
-          //           return Container(
-          //             margin: const EdgeInsets.symmetric(
-          //               horizontal: 12.0,
-          //               vertical: 4.0,
-          //             ),
-          //             decoration: BoxDecoration(
-          //               border: Border.all(),
-          //               borderRadius: BorderRadius.circular(12.0),
-          //             ),
-          //             child: ListTile(
-          //               onTap: () {
-          //                 if (kDebugMode) {
-          //                   print('${value[index]}');
-          //                 }
-          //               },
-          //               title: Text('${value[index]}',style: const TextStyle(color: Colors.blueAccent),),
-          //             ),
-          //           );
-          //         },
-          //       );
-          //     },
-          //   ),
-          // ),
-          // :
           Expanded(
             child: ListView.builder(
               itemCount: _calendarList.length,
@@ -265,11 +191,6 @@ class _NewCalendarScreenState extends State<CalendarScreen>
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: ListTile(
-                    // onTap: () {
-                    //   if (kDebugMode) {
-                    //     print(_calendarList[index].title);
-                    //   }
-                    // },
                     title: Text(
                       "${event1.day}: ${event1.title}",
                       style: const TextStyle(color: Colors.blueAccent),
@@ -285,39 +206,15 @@ class _NewCalendarScreenState extends State<CalendarScreen>
   }
 
   ///end new calandar
-
-//   void _onDaySelected(DateTime? day, List? events, List? holidays) {
-//     if (kDebugMode) {
-//       print('CALLBACK: _onDaySelected' '$day');
-//     }
-//      setState(() {
-//     });
-//   }
-
   void getListEventDay(String year, String month) async {
     CalendarData data = CalendarData();
     var result = await data.getList(year, month);
 
     setState(() {
       loading = false;
-      //_calendarList=[];
       _selectedEvents.value = [];
 
       _calendarList = result.calendarList;
-      // _holidays={};
-      //   _events={};
-      // for (var element in _calendarList) {
-
-      //   for (int i = 0; i <= element.endDate.difference(element.startDate).inDays; i++) {
-      //      var datetime1=   element.startDate.add(Duration(days: i));
-      //       _events[datetime1]=[element.title];
-      //       _holidays[datetime1]=[element.title];
-      //       //
-
-      //   }
-      // }
-      //     ///////new =====
-      //     ////
       _bbuEventSourceAll = {};
       _bbuEventSourceAll = {
         for (var item in List.generate(_calendarList.length, (index) => index))
@@ -331,10 +228,6 @@ class _NewCalendarScreenState extends State<CalendarScreen>
             const Event('Today\'s Event 1'),
           ],
         });
-
-      ///
-      ///
-      ///====
     });
   }
 }

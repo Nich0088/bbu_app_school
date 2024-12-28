@@ -19,10 +19,11 @@ class HomeGridItemWidget extends StatelessWidget {
       child: Container(
         width: double.infinity, // Set the width of the container
         height: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColor.cardColor,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          boxShadow: [AppStyle.boxShadow],
+        decoration: const BoxDecoration(
+          // color: AppColor.background,
+          color: Colors.black26,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          // boxShadow: [AppStyle.boxShadow],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,8 +31,8 @@ class HomeGridItemWidget extends StatelessWidget {
           children: [
             Image.asset(
               item.image,
-              width: 55,
-              height: 55,
+              width: 35,
+              height: 35,
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 4),
@@ -41,7 +42,7 @@ class HomeGridItemWidget extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
-                  ?.copyWith(color: AppColor.primaryColor),
+                  ?.copyWith(color: AppColor.textPrimaryColor),
             ),
           ],
         ),

@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/campus/controller/campus_controller.dart';
 
-import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 import '../../../utils/helpers/utility_function.dart';
 import '../model/campuses.dart';
 
@@ -105,16 +105,17 @@ class CampusItemWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(
-              top: 4,
+              top: 18,
               right: 20,
               left: 20,
+              bottom: 12,
             ),
             child: Text(
               item.campus ?? '',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge
-                  ?.copyWith(color: AppColor.primaryColor),
+                  ?.copyWith(color: AppColor.primaryColor, fontSize: 24.0),
             ),
           ),
           Padding(
@@ -127,79 +128,80 @@ class CampusItemWidget extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.mail_outline_rounded,
-                  size: 24,
+                  size: 20,
                   color: AppColor.primaryColor,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Text(
                   item.email ?? '',
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge
-                      ?.copyWith(color: AppColor.primaryColor),
+                      ?.copyWith(color: Colors.black, fontSize: 18.0),
                 ),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(
-              top: 4,
+              top: 2,
               right: 20,
               left: 20,
+              bottom: 2,
             ),
             child: Row(
               children: [
                 const Icon(
                   Icons.location_on,
-                  size: 24,
+                  size: 20,
                   color: AppColor.primaryColor,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     item.address ?? '',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(color: AppColor.primaryColor),
+                        ?.copyWith(color: Colors.black, fontSize: 18.0),
                   ),
                 ),
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              _showPhoneNumberBottomSheet(context, item.tel);
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 4,
-                right: 20,
-                left: 20,
-                bottom: 20,
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.phone,
-                    size: 24,
-                    color: AppColor.primaryColor,
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      item.tel ?? '',
-                      maxLines: 2,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: AppColor.primaryColor),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     _showPhoneNumberBottomSheet(context, item.tel);
+          //   },
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(
+          //       top: 0,
+          //       right: 20,
+          //       left: 20,
+          //       bottom: 20,
+          //     ),
+          //     child: Row(
+          //       children: [
+          //         const Icon(
+          //           Icons.phone,
+          //           size: 20,
+          //           color: AppColor.primaryColor,
+          //         ),
+          //         const SizedBox(width: 9),
+          //         Expanded(
+          //           child: Text(
+          //             item.tel ?? '',
+          //             maxLines: 2,
+          //             style: Theme.of(context)
+          //                 .textTheme
+          //                 .titleLarge
+          //                 ?.copyWith(color: Colors.black, fontSize: 18.0),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -1,14 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/common/app_setting.dart';
+import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/core/auth/login/screen/login_screen.dart';
 import 'package:school_app/src/core/auth/role_selection/screen/role_selection_screen.dart';
 import 'package:school_app/src/core/splash_screen/screen/splash_screen.dart';
 import 'package:school_app/src/modules/about_us/screen/about_us_screen.dart';
 import 'package:school_app/src/modules/apply/screen/apply_screen.dart';
-import 'package:school_app/src/modules/attendant/screen/attendant_screen.dart';
 import 'package:school_app/src/modules/calendar/screen/calendar_screen.dart';
 import 'package:school_app/src/modules/campus/screen/campus_screen.dart';
 import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
@@ -20,6 +19,7 @@ import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:school_app/src/modules/event/models/event_new_data.dart';
 import 'package:school_app/src/modules/event/screen/event_detail_screen.dart';
 import 'package:school_app/src/modules/event/screen/events_screen.dart';
+import 'package:school_app/src/modules/faq/screen/faq_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
 import 'package:school_app/src/modules/registration_application/screen/registration_application_screen.dart';
 import 'package:school_app/src/modules/scholarship/screen/scholarship_screen.dart';
@@ -112,6 +112,10 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const CalendarScreen(),
     ),
     GoRoute(
+      path: AppScreen.faqScreen.path,
+      builder: (context, state) => const FaqScreen(),
+    ),
+    GoRoute(
       path: AppScreen.attendantScreen.path,
       builder: (context, state) => const AttendantScreen(),
     ),
@@ -156,6 +160,7 @@ enum AppScreen {
   attendantScreen("/attendant"),
   certificateFormatScreen("/certificateFormat"),
   eventDetailScreen("/event-detail");
+  faqScreen("/faq");
 
   final String path;
 

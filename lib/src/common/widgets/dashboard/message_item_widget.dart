@@ -19,11 +19,11 @@ class MessageItemWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
         left: 0,
-        right: isLastItem ? 0 : 12,
+        right: isLastItem ? 0 : 29,
       ),
       width: 170,
       decoration: const BoxDecoration(
-        color: AppColor.cardColor,
+        color: AppColor.background,
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Column(
@@ -51,13 +51,13 @@ class MessageItemWidget extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
-                      ?.copyWith(color: Colors.black),
+                      ?.copyWith(color: Colors.white),
                 ),
                 Text(
                   item.subTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                 ),

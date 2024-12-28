@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             onChangeTextField: (value) {
                               _loginController.resetUsernameError();
                             },
-                            label: "email",
+                            label: "Email",
                           ),
                         ),
                         const SizedBox(height: 24),
