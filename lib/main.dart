@@ -11,6 +11,7 @@ import 'package:school_app/src/modules/apply/screen/apply_screen.dart';
 import 'package:school_app/src/modules/calendar/screen/calendar_screen.dart';
 import 'package:school_app/src/modules/campus/screen/campus_screen.dart';
 import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
+import 'package:school_app/src/modules/create_user_with_branch/screen/create_user_with_branch_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
@@ -120,6 +121,10 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const AttendantScreen(),
     ),
     GoRoute(
+      path: AppScreen.createUserWithBranch.path,
+      builder: (context, state) => const CreateUserWithBranchScreen(),
+    ),
+    GoRoute(
       path: AppScreen.eventDetailScreen.path,
       builder: (context, state) {
         final EventData? eventData = state.extra as EventData?;
@@ -159,7 +164,8 @@ enum AppScreen {
   calendarScreen("/calendar"),
   attendantScreen("/attendant"),
   certificateFormatScreen("/certificateFormat"),
-  eventDetailScreen("/event-detail");
+  eventDetailScreen("/event-detail"),
+  createUserWithBranch("/create-user-with-branch"),
   faqScreen("/faq");
 
   final String path;

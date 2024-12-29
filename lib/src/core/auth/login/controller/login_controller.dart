@@ -58,31 +58,6 @@ class LoginController extends GetxController {
     isInvalidUserType.value = false;
   }
 
-  Future<void> getApiToken() async {
-    String urlString = ApiEndpoint.appBaseUrl9 + ApiEndpoint.authorizeToken;
-    var url = Uri.parse(urlString);
-    var response = await http.post(
-      url,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: jsonEncode({
-        "username": 'mich',
-        "password": '1234',
-      }),
-    );
-    var authorizeTokenResult =
-        AuthorizeTokenResult.fromJson(jsonDecode(response.body));
-    if (authorizeTokenResult.code == 200) {
-      if (authorizeTokenResult.data?.token != null) {
-        await LocalStorage.storeData(
-          key: LocalStorage.authorizeTokenData,
-          value: jsonEncode(authorizeTokenResult.data?.toJson()),
-        );
-      }
-    }
-  }
-
   Future<void> loginUser({required VoidCallback onSuccess}) async {
     if (emailTextEditingController.value.text.length < _emailMaxLength) {
       invalidEmailDescription.value = "Please enter username";
@@ -112,13 +87,6 @@ class LoginController extends GetxController {
 
     String? authorizeTokenData =
         await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);
-
-    if (authorizeTokenData == null) {
-      await getApiToken();
-      authorizeTokenData = await LocalStorage.getStringValue(
-        key: LocalStorage.authorizeTokenData,
-      );
-    }
 
     if (authorizeTokenData == null) return;
 
