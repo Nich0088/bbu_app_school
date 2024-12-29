@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:school_app/src/constants/app_setting.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
 
+import '../../../common/app_setting.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_item_widget.dart';
@@ -132,7 +132,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   Widget _chatTab() {
     return Center(
       child: Text(
-        'Chat',
+        'Coming Soon',
         style: Theme.of(context)
             .textTheme
             .bodyLarge

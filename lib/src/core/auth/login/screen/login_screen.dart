@@ -9,7 +9,6 @@ import '../../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../../common/widgets/custom_drop_down_picker.dart';
 import '../../../../common/widgets/custom_text_field.dart';
 import '../../../../common/widgets/loading_container_widget.dart';
-import '../../../../modules/dashboard/models/user_type.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -161,8 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               await _loginController.loginUser(
                                 onSuccess: () {
                                   context.go(
-                                    AppScreen.dashboardScreen.path,
-                                    extra: UserType.loggedInUser,
+                                    AppScreen.createUserWithBranch.path,
                                   );
                                 },
                               );

@@ -51,12 +51,12 @@ class DashboardController extends GetxController {
           "assets/dashboard/location.png",
           HomeGridItemType.location,
         ),
-        HomeGridItem(
-          5,
-          "Attendant",
-          "assets/dashboard/attendance.png",
-          HomeGridItemType.attendant,
-        ),
+        // HomeGridItem(
+        //   5,
+        //   "Attendant",
+        //   "assets/dashboard/attendance.png",
+        //   HomeGridItemType.attendant,
+        // ),
         HomeGridItem(
           6,
           "Contact",

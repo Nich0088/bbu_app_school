@@ -515,92 +515,38 @@ class UserDashboardController extends GetxController {
         ScheduleItem(
           id: 0,
           image:
-              "https://miro.medium.com/v2/resize:fit:4800/format:webp/1*J38nYZU7gzu-4lQmtjlSUw.jpeg",
+              "https://files.oaiusercontent.com/file-L1cW35mNXJHnMmWTsgXQdp?se=2024-12-22T17%3A50%3A58Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1.png&sig=6QXO9s55D3tNZ%2BrcfRMAsimrraDQ3Rw6ocnFvX0K9Pk%3D",
           title: "Data Structures and Algorithms",
           subTitle: "D1IT-A. SeT",
-          roomName: "507 (B)",
+          roomName: "506 (B)",
           date: "Apr 01, 2024",
         ),
         ScheduleItem(
           id: 1,
           image:
-              "https://upload.wikimedia.org/wikipedia/en/9/92/Windows_11_Desktop.png",
+              "https://files.oaiusercontent.com/file-Cjptn6rdF7g2rSByS9MSXP?se=2024-12-22T17%3A52%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D2.png&sig=CM4TL%2BqSp0aaAeBMxpP31VG5FuTzAU21zZI3Ivr2Mn8%3D",
           title: "Operating Systems",
           subTitle: "D1IT-B. Mr. Smith",
-          roomName: "304 (A)",
+          roomName: "506 (B)",
           date: "Apr 02, 2024",
         ),
         ScheduleItem(
           id: 2,
           image:
-              "https://www.techtarget.com/rms/onlineimages/app_arch-software_dev_lifecycle-f_mobile.png",
+              "https://files.oaiusercontent.com/file-SZKityW5E5Hx7eUWrv7gKC?se=2024-12-22T17%3A52%3A21Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D3.png&sig=QJLA3i47V%2B8HNSQzMyC2osAsdD9I3MPZDtaxBLPxwAg%3D",
           title: "Software Engineering",
           subTitle: "D1IT-C. Dr. Johnson",
-          roomName: "205 (C)",
+          roomName: "506 (B)",
           date: "Apr 03, 2024",
         ),
         ScheduleItem(
           id: 3,
           image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlKKBS-HlJjFJpXp89i524xTRaIUiZyiZu_qfTcNVl40Juj8U5",
+              "https://files.oaiusercontent.com/file-Cjptn6rdF7g2rSByS9MSXP?se=2024-12-22T17%3A52%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D2.png&sig=CM4TL%2BqSp0aaAeBMxpP31VG5FuTzAU21zZI3Ivr2Mn8%3D",
           title: "Database Management Systems",
           subTitle: "D1IT-D. Prof. Lee",
           roomName: "502 (B)",
           date: "Apr 04, 2024",
-        ),
-        ScheduleItem(
-          id: 4,
-          image:
-              "https://www.lifewire.com/thmb/TXVRTtkHvRpTjnRObQ3xm2VlsD0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/WirelessNetwork-5994852003f4020011db5333.jpg",
-          title: "Computer Networks",
-          subTitle: "D1IT-E. Dr. Patel",
-          roomName: "301 (A)",
-          date: "Apr 05, 2024",
-        ),
-        ScheduleItem(
-          id: 5,
-          image:
-              "https://cdn.mos.cms.futurecdn.net/VFLt5vHV7aCoLrLGjP9Qwm-1200-80.jpg",
-          title: "Artificial Intelligence",
-          subTitle: "D1IT-F. Ms. Wilson",
-          roomName: "408 (B)",
-          date: "Apr 06, 2024",
-        ),
-        ScheduleItem(
-          id: 6,
-          image:
-              "https://media.bitcot.com/wp-content/uploads/2023/06/best-web-development-languages.webp",
-          title: "Web Development",
-          subTitle: "D1IT-G. Mr. Clark",
-          roomName: "509 (C)",
-          date: "Apr 07, 2024",
-        ),
-        ScheduleItem(
-          id: 7,
-          image:
-              "https://www.techmango.net/wp-content/uploads/2022/04/mobile-app-development.png",
-          title: "Mobile Application Development",
-          subTitle: "D1IT-H. Dr. Parker",
-          roomName: "202 (A)",
-          date: "Apr 08, 2024",
-        ),
-        ScheduleItem(
-          id: 8,
-          image:
-              "https://www.ingenious.co.uk/wp-content/uploads/2023/08/What-is-Cloud-Computing-and-How-Can-it-Benefit-Our-Company-1024x512.jpeg",
-          title: "Cloud Computing",
-          subTitle: "D1IT-I. Mr. Garcia",
-          roomName: "401 (B)",
-          date: "Apr 09, 2024",
-        ),
-        ScheduleItem(
-          id: 9,
-          image:
-              "https://www.theforage.com/blog/wp-content/uploads/2022/12/what-is-cybersecurity.jpg",
-          title: "Cybersecurity",
-          subTitle: "D1IT-J. Ms. Davis",
-          roomName: "602 (C)",
-          date: "Apr 10, 2024",
         ),
       ];
 }

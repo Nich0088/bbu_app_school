@@ -19,4 +19,6 @@ class ApiEndpoint {
   static const String classTimeSchedule = "api/SchTeacherGetTimeByScheduleID";
   static const String videoAccesskey = "/api/v1/videoaccesskey";
   static const String faq = "api/view_faq";
+  static const String payrollUserType = "api/v1/PayrollUserType";
+  static const String payrollBranch = "api/v1/PayrollBranch";
 }
