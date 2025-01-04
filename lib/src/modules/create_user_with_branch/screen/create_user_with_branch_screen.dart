@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
+import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
+import 'package:school_app/src/core/splash_screen/controller/splash_controller.dart';
 import 'package:school_app/src/modules/create_user_with_branch/controller/create_user_with_branch_controller.dart';
 
 import '../../../../main.dart';
@@ -10,6 +12,7 @@ import '../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/custom_drop_down_picker.dart';
+import '../../../common/widgets/custom_text_field.dart';
 import '../../dashboard/models/user_type.dart';
 
 class CreateUserWithBranchScreen extends StatefulWidget {
@@ -24,9 +27,12 @@ class _CreateUserWithBranchScreenState
     extends State<CreateUserWithBranchScreen> {
   final CreateUserWithBranchController _createUserWithBranchController =
       Get.put(CreateUserWithBranchController());
+  final FocusNode _idInBranchFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    _createUserWithBranchController.register(context);
+
     return GetBuilder<CreateUserWithBranchController>(
       builder: (controller) {
         return LoadingScaffoldWidget(
@@ -58,12 +64,14 @@ class _CreateUserWithBranchScreenState
                           .universityBranchTextEditingController.value,
                       label: "Branch",
                       onSelected: (item) {
+                        if (item == null) return;
+
                         _createUserWithBranchController
                             .universityBranchTextEditingController
                             .value
-                            .text = item?.title ?? '';
+                            .text = item.title ?? '';
                         _createUserWithBranchController
-                            .selectedUniversityBranchId.value = item?.id ?? -1;
+                            .setSelectedUniversityBranch(item);
                       },
                       dropDownMenuEntryList: _createUserWithBranchController
                           .universityBranchDropDownItemList.value
@@ -81,38 +89,18 @@ class _CreateUserWithBranchScreenState
                       left: AppStyle.horizontalPadding,
                       right: AppStyle.horizontalPadding,
                     ),
-                    child: CustomDropDownPicker(
+                    child: CustomTextField(
+                      focusNode: _idInBranchFocusNode,
+                      errorDescription: _createUserWithBranchController
+                          .invalidIdInBranchDescription.value,
+                      isShowError: _createUserWithBranchController
+                          .isInvalidIdInBranch.value,
                       controller: _createUserWithBranchController
-                          .userTypeTextEditingController.value,
-                      label: "User Type",
-                      onSelected: (item) {
-                        _createUserWithBranchController
-                            .userTypeTextEditingController
-                            .value
-                            .text = item?.title ?? '';
+                          .idInBranchTextEditingController.value,
+                      onChangeTextField: (value) {
+                        _createUserWithBranchController.resetIdInBranchError();
                       },
-                      dropDownMenuEntryList: _createUserWithBranchController
-                          .userTypeDropDownItemList.value
-                          .map((item) =>
-                              DropdownMenuEntry<CustomDropDownMenuItem>(
-                                value: item,
-                                label: item.title,
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 16,
-                      left: AppStyle.horizontalPadding,
-                      right: AppStyle.horizontalPadding,
-                    ),
-                    child: Text(
-                      'ID in branch : ${_createUserWithBranchController.selectedUniversityBranchId.value >= 0 ? _createUserWithBranchController.selectedUniversityBranchId.value : ''}',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColor.textSecondaryColor,
-                          ),
-                      textAlign: TextAlign.start,
+                      label: "ID in branch",
                     ),
                   ),
                   const SizedBox(height: 32),
@@ -124,12 +112,20 @@ class _CreateUserWithBranchScreenState
                     ),
                     child: CustomButton(
                       onPressed: () {
-                        context.go(
-                          AppScreen.dashboardScreen.path,
-                          extra: UserType.loggedInUser,
+                        _idInBranchFocusNode.unfocus();
+                        _createUserWithBranchController.saveUser(
+                          onSuccess: () {
+                            Get.delete<SplashController>();
+                            Get.delete<LoginController>();
+                            Get.delete<CreateUserWithBranchController>();
+                            context.go(
+                              AppScreen.dashboardScreen.path,
+                              extra: UserType.loggedInUser,
+                            );
+                          },
                         );
                       },
-                      title: "Create",
+                      title: "Save",
                     ),
                   )
                 ],

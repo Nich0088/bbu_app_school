@@ -406,7 +406,7 @@ class DashboardScreen extends StatelessWidget {
                       TextButton(
                         onPressed: () {
                           _logOutUser(action: () {
-                            context.go(AppScreen.loginScreen.path);
+                            context.go(AppScreen.splashScreen.path);
                           });
                         },
                         child: Text(
@@ -486,9 +486,6 @@ class DashboardScreen extends StatelessWidget {
                             case HomeGridItemType.contact:
                               context.push(AppScreen.contactScreen.path);
                               break;
-                            case HomeGridItemType.checkIn:
-                              context.push(AppScreen.checkInScreen.path);
-                              break;
                             case HomeGridItemType.campus:
                               context.push(AppScreen.campusScreen.path);
                               break;
@@ -525,6 +522,8 @@ class DashboardScreen extends StatelessWidget {
                             case HomeGridItemType.attendant:
                               context.push(AppScreen.faqScreen.path);
                               break;
+                            case HomeGridItemType.checkIn:
+                            // TODO: Handle this case.
                           }
                         },
                       );
