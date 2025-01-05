@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _passwordFocusNode.unfocus();
                               await _loginController.loginUser(
                                 onSuccess: () {
-                                  context.go(
+                                  context.push(
                                     AppScreen.createUserWithBranch.path,
                                   );
                                 },
