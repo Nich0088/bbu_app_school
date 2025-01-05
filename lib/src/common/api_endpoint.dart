@@ -21,4 +21,5 @@ class ApiEndpoint {
   static const String faq = "api/view_faq";
   static const String payrollUserType = "api/v1/PayrollUserType";
   static const String payrollBranch = "api/v1/PayrollBranch";
+  static const String payrollUserWorkInBranch = "api/PayrollUserWorkInBranch";
 }

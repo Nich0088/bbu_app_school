@@ -5,38 +5,82 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:school_app/src/common/base_get_x_controller.dart';
 import 'package:school_app/src/common/model/custom_drop_down_menu_item.dart';
+import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
+import 'package:school_app/src/modules/create_user_with_branch/model/create_user_work_in_branch_result.dart';
 import 'package:school_app/src/modules/create_user_with_branch/model/university_branch_result.dart';
-import 'package:school_app/src/modules/create_user_with_branch/model/user_type_result.dart';
 
 import '../../../common/api_endpoint.dart';
+import '../../../common/helpers/local_storage.dart';
+import '../../../core/auth/login/model/authorize_token_result.dart';
 
 class CreateUserWithBranchController extends BaseGetXController {
-  var userTypeDropDownItemList = <CustomDropDownMenuItem>[].obs;
+  final LoginController _loginController = Get.put(LoginController());
   var universityBranchDropDownItemList = <CustomDropDownMenuItem>[].obs;
-  var selectedUniversityBranchId = (-1).obs;
-  var userTypeTextEditingController = TextEditingController().obs;
   var universityBranchTextEditingController = TextEditingController().obs;
   var idInBranchTextEditingController = TextEditingController().obs;
+  var isInvalidIdInBranch = false.obs;
+  var invalidIdInBranchDescription = "".obs;
+  UniversityBranchData? _selectedUniversityBranch;
+  UniversityBranchResult? _universityBranchResult;
+  CreateUserWorkInBranchResult? createUserWorkInBranchResult;
 
   @override
   void onInit() async {
-    await _getUserType();
     await _getUniversityBranch();
     super.onInit();
   }
 
-  Future<void> _getUserType() async {
-    String urlString = ApiEndpoint.appBaseUrl9 + ApiEndpoint.payrollUserType;
+  void resetIdInBranchError() {
+    invalidIdInBranchDescription.value = "";
+    isInvalidIdInBranch.value = false;
+  }
+
+  void setSelectedUniversityBranch(
+      CustomDropDownMenuItem selectedUniversityBranchDropDownItem) {
+    int universityBranchDataListLength =
+        _universityBranchResult?.universityBranchData?.length ?? 0;
+
+    for (int index = 0; index < universityBranchDataListLength; index++) {
+      if (_universityBranchResult?.universityBranchData?[index].branchId ==
+          selectedUniversityBranchDropDownItem.id) {
+        _selectedUniversityBranch =
+            _universityBranchResult?.universityBranchData?[index];
+        debugPrint(jsonEncode(_selectedUniversityBranch));
+        break;
+      }
+    }
+  }
+
+  Future<void> saveUser({required VoidCallback onSuccess}) async {
+    String urlString =
+        ApiEndpoint.appBaseUrl9 + ApiEndpoint.payrollUserWorkInBranch;
     debugPrint(urlString);
     var url = Uri.parse(urlString);
+    if (_selectedUniversityBranch == null) return;
+
+    String? authorizeTokenData =
+        await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);
+
+    if (authorizeTokenData == null) return;
+
+    var authorizeTokenResult =
+        AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
+
     setLoadingState(true);
-    var response = await http.get(
+    var response = await http.post(
       url,
       headers: {
         "Content-Type": "application/json",
+        "Authorization": "Bearer ${authorizeTokenResult.token}",
       },
+      body: jsonEncode({
+        "userId": _loginController.loginResult?.data?.id,
+        "branchid": _selectedUniversityBranch?.branchId,
+        "usertype_id": _loginController.selectedUserType?.id,
+      }),
     );
     setLoadingState(false);
+    debugPrint(response.body);
 
     if (response.body.isEmpty) {
       appDialogHelper?.showErrorDialog(
@@ -46,19 +90,24 @@ class CreateUserWithBranchController extends BaseGetXController {
       return;
     }
 
-    UserTypeResult userTypeResult =
-        UserTypeResult.fromJson(jsonDecode(response.body));
+    createUserWorkInBranchResult =
+        CreateUserWorkInBranchResult.fromJson(jsonDecode(response.body));
 
-    if (userTypeResult.code != 200) {
+    if (createUserWorkInBranchResult?.code == 200) {
+      onSuccess.call();
+    } else if (createUserWorkInBranchResult?.createUserWorkInBranchData
+            is String &&
+        createUserWorkInBranchResult?.createUserWorkInBranchData
+                .toString()
+                .toLowerCase() ==
+            'data already exists'.toLowerCase()) {
+      onSuccess.call();
+    } else {
       appDialogHelper?.showErrorDialog(
-        errorMessage: userTypeResult.message ?? '',
-        errorCode: '${userTypeResult.code}',
+        errorMessage: createUserWorkInBranchResult?.message ?? '',
+        errorCode: '${createUserWorkInBranchResult?.code}',
       );
-      return;
     }
-
-    userTypeDropDownItemList.value =
-        _generateUserType(userTypeResult.userTypeData);
   }
 
   Future<void> _getUniversityBranch() async {
@@ -73,6 +122,7 @@ class CreateUserWithBranchController extends BaseGetXController {
       },
     );
     setLoadingState(false);
+    debugPrint(response.body);
 
     if (response.body.isEmpty) {
       appDialogHelper?.showErrorDialog(
@@ -82,37 +132,19 @@ class CreateUserWithBranchController extends BaseGetXController {
       return;
     }
 
-    UniversityBranchResult universityBranchResult =
+    _universityBranchResult =
         UniversityBranchResult.fromJson(jsonDecode(response.body));
 
-    if (universityBranchResult.code != 200) {
+    if (_universityBranchResult?.code != 200) {
       appDialogHelper?.showErrorDialog(
-        errorMessage: universityBranchResult.message ?? '',
-        errorCode: '${universityBranchResult.code}',
+        errorMessage: _universityBranchResult?.message ?? '',
+        errorCode: '${_universityBranchResult?.code}',
       );
       return;
     }
 
     universityBranchDropDownItemList.value =
-        _generateUniversityList(universityBranchResult.universityBranchData);
-  }
-
-  List<CustomDropDownMenuItem> _generateUserType(
-      List<UserTypeData>? userTypeDataList) {
-    if (userTypeDataList == null) return [];
-
-    List<CustomDropDownMenuItem> userTypeCustomDropDownMenuItemList = [];
-
-    for (int index = 0; index < userTypeDataList.length; index++) {
-      userTypeCustomDropDownMenuItemList.add(
-        CustomDropDownMenuItem(
-            value: userTypeDataList[index].usertypeName ?? '',
-            id: userTypeDataList[index].id ?? index,
-            title: userTypeDataList[index].usertypeName ?? ''),
-      );
-    }
-
-    return userTypeCustomDropDownMenuItemList;
+        _generateUniversityList(_universityBranchResult?.universityBranchData);
   }
 
   List<CustomDropDownMenuItem> _generateUniversityList(

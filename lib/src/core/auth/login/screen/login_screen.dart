@@ -108,27 +108,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             horizontal: AppStyle.horizontalPadding,
                           ),
                           child: CustomDropDownPicker(
-                            errorDescription: _loginController
-                                .invalidUserTypeDescription.value,
-                            isShowError:
-                                _loginController.isInvalidUserType.value,
                             controller: _loginController
                                 .userTypeTextEditingController.value,
                             label: "User Type",
                             onSelected: (item) {
+                              if (item == null) return;
                               _loginController.userTypeTextEditingController
-                                  .value.text = item?.title ?? '';
-                              _loginController.resetUserTypeError();
-                              _loginController.selectedUserType = item;
+                                  .value.text = item.title ?? '';
+                              _loginController.setSelectedUserType(item);
                             },
-                            dropDownMenuEntryList: _loginController.userTypeList
-                                .map(
-                                  (item) =>
-                                      DropdownMenuEntry<CustomDropDownMenuItem>(
-                                    value: item,
-                                    label: item.title,
-                                  ),
-                                )
+                            dropDownMenuEntryList: _loginController
+                                .userTypeDropDownItemList.value
+                                .map((item) =>
+                                    DropdownMenuEntry<CustomDropDownMenuItem>(
+                                      value: item,
+                                      label: item.title,
+                                    ))
                                 .toList(),
                           ),
                         ),
