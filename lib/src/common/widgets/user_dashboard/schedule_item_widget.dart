@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:school_app/src/modules/user_dashboard/model/class_time_schedule_result.dart';
 
 import '../../app_setting.dart';
-import '../../../modules/user_dashboard/model/schedule_item.dart';
 
 class ScheduleItemWidget extends StatelessWidget {
   final bool isLastItem;
-  final ScheduleItem item;
+  final ClassTimeScheduleData item;
   final GestureTapCallback onClick;
 
   const ScheduleItemWidget({
@@ -52,7 +52,7 @@ class ScheduleItemWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: 60,
                   height: 60,
-                  imageUrl: item.image,
+                  imageUrl: "item.image",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -65,7 +65,7 @@ class ScheduleItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      item.title,
+                      "item.title",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -74,7 +74,7 @@ class ScheduleItemWidget extends StatelessWidget {
                           ?.copyWith(color: Colors.black),
                     ),
                     Text(
-                      item.subTitle,
+                      "item.subTitle",
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
                           .textTheme
@@ -94,7 +94,7 @@ class ScheduleItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      item.date,
+                      'item.date',
                       textAlign: TextAlign.right,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -103,7 +103,7 @@ class ScheduleItemWidget extends StatelessWidget {
                           ?.copyWith(color: Colors.black),
                     ),
                     Text(
-                      "Room: ${item.roomName}",
+                      "Room: ${'item.roomName'}",
                       textAlign: TextAlign.right,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)

@@ -5,9 +5,9 @@ import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/modules/attendant/controller/attendant_controller.dart';
 import 'package:school_app/src/modules/attendant/model/check_in_and_out_history_result.dart';
 
+import '../../../common/app_setting.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/loading_container_widget.dart';
-import '../../../common/app_setting.dart';
 
 class AttendantScreen extends StatelessWidget {
   const AttendantScreen({super.key});
@@ -30,6 +30,7 @@ class AttendantScreen extends StatelessWidget {
               title: "Attendant",
               isCenterTitle: true,
               onPressedBack: () {
+                Get.delete<AttendantController>();
                 context.pop();
               },
             ),

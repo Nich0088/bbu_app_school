@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -105,7 +103,7 @@ final GoRouter _goRouter = GoRouter(
     ),
     GoRoute(
       path: AppScreen.videoScreen.path,
-      builder: (context, state) => const VideoScreen(),
+      builder: (context, state) => VideoScreen(),
     ),
     GoRoute(
       path: AppScreen.applyScreen.path,

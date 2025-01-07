@@ -6,12 +6,12 @@ import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
-import 'package:school_app/src/modules/user_dashboard/model/class_time_schedule_result.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_result_item_widget.dart';
+import '../model/class_time_schedule_result.dart';
 
 class UserDashboardScreen extends StatefulWidget {
   const UserDashboardScreen({super.key});
@@ -31,9 +31,17 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
 
-    _tabController.addListener(() {
+    _tabController.addListener(() async {
       if (_tabController.indexIsChanging) {
         debugPrint("Tab changed to: ${_tabController.index}");
+        switch (_tabController.index) {
+          case 1:
+            await _userDashboardController.getStudentScore();
+            break;
+          case 2:
+            await _userDashboardController.getClassSchedule();
+            break;
+        }
       }
     });
   }
@@ -148,31 +156,52 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   }
 
   Widget _resultTab() {
-    return ListView.builder(
-      itemCount: _userDashboardController.studyResultItemList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return StudyResultItemWidget(
-          item: _userDashboardController.studyResultItemList[index],
-        );
-      },
+    return Obx(
+      () => _userDashboardController.studentScoreList.value.isNotEmpty
+          ? ListView.builder(
+              itemCount: _userDashboardController.studentScoreList.value.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return StudyResultItemWidget(
+                  item: _userDashboardController.studentScoreList.value[index],
+                );
+              },
+            )
+          : const SizedBox(),
     );
   }
 
   Widget _classTab() {
-    return ListView.builder(
-      itemCount: _userDashboardController.scheduleItemList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return ScheduleItemWidget(
-          item: _userDashboardController.scheduleItemList[index],
-          isLastItem:
-              index == _userDashboardController.scheduleItemList.length - 1,
-          onClick: () {
-            debugPrint("${_userDashboardController.scheduleItemList[index]}");
-          },
-        );
-      },
+    return Obx(
+      () => _userDashboardController.classTimeScheduleResult.value
+                  .classTimeScheduleDataList?.isNotEmpty ==
+              true
+          ? ListView.builder(
+              itemCount: _userDashboardController.classTimeScheduleResult.value
+                  .classTimeScheduleDataList?.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                ClassTimeScheduleData? item = _userDashboardController
+                    .classTimeScheduleResult
+                    .value
+                    .classTimeScheduleDataList?[index];
+
+                if (item == null) return const SizedBox();
+
+                return ScheduleItemWidget(
+                  item: item,
+                  isLastItem: index ==
+                      (_userDashboardController.classTimeScheduleResult.value
+                                  .classTimeScheduleDataList?.length ??
+                              0) -
+                          1,
+                  onClick: () {
+                    debugPrint(jsonEncode(item));
+                  },
+                );
+              },
+            )
+          : const SizedBox(),
     );
   }
 

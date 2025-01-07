@@ -1,10 +1,10 @@
-class StudyResultItem {
+class StudentScoreItem {
   final int id;
   final String term;
   final String termTitle;
   final List<Subject> subjectList;
 
-  StudyResultItem({
+  StudentScoreItem({
     required this.id,
     required this.term,
     required this.termTitle,

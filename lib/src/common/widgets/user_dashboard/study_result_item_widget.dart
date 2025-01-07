@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../app_setting.dart';
 import '../../../modules/user_dashboard/model/study_result_item.dart';
+import '../../app_setting.dart';
 
 class StudyResultItemWidget extends StatelessWidget {
-  final StudyResultItem item;
+  final StudentScoreItem item;
 
   const StudyResultItemWidget({
     super.key,

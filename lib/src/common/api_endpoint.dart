@@ -24,4 +24,5 @@ class ApiEndpoint {
   static const String payrollUserWorkInBranch = "api/PayrollUserWorkInBranch";
   static const String userWorkId = "api/PayrollUserWorkInBranch/getUserWorkId";
   static const String studentProfile = "api/v1/ApiStudentResult/studentprofile";
+  static const String studentScore = "api/v1/ApiStudentResult/studentscores";
 }
