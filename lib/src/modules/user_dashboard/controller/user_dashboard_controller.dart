@@ -26,13 +26,21 @@ class UserDashboardController extends BaseGetXController {
   var selectedStudentId = ''.obs;
   var studentProfileDataList = <StudyItem>[].obs;
   var studentScoreList = <StudentScoreItem>[].obs;
-
+  var scheduleCodeTextEditingController = TextEditingController().obs;
+  var selectedBranchTextEditingController = TextEditingController().obs;
+  var studentIdTextEditingController = TextEditingController().obs;
+  var selectedTabViewIndex = 0;
   LoginController loginController = Get.put(LoginController());
 
   @override
   void onInit() async {
     await _getStudentId();
     super.onInit();
+  }
+
+  void setSelectedTabViewIndex(int index) {
+    selectedTabViewIndex = index;
+    update();
   }
 
   Future<void> setSelectedStudentId(String studentId) async {

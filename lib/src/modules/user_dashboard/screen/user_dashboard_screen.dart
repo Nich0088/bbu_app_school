@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/app_setting.dart';
+import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
+import '../../../common/widgets/custom_text_field.dart';
 import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_result_item_widget.dart';
@@ -25,6 +27,9 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   late TabController _tabController;
   final UserDashboardController _userDashboardController =
       Get.put(UserDashboardController());
+  final FocusNode _scheduleCodeFocusNode = FocusNode();
+  final FocusNode _selectedBranchFocusNode = FocusNode();
+  final FocusNode _studentIDxFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -34,6 +39,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
     _tabController.addListener(() async {
       if (_tabController.indexIsChanging) {
         debugPrint("Tab changed to: ${_tabController.index}");
+        _userDashboardController.setSelectedTabViewIndex(_tabController.index);
         switch (_tabController.index) {
           case 1:
             await _userDashboardController.getStudentScore();
@@ -54,53 +60,69 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserDashboardController>(builder: (controller) {
-      return LoadingScaffoldWidget(
-        isShowLoading: controller.isShowLoading,
-        appBar: CustomAppBar(
-          context,
-          backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: false,
-          title: "User Dashboard",
-          isCenterTitle: true,
-          onPressedBack: () {
-            Get.delete<UserDashboardController>();
-            context.pop();
-          },
-          bottom: TabBar(
+    return GetBuilder<UserDashboardController>(
+      builder: (controller) {
+        return LoadingScaffoldWidget(
+          isShowLoading: controller.isShowLoading,
+          appBar: CustomAppBar(
+            context,
+            backgroundColor: AppColor.primaryColor,
+            isDashboardAppBar: false,
+            title: "User Dashboard",
+            isCenterTitle: true,
+            onPressedBack: () {
+              Get.delete<UserDashboardController>();
+              context.pop();
+            },
+            bottom: TabBar(
+              controller: _tabController,
+              labelColor: AppColor.textPrimaryColor,
+              indicatorColor: const Color(0xCCE25425),
+              indicatorSize: TabBarIndicatorSize.tab,
+              unselectedLabelColor: AppColor.textPrimaryColor.withOpacity(0.3),
+              tabs: const [
+                Tab(
+                  text: "Study",
+                ),
+                Tab(
+                  text: "Result",
+                ),
+                Tab(
+                  text: "Class",
+                ),
+                Tab(
+                  text: "Chat",
+                ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
-            labelColor: AppColor.textPrimaryColor,
-            indicatorColor: const Color(0xCCE25425),
-            indicatorSize: TabBarIndicatorSize.tab,
-            unselectedLabelColor: AppColor.textPrimaryColor.withOpacity(0.3),
-            tabs: const [
-              Tab(
-                text: "Study",
-              ),
-              Tab(
-                text: "Result",
-              ),
-              Tab(
-                text: "Class",
-              ),
-              Tab(
-                text: "Chat",
-              ),
+            children: [
+              _studyTab(context),
+              _resultTab(),
+              _classTab(),
+              _chatTab(),
             ],
           ),
-        ),
-        body: TabBarView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _tabController,
-          children: [
-            _studyTab(context),
-            _resultTab(),
-            _classTab(),
-            _chatTab(),
-          ],
-        ),
-      );
-    });
+          floatingActionButton: controller.selectedTabViewIndex == 2
+              ? FloatingActionButton(
+                  onPressed: () {
+                    _showEnterScheduleBottomSheet(context);
+                  },
+                  shape: const CircleBorder(),
+                  backgroundColor: AppColor.cardColor,
+                  child: const Icon(
+                    size: 32,
+                    Icons.add_outlined,
+                    color: AppColor.primaryColor,
+                  ),
+                )
+              : null,
+        );
+      },
+    );
   }
 
   Widget _studyTab(BuildContext context) {
@@ -299,6 +321,118 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                   },
                 ),
               ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showEnterScheduleBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Obx(
+          () => Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  topLeft: Radius.circular(16),
+                ),
+              ),
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 4),
+                    width: 60,
+                    height: 5,
+                    decoration: const BoxDecoration(
+                      color: Color(0x617C7C7C),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Please Enter Schedule Code Bellow',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: AppColor.primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyle.horizontalPadding,
+                    ),
+                    child: CustomTextField(
+                      focusNode: _scheduleCodeFocusNode,
+                      errorDescription: '',
+                      isShowError: false,
+                      controller: _userDashboardController
+                          .scheduleCodeTextEditingController.value,
+                      onChangeTextField: (value) {
+                        //
+                      },
+                      label: 'Schedule Code',
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyle.horizontalPadding,
+                    ),
+                    child: CustomTextField(
+                      focusNode: _selectedBranchFocusNode,
+                      errorDescription: '',
+                      isShowError: false,
+                      controller: _userDashboardController
+                          .selectedBranchTextEditingController.value,
+                      onChangeTextField: (value) {
+                        //
+                      },
+                      label: 'Selected Branch',
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyle.horizontalPadding,
+                    ),
+                    child: CustomTextField(
+                      focusNode: _studentIDxFocusNode,
+                      errorDescription: '',
+                      isShowError: false,
+                      controller: _userDashboardController
+                          .studentIdTextEditingController.value,
+                      onChangeTextField: (value) {
+                        //
+                      },
+                      label: 'Student Id',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyle.horizontalPadding,
+                      vertical: 24,
+                    ),
+                    child: CustomButton(
+                      onPressed: () {
+                        //
+                      },
+                      title: 'Add Class',
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
