@@ -15,7 +15,7 @@ class SplashController extends GetxController {
     await _getApiToken();
 
     String? userProfileData =
-        await LocalStorage.getStringValue(key: LocalStorage.userProfileData);
+        await LocalStorage.getStringValue(key: LocalStorage.loginResultData);
 
     if (userProfileData != null) {
       actionOnTokenExist.call();

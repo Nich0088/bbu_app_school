@@ -208,7 +208,7 @@ class DashboardController extends GetxController {
 
   Future<void> _getUserProfileData() async {
     String? userProfileDataString =
-        await LocalStorage.getStringValue(key: LocalStorage.userProfileData);
+        await LocalStorage.getStringValue(key: LocalStorage.loginResultData);
 
     if (userProfileDataString == null) return;
 

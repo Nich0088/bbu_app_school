@@ -2,7 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
   static const String authorizeTokenData = "authorize.token.data";
-  static const String userProfileData = "user.profile.data";
+  static const String loginResultData = "user.profile.data";
+  static const String userTypeData = "user.type.data";
+  static const String universityBranchData = "university.branch.data";
 
   static SharedPreferences? _prefs;
 
@@ -42,7 +44,9 @@ class LocalStorage {
   }
 
   static Future<void> clearLocalData() async {
-    await _prefs?.remove(LocalStorage.userProfileData);
+    await _prefs?.remove(LocalStorage.loginResultData);
     await _prefs?.remove(LocalStorage.authorizeTokenData);
+    await _prefs?.remove(LocalStorage.userTypeData);
+    await _prefs?.remove(LocalStorage.universityBranchData);
   }
 }

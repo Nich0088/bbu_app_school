@@ -1,57 +1,24 @@
-import 'package:get/get.dart';
-import 'package:injectable/injectable.dart';
-import 'package:school_app/src/modules/user_dashboard/model/schedule_item.dart';
-import 'package:school_app/src/modules/user_dashboard/model/study_item.dart';
+import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:school_app/src/common/base_get_x_controller.dart';
+import 'package:school_app/src/core/auth/login/controller/login_controller.dart';
+import 'package:school_app/src/core/auth/login/model/login_result.dart';
+import 'package:school_app/src/modules/create_user_with_branch/model/university_branch_result.dart';
+import 'package:school_app/src/modules/create_user_with_branch/model/user_type_result.dart';
+import 'package:school_app/src/modules/user_dashboard/model/student_id_result.dart';
+import 'package:school_app/src/modules/user_dashboard/model/student_profile_result.dart';
+
+import '../../../common/api_endpoint.dart';
+import '../../../common/helpers/local_storage.dart';
+import '../../../core/auth/login/model/authorize_token_result.dart';
+import '../model/class_time_schedule_result.dart';
+import '../model/study_item.dart';
 import '../model/study_result_item.dart';
 
-class UserDashboardController extends GetxController {
-  @factoryMethod
-  static init() => Get.put(UserDashboardController());
-
-  List<StudyItem> get studyItemList => [
-        StudyItem(
-          id: 0,
-          title: "Branch name in English",
-          label: "Phnom Penh Campus",
-        ),
-        StudyItem(
-          id: 1,
-          title: "Branch name in Khmer",
-          label: "សាខាភ្នំពេញ",
-        ),
-        StudyItem(
-          id: 2,
-          title: "Faculty name in English",
-          label: "Science in Technology",
-        ),
-        StudyItem(
-          id: 3,
-          title: "Faculty name in Khmer",
-          label: "វិទ្យាសាស្រ្តនឹងបច្ចេកវិទ្យា",
-        ),
-        StudyItem(
-          id: 4,
-          title: "Field in English",
-          label: "Information Technology (Profession)",
-        ),
-        StudyItem(
-          id: 5,
-          title: "Field in Khmer",
-          label: "បច្ចេកវិទ្យាព័ត៏មាន (កម្រិតវិជ្ជាជីវះ)",
-        ),
-        StudyItem(
-          id: 6,
-          title: "Degree in English",
-          label: "Bachelor",
-        ),
-        StudyItem(
-          id: 7,
-          title: "Degree in Khmer",
-          label: "បរិញ្ញាប័ត្រ",
-        ),
-      ];
-
+class UserDashboardController extends BaseGetXController {
   List<StudyResultItem> get studyResultItemList => [
         StudyResultItem(
           id: 0,
@@ -511,42 +478,247 @@ class UserDashboardController extends GetxController {
         ),
       ];
 
-  List<ScheduleItem> get scheduleItemList => [
-        ScheduleItem(
-          id: 0,
-          image:
-              "https://files.oaiusercontent.com/file-L1cW35mNXJHnMmWTsgXQdp?se=2024-12-22T17%3A50%3A58Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D1.png&sig=6QXO9s55D3tNZ%2BrcfRMAsimrraDQ3Rw6ocnFvX0K9Pk%3D",
-          title: "Data Structures and Algorithms",
-          subTitle: "D1IT-A. SeT",
-          roomName: "506 (B)",
-          date: "Apr 01, 2024",
-        ),
-        ScheduleItem(
-          id: 1,
-          image:
-              "https://files.oaiusercontent.com/file-Cjptn6rdF7g2rSByS9MSXP?se=2024-12-22T17%3A52%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D2.png&sig=CM4TL%2BqSp0aaAeBMxpP31VG5FuTzAU21zZI3Ivr2Mn8%3D",
-          title: "Operating Systems",
-          subTitle: "D1IT-B. Mr. Smith",
-          roomName: "506 (B)",
-          date: "Apr 02, 2024",
-        ),
-        ScheduleItem(
-          id: 2,
-          image:
-              "https://files.oaiusercontent.com/file-SZKityW5E5Hx7eUWrv7gKC?se=2024-12-22T17%3A52%3A21Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D3.png&sig=QJLA3i47V%2B8HNSQzMyC2osAsdD9I3MPZDtaxBLPxwAg%3D",
-          title: "Software Engineering",
-          subTitle: "D1IT-C. Dr. Johnson",
-          roomName: "506 (B)",
-          date: "Apr 03, 2024",
-        ),
-        ScheduleItem(
-          id: 3,
-          image:
-              "https://files.oaiusercontent.com/file-Cjptn6rdF7g2rSByS9MSXP?se=2024-12-22T17%3A52%3A10Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D2.png&sig=CM4TL%2BqSp0aaAeBMxpP31VG5FuTzAU21zZI3Ivr2Mn8%3D",
-          title: "Database Management Systems",
-          subTitle: "D1IT-D. Prof. Lee",
-          roomName: "502 (B)",
-          date: "Apr 04, 2024",
-        ),
-      ];
+  var classTimeScheduleResult = ClassTimeScheduleResult().obs;
+  var studentIdList = <String>[].obs;
+  var selectedStudentId = ''.obs;
+  var studentProfileDataList = <StudyItem>[].obs;
+
+  LoginController loginController = Get.put(LoginController());
+
+  @override
+  void onInit() async {
+    // await _getClassSchedule();
+    await _getStudentId();
+    super.onInit();
+  }
+
+  Future<void> setSelectedStudentId(String studentId) async {
+    if (selectedStudentId.value.toLowerCase() == studentId.toLowerCase()) {
+      return;
+    }
+
+    selectedStudentId.value = studentId;
+    debugPrint(studentId);
+
+    await _getStudentProfile(studentId);
+  }
+
+  // Future<void> _getClassSchedule() async {
+  //   String urlString =
+  //       '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.classTimeSchedule}/${AppConstant.mockBranch}/${AppConstant.mockScheduleId}/${AppConstant.mockScheduleStatus}';
+  //   debugPrint("$urlString");
+  //
+  //   String? authorizeTokenData =
+  //       await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);
+  //
+  //   if (authorizeTokenData == null) return;
+  //
+  //   var authorizeTokenResult =
+  //       AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
+  //
+  //   var url = Uri.parse(urlString);
+  //   setLoadingState(true);
+  //
+  //   var response = await http.get(
+  //     url,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Authorization": "Bearer ${authorizeTokenResult.token}",
+  //     },
+  //   );
+  //   debugPrint('Grogu --> status code =  ${response.statusCode}');
+  //   debugPrint('Grogu --> body = ${response.body}');
+  //   setLoadingState(false);
+  //
+  //   if (response.body.isEmpty) return;
+  //
+  //   classTimeScheduleResult.value =
+  //       ClassTimeScheduleResult.fromJson(jsonDecode(response.body));
+  //
+  //   if (response.statusCode != 200) {
+  //     appDialogHelper?.showErrorDialog(
+  //       errorMessage:
+  //           classTimeScheduleResult.value.message ?? 'something when wrong',
+  //       errorCode: '',
+  //     );
+  //   }
+  // }
+
+  Future<void> _getStudentId() async {
+    String? loginResultDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.loginResultData);
+    if (loginResultDataString == null) return;
+    var loginResultData =
+        LoginResultData.fromJson(jsonDecode(loginResultDataString));
+
+    String? userTypeDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
+    if (userTypeDataString == null) return;
+    var userTypeData = UserTypeData.fromJson(jsonDecode(userTypeDataString));
+
+    String? universityBranchDataString = await LocalStorage.getStringValue(
+        key: LocalStorage.universityBranchData);
+    if (universityBranchDataString == null) return;
+    var universityBranchData =
+        UniversityBranchData.fromJson(jsonDecode(universityBranchDataString));
+
+    String urlString =
+        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.userWorkId}/${loginResultData.id}/${universityBranchData.shortName}/${userTypeData.id}';
+    debugPrint("$urlString");
+
+    String? authorizeTokenData =
+        await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);
+
+    if (authorizeTokenData == null) return;
+
+    var authorizeTokenResult =
+        AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
+
+    var url = Uri.parse(urlString);
+    setLoadingState(true);
+
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${authorizeTokenResult.token}",
+      },
+    );
+    debugPrint('Grogu --> status code =  ${response.statusCode}');
+    debugPrint('Grogu --> body = ${response.body}');
+    setLoadingState(false);
+
+    if (response.body.isEmpty) return;
+
+    StudentIdResult studentIdResult =
+        StudentIdResult.fromJson(jsonDecode(response.body));
+
+    if (response.statusCode != 200) {
+      appDialogHelper?.showErrorDialog(
+        errorMessage: studentIdResult.message ?? 'something when wrong',
+        errorCode: studentIdResult.code?.toString() ?? '',
+      );
+      return;
+    }
+    studentIdList.value = studentIdResult.data ?? [];
+    if (studentIdList.value.isNotEmpty) {
+      selectedStudentId.value = studentIdList.value.first;
+      await _getStudentProfile(selectedStudentId.value);
+    }
+  }
+
+  Future<void> _getStudentProfile(String studentId) async {
+    String urlString =
+        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.studentProfile}/$studentId';
+    debugPrint("$urlString");
+
+    String? authorizeTokenData =
+        await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);
+
+    if (authorizeTokenData == null) return;
+
+    var authorizeTokenResult =
+        AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
+
+    var url = Uri.parse(urlString);
+    setLoadingState(true);
+
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${authorizeTokenResult.token}",
+      },
+    );
+    debugPrint('Grogu --> status code =  ${response.statusCode}');
+    debugPrint('Grogu --> body = ${response.body}');
+    setLoadingState(false);
+
+    if (response.body.isEmpty) return;
+
+    StudentProfileResult studentProfileResult =
+        StudentProfileResult.fromJson(jsonDecode(response.body));
+
+    if (response.statusCode != 200) {
+      appDialogHelper?.showErrorDialog(
+        errorMessage: studentProfileResult.message ?? 'something when wrong',
+        errorCode: studentProfileResult.code?.toString() ?? '',
+      );
+      return;
+    }
+    if (studentProfileResult.studentProfileData != null) {
+      studentProfileDataList.value =
+          _generateListOfProfileData(studentProfileResult.studentProfileData!);
+    }
+  }
+
+  List<StudyItem> _generateListOfProfileData(
+      StudentProfileData studentProfileData) {
+    List<StudyItem> studyItemList = [];
+    studyItemList.add(
+      StudyItem(
+        id: 0,
+        title: studentProfileData.branchNameEn ?? '',
+        label: 'Branch name in English',
+        isFixedEnglishLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 1,
+        title: studentProfileData.branchNameKh ?? '',
+        label: 'Branch name in Khmer',
+        isFixedKhmerLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 2,
+        title: studentProfileData.facultyEn ?? '',
+        label: 'Faculty name in English',
+        isFixedEnglishLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 3,
+        title: studentProfileData.facultyKh ?? '',
+        label: 'Faculty name in Khmer',
+        isFixedKhmerLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 4,
+        title: studentProfileData.specializationEn ?? '',
+        label: 'Field in English',
+        isFixedEnglishLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 5,
+        title: studentProfileData.specializationKh ?? '',
+        label: 'Field in Khmer',
+        isFixedKhmerLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 6,
+        title: studentProfileData.degreeEn ?? '',
+        label: 'Degree in English',
+        isFixedEnglishLanguage: true,
+      ),
+    );
+    studyItemList.add(
+      StudyItem(
+        id: 7,
+        title: studentProfileData.degreeKh ?? '',
+        label: 'Degree in Khmer',
+        isFixedKhmerLanguage: true,
+      ),
+    );
+    return studyItemList;
+  }
 }

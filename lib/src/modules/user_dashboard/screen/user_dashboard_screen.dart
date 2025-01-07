@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/src/common/app_setting.dart';
+import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
+import 'package:school_app/src/modules/user_dashboard/model/class_time_schedule_result.dart';
 
-import '../../../common/app_setting.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_item_widget.dart';
@@ -42,61 +46,104 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        context,
-        backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
-        title: "User Dashboard",
-        isCenterTitle: true,
-        onPressedBack: () {
-          context.pop();
-        },
-        bottom: TabBar(
+    return GetBuilder<UserDashboardController>(builder: (controller) {
+      return LoadingScaffoldWidget(
+        isShowLoading: controller.isShowLoading,
+        appBar: CustomAppBar(
+          context,
+          backgroundColor: AppColor.primaryColor,
+          isDashboardAppBar: false,
+          title: "User Dashboard",
+          isCenterTitle: true,
+          onPressedBack: () {
+            Get.delete<UserDashboardController>();
+            context.pop();
+          },
+          bottom: TabBar(
+            controller: _tabController,
+            labelColor: AppColor.textPrimaryColor,
+            indicatorColor: const Color(0xCCE25425),
+            indicatorSize: TabBarIndicatorSize.tab,
+            unselectedLabelColor: AppColor.textPrimaryColor.withOpacity(0.3),
+            tabs: const [
+              Tab(
+                text: "Study",
+              ),
+              Tab(
+                text: "Result",
+              ),
+              Tab(
+                text: "Class",
+              ),
+              Tab(
+                text: "Chat",
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
           controller: _tabController,
-          labelColor: AppColor.textPrimaryColor,
-          indicatorColor: const Color(0xCCE25425),
-          indicatorSize: TabBarIndicatorSize.tab,
-          unselectedLabelColor: AppColor.textPrimaryColor.withOpacity(0.3),
-          tabs: const [
-            Tab(
-              text: "Study",
-            ),
-            Tab(
-              text: "Result",
-            ),
-            Tab(
-              text: "Class",
-            ),
-            Tab(
-              text: "Chat",
-            ),
+          children: [
+            _studyTab(context),
+            _resultTab(),
+            _classTab(),
+            _chatTab(),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _studyTab(),
-          _resultTab(),
-          _classTab(),
-          _chatTab(),
-        ],
-      ),
-    );
+      );
+    });
   }
 
-  Widget _studyTab() {
-    return ListView.builder(
-      itemCount: _userDashboardController.studyItemList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return StudyItemWidget(
-          item: _userDashboardController.studyItemList[index],
-          isLastItem:
-              index == _userDashboardController.studyItemList.length - 1,
-        );
-      },
+  Widget _studyTab(BuildContext context) {
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          if (_userDashboardController.studentIdList.value.isNotEmpty)
+            GestureDetector(
+              onTap: () {
+                _showSelectStudentIdBottomSheet(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  right: 16,
+                ),
+                child: Card(
+                  color: AppColor.primaryColor,
+                  elevation: 4,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      _userDashboardController.selectedStudentId.value,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (_userDashboardController.studentProfileDataList.value.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                itemCount: _userDashboardController
+                    .studentProfileDataList.value.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return StudyItemWidget(
+                    item: _userDashboardController
+                        .studentProfileDataList.value[index],
+                    isLastItem: true,
+                  );
+                },
+              ),
+            ),
+        ],
+      ),
     );
   }
 
@@ -138,6 +185,94 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
             .bodyLarge
             ?.copyWith(color: AppColor.primaryColor),
       ),
+    );
+  }
+
+  void _showSelectStudentIdBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Obx(
+          () => Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(16),
+                topLeft: Radius.circular(16),
+              ),
+            ),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 4),
+                  width: 60,
+                  height: 5,
+                  decoration: const BoxDecoration(
+                    color: Color(0x617C7C7C),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount:
+                      _userDashboardController.studentIdList.value.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        top: index == 0 ? 0 : 16,
+                        left: 20,
+                        right: 20,
+                        bottom: index ==
+                                _userDashboardController
+                                        .studentIdList.value.length -
+                                    1
+                            ? 16
+                            : 0,
+                      ),
+                      child: InkWell(
+                        onTap: () async {
+                          context.pop();
+                          await _userDashboardController.setSelectedStudentId(
+                            _userDashboardController.studentIdList.value[index],
+                          );
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: AppColor.cardColor,
+                          elevation: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 16,
+                            ),
+                            child: Text(
+                              _userDashboardController
+                                  .studentIdList.value[index],
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                    color: AppColor.primaryColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -103,6 +103,10 @@ class LoginController extends BaseGetXController {
 
     var authorizeTokenResult =
         AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
+    await LocalStorage.storeData(
+      key: LocalStorage.userTypeData,
+      value: jsonEncode(selectedUserType?.toJson()),
+    );
 
     var url = Uri.parse(urlString);
     setLoadingState(true);
@@ -130,7 +134,7 @@ class LoginController extends BaseGetXController {
       case 200:
         if (loginResult?.data != null) {
           await LocalStorage.storeData(
-            key: LocalStorage.userProfileData,
+            key: LocalStorage.loginResultData,
             value: jsonEncode(loginResult?.data?.toJson()),
           );
           onSuccess.call();

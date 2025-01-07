@@ -66,6 +66,11 @@ class CreateUserWithBranchController extends BaseGetXController {
     var authorizeTokenResult =
         AuthorizeTokenData.fromJson(jsonDecode(authorizeTokenData));
 
+    await LocalStorage.storeData(
+      key: LocalStorage.universityBranchData,
+      value: jsonEncode(_selectedUniversityBranch?.toJson()),
+    );
+
     setLoadingState(true);
     var response = await http.post(
       url,

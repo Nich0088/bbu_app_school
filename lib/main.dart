@@ -14,6 +14,7 @@ import 'package:school_app/src/modules/calendar/screen/calendar_screen.dart';
 import 'package:school_app/src/modules/campus/screen/campus_screen.dart';
 import 'package:school_app/src/modules/check_in/screen/check_ins_screen.dart';
 import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
+import 'package:school_app/src/modules/create_user_with_branch/screen/create_user_with_branch_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
@@ -29,17 +30,7 @@ import 'package:school_app/src/modules/scholarship/screen/scholarship_screen.dar
 import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
 import 'package:school_app/src/modules/video/screen/video_screen.dart';
 
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
-
 void main() async {
-  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await LocalStorage.init();
@@ -133,6 +124,10 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const FaqScreen(),
     ),
     GoRoute(
+      path: AppScreen.createUserWithBranch.path,
+      builder: (context, state) => const CreateUserWithBranchScreen(),
+    ),
+    GoRoute(
       path: AppScreen.eventDetailScreen.path,
       builder: (context, state) {
         final EventData? eventData = state.extra as EventData?;
@@ -173,6 +168,7 @@ enum AppScreen {
   checkInScreen("/check-in"),
   certificateFormatScreen("/certificateFormat"),
   eventDetailScreen("/event-detail"),
+  createUserWithBranch("/create-user-with-branch"),
   faqScreen("/faq");
 
   final String path;

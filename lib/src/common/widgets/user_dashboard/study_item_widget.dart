@@ -47,10 +47,15 @@ class StudyItemWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Text(
               item.title,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(color: Colors.black),
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.black,
+                  fontFamily: (() {
+                    if (item.isFixedEnglishLanguage) {
+                      return 'sourceSansThree';
+                    } else if (item.isFixedKhmerLanguage) {
+                      return 'notoSansKhmer';
+                    }
+                  }())), // if both condition is false then it will depend on the app selected language
             ),
           ),
         ],
