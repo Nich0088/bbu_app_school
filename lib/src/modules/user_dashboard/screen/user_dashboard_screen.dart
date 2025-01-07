@@ -90,6 +90,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
           ),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: _tabController,
           children: [
             _studyTab(context),
