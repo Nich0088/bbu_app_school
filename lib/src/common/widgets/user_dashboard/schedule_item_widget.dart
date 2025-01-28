@@ -1,12 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:school_app/src/modules/user_dashboard/model/class_time_schedule_result.dart';
+import 'package:school_app/src/common/helpers/app_date_formatter.dart';
+import 'package:school_app/src/modules/user_dashboard/model/class_schedule_result.dart';
 
 import '../../app_setting.dart';
 
 class ScheduleItemWidget extends StatelessWidget {
   final bool isLastItem;
-  final ClassTimeScheduleData item;
+  final ClassScheduleData item;
   final GestureTapCallback onClick;
 
   const ScheduleItemWidget({
@@ -49,69 +49,49 @@ class ScheduleItemWidget extends StatelessWidget {
           child: Row(
             children: [
               ClipOval(
-                child: CachedNetworkImage(
+                child: Container(
                   width: 60,
                   height: 60,
-                  imageUrl: "item.image",
-                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                    color: AppColor.primaryColor,
+                  ),
+                  child: Text(
+                    item.status ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
               SizedBox(
                 width: (MediaQuery.of(context).size.width - 176) * 0.6,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "item.title",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: Colors.black),
-                    ),
-                    Text(
-                      "item.subTitle",
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.black),
-                    ),
-                  ],
+                child: Text(
+                  item.scheduleShortName ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.black),
                 ),
               ),
               const Spacer(),
               const SizedBox(width: 20),
               SizedBox(
                 width: (MediaQuery.of(context).size.width - 176) * 0.4,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'item.date',
-                      textAlign: TextAlign.right,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.black),
-                    ),
-                    Text(
-                      "Room: ${'item.roomName'}",
-                      textAlign: TextAlign.right,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.black),
-                    ),
-                  ],
+                child: Text(
+                  AppDateFormatter.formatDate(
+                    pattern: AppDateFormatter.monthCommaDateYear,
+                    dateString: item.startDate?.split('T')[0],
+                  ),
+                  textAlign: TextAlign.right,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.black),
                 ),
               ),
             ],

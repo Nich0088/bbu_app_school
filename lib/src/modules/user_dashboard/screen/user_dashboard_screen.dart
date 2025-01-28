@@ -7,13 +7,15 @@ import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
+import 'package:school_app/src/modules/user_dashboard/model/class_schedule_result.dart';
 
+import '../../../common/model/custom_drop_down_menu_item.dart';
 import '../../../common/widgets/custom_app_bar.dart';
+import '../../../common/widgets/custom_drop_down_picker.dart';
 import '../../../common/widgets/custom_text_field.dart';
 import '../../../common/widgets/user_dashboard/schedule_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_result_item_widget.dart';
-import '../model/class_time_schedule_result.dart';
 
 class UserDashboardScreen extends StatefulWidget {
   const UserDashboardScreen({super.key});
@@ -45,7 +47,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
             await _userDashboardController.getStudentScore();
             break;
           case 2:
-            await _userDashboardController.getClassSchedule();
+            await _userDashboardController.initializeDataForClassTab();
             break;
         }
       }
@@ -60,6 +62,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
 
   @override
   Widget build(BuildContext context) {
+    _userDashboardController.register(context);
+
     return GetBuilder<UserDashboardController>(
       builder: (controller) {
         return LoadingScaffoldWidget(
@@ -196,35 +200,37 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
 
   Widget _classTab() {
     return Obx(
-      () => _userDashboardController.classTimeScheduleResult.value
-                  .classTimeScheduleDataList?.isNotEmpty ==
-              true
-          ? ListView.builder(
-              itemCount: _userDashboardController.classTimeScheduleResult.value
-                  .classTimeScheduleDataList?.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                ClassTimeScheduleData? item = _userDashboardController
-                    .classTimeScheduleResult
-                    .value
-                    .classTimeScheduleDataList?[index];
+      () => RefreshIndicator(
+        child: ListView.builder(
+          itemCount: _userDashboardController.classScheduleResult.value
+                      .classScheduleDataList?.isNotEmpty ==
+                  true
+              ? _userDashboardController
+                  .classScheduleResult.value.classScheduleDataList?.length
+              : 0,
+          itemBuilder: (context, index) {
+            ClassScheduleData? item = _userDashboardController
+                .classScheduleResult.value.classScheduleDataList?[index];
 
-                if (item == null) return const SizedBox();
+            if (item == null) return const SizedBox();
 
-                return ScheduleItemWidget(
-                  item: item,
-                  isLastItem: index ==
-                      (_userDashboardController.classTimeScheduleResult.value
-                                  .classTimeScheduleDataList?.length ??
-                              0) -
-                          1,
-                  onClick: () {
-                    debugPrint(jsonEncode(item));
-                  },
-                );
+            return ScheduleItemWidget(
+              item: item,
+              isLastItem: index ==
+                  (_userDashboardController.classScheduleResult.value
+                              .classScheduleDataList?.length ??
+                          0) -
+                      1,
+              onClick: () {
+                debugPrint(jsonEncode(item));
               },
-            )
-          : const SizedBox(),
+            );
+          },
+        ),
+        onRefresh: () async {
+          _userDashboardController.getClassList();
+        },
+      ),
     );
   }
 
@@ -373,14 +379,44 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppStyle.horizontalPadding,
                     ),
+                    child: CustomDropDownPicker(
+                      controller: _userDashboardController
+                          .universityBranchTextEditingController.value,
+                      label: "Branch",
+                      onSelected: (item) {
+                        if (item == null) return;
+                        _userDashboardController
+                            .universityBranchTextEditingController
+                            .value
+                            .text = item.title ?? '';
+                        _userDashboardController
+                            .setSelectedUniversityBranch(item);
+                      },
+                      dropDownMenuEntryList: _userDashboardController
+                          .universityBranchDropDownItemList.value
+                          .map((item) =>
+                              DropdownMenuEntry<CustomDropDownMenuItem>(
+                                value: item,
+                                label: item.title,
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppStyle.horizontalPadding,
+                    ),
                     child: CustomTextField(
                       focusNode: _scheduleCodeFocusNode,
-                      errorDescription: '',
-                      isShowError: false,
+                      errorDescription: _userDashboardController
+                          .invalidScheduleCodeDescription.value,
+                      isShowError:
+                          _userDashboardController.isInvalidScheduleCode.value,
                       controller: _userDashboardController
                           .scheduleCodeTextEditingController.value,
                       onChangeTextField: (value) {
-                        //
+                        _userDashboardController.resetScheduleCodeValidation();
                       },
                       label: 'Schedule Code',
                     ),
@@ -390,33 +426,25 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppStyle.horizontalPadding,
                     ),
-                    child: CustomTextField(
-                      focusNode: _selectedBranchFocusNode,
-                      errorDescription: '',
-                      isShowError: false,
-                      controller: _userDashboardController
-                          .selectedBranchTextEditingController.value,
-                      onChangeTextField: (value) {
-                        //
-                      },
-                      label: 'Selected Branch',
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppStyle.horizontalPadding,
-                    ),
-                    child: CustomTextField(
-                      focusNode: _studentIDxFocusNode,
-                      errorDescription: '',
-                      isShowError: false,
+                    child: CustomDropDownPicker(
                       controller: _userDashboardController
                           .studentIdTextEditingController.value,
-                      onChangeTextField: (value) {
-                        //
+                      label: "Student Id",
+                      onSelected: (item) {
+                        if (item == null) return;
+                        _userDashboardController.studentIdTextEditingController
+                            .value.text = item.title ?? '';
+                        _userDashboardController
+                            .setSelectedStudentIdClassTab(item);
                       },
-                      label: 'Student Id',
+                      dropDownMenuEntryList: _userDashboardController
+                          .studentIdDropDownItemList.value
+                          .map((item) =>
+                              DropdownMenuEntry<CustomDropDownMenuItem>(
+                                value: item,
+                                label: item.title,
+                              ))
+                          .toList(),
                     ),
                   ),
                   Padding(
@@ -425,8 +453,12 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                       vertical: 24,
                     ),
                     child: CustomButton(
-                      onPressed: () {
-                        //
+                      onPressed: () async {
+                        await _userDashboardController.linkClassSchedule(
+                          actionOnSuccess: () {
+                            context.pop();
+                          },
+                        );
                       },
                       title: 'Add Class',
                     ),
