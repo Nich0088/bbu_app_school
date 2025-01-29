@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
 import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
@@ -222,7 +221,10 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                           0) -
                       1,
               onClick: () {
-                debugPrint(jsonEncode(item));
+                context.push(
+                  AppScreen.studentClassDetailScreen.path,
+                  extra: item,
+                );
               },
             );
           },

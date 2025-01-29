@@ -57,7 +57,7 @@ class ScheduleItemWidget extends StatelessWidget {
                     color: AppColor.primaryColor,
                   ),
                   child: Text(
-                    item.status ?? '',
+                    item.facultyShortName ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleLarge,

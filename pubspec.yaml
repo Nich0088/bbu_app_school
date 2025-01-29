@@ -51,6 +51,7 @@ flutter:
     - assets/dashboard/
     - assets/attendant/
     - assets/registration_application/
+    - assets/student_class_detail/
     - assets/translations/
     - assets/location/
     - assets/loading.json

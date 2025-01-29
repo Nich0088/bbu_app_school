@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../main.dart';
-import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 import '../controller/event_controller.dart';
 
 class EventsScreen extends StatefulWidget {

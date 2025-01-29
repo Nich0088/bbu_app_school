@@ -25,8 +25,11 @@ import 'package:school_app/src/modules/event/screen/events_screen.dart';
 import 'package:school_app/src/modules/faq/screen/faq_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
 import 'package:school_app/src/modules/scholarship/screen/scholarship_screen.dart';
+import 'package:school_app/src/modules/user_dashboard/screen/student_class_detail_screen.dart';
 import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
 import 'package:school_app/src/modules/video/screen/video_screen.dart';
+
+import 'src/modules/user_dashboard/model/class_schedule_result.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -135,6 +138,14 @@ final GoRouter _goRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: AppScreen.studentClassDetailScreen.path,
+      builder: (context, state) {
+        final ClassScheduleData? classScheduleData =
+            state.extra as ClassScheduleData?;
+        return StudentClassDetailScreen(classScheduleData: classScheduleData);
+      },
+    ),
+    GoRoute(
       path: AppScreen.certificateFormatScreen.path,
       builder: (context, state) {
         final CertificateFormatItem? certificateFormatItem =
@@ -167,6 +178,7 @@ enum AppScreen {
   certificateFormatScreen("/certificateFormat"),
   eventDetailScreen("/event-detail"),
   createUserWithBranch("/create-user-with-branch"),
+  studentClassDetailScreen("/student-class-detail-screen"),
   faqScreen("/faq");
 
   final String path;
