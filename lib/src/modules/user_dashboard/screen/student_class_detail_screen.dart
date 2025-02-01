@@ -213,18 +213,21 @@ class ClassScheduleSubjectItemWidget extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
               const SizedBox(width: 4),
-              Text(
-                item.subjectNameen ?? '',
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Colors.black),
+              Expanded(
+                child: Text(
+                  item.subjectNameen ?? '',
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.black),
+                ),
               ),
-              const Spacer(),
               Text(
                 item.dayname ?? '',
                 overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
