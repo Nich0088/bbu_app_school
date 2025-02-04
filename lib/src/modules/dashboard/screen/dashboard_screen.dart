@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,8 +29,27 @@ class DashboardScreen extends StatelessWidget {
 
   final UserType? userType;
 
+  double calculateDistance(double lat1, double lng1, double lat2, double lng2) {
+    const earthRadiusKm = 6371;
+
+    double toRadians(double degree) => degree * pi / 180;
+
+    final dLat = toRadians(lat2 - lat1);
+    final dLng = toRadians(lng2 - lng1);
+
+    final a = pow(sin(dLat / 2), 2) +
+        cos(toRadians(lat1)) * cos(toRadians(lat2)) * pow(sin(dLng / 2), 2);
+
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+    return earthRadiusKm * c;
+  }
+
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+        "Grogu --> distance = ${calculateDistance(11.584789848288693, 104.89801806753692, 11.582296805864223, 104.90027236955652)}");
+
     DashboardController dashboardController = Get.put(DashboardController());
     dashboardController.register(context);
     switch (userType) {
@@ -47,7 +68,7 @@ class DashboardScreen extends StatelessWidget {
     DashboardController dashboardController = Get.put(DashboardController());
     return GetBuilder<DashboardController>(builder: (controller) {
       return LoadingContainerWidget(
-        // isShowLoading: controller.isShowLoading,
+        isShowLoading: controller.isShowLoading,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: AppColor.primaryColor,

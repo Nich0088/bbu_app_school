@@ -25,6 +25,8 @@ import 'package:school_app/src/modules/event/screen/events_screen.dart';
 import 'package:school_app/src/modules/faq/screen/faq_screen.dart';
 import 'package:school_app/src/modules/location/screen/location_screen.dart';
 import 'package:school_app/src/modules/scholarship/screen/scholarship_screen.dart';
+import 'package:school_app/src/modules/user_dashboard/model/attendant_screen_data.dart';
+import 'package:school_app/src/modules/user_dashboard/screen/attendant_screen.dart';
 import 'package:school_app/src/modules/user_dashboard/screen/student_class_detail_screen.dart';
 import 'package:school_app/src/modules/user_dashboard/screen/user_dashboard_screen.dart';
 import 'package:school_app/src/modules/video/screen/video_screen.dart';
@@ -146,6 +148,14 @@ final GoRouter _goRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: AppScreen.attendantScreen.path,
+      builder: (context, state) {
+        final AttendantScreenData? attendantScreenData =
+            state.extra as AttendantScreenData?;
+        return AttendantScreen(attendantScreenData: attendantScreenData);
+      },
+    ),
+    GoRoute(
       path: AppScreen.certificateFormatScreen.path,
       builder: (context, state) {
         final CertificateFormatItem? certificateFormatItem =
@@ -179,6 +189,7 @@ enum AppScreen {
   eventDetailScreen("/event-detail"),
   createUserWithBranch("/create-user-with-branch"),
   studentClassDetailScreen("/student-class-detail-screen"),
+  attendantScreen("/attendant-screen"),
   faqScreen("/faq");
 
   final String path;

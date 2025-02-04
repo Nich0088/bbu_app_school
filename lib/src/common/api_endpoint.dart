@@ -15,7 +15,8 @@ class ApiEndpoint {
   static const String viewVideo = "api/view_video";
   static const String viewLocation = "api/view_location";
   static const String viewCampuses = "api/view_campuses";
-  static const String checkList = "api/school/check-list";
+  static const String checkInAndCheckOutHistoryList =
+      "api/v1/schedule/class/subjects/checkinAndCheckout/list";
   static const String placeOfBirth = "api/v1/placeofbirth";
   static const String classTimeSchedule = "api/SchTeacherGetTimeByScheduleID";
   static const String videoAccesskey = "/api/v1/videoaccesskey";

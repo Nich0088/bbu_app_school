@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/common/widgets/custom_button.dart';
-import 'package:school_app/src/modules/attendant/controller/attendant_controller.dart';
-import 'package:school_app/src/modules/attendant/model/check_in_and_out_history_result.dart';
+import 'package:school_app/src/modules/user_dashboard/controller/attendant_controller.dart';
+import 'package:school_app/src/modules/user_dashboard/model/attendant_screen_data.dart';
+import 'package:school_app/src/modules/user_dashboard/model/check_in_and_out_history_result.dart';
 
 import '../../../common/app_setting.dart';
+import '../../../common/helpers/app_date_formatter.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/loading_container_widget.dart';
 
 class AttendantScreen extends StatelessWidget {
-  const AttendantScreen({super.key});
+  const AttendantScreen({super.key, this.attendantScreenData});
+
+  final AttendantScreenData? attendantScreenData;
 
   @override
   Widget build(BuildContext context) {
     AttendantController attendantController = Get.put(AttendantController());
 
     attendantController.register(context);
+    attendantController.setAttendantScreenData(attendantScreenData);
 
     return GetBuilder<AttendantController>(
       builder: (controller) {
@@ -69,47 +74,58 @@ class AttendantScreen extends StatelessWidget {
                                 ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(
+                        Padding(
+                          padding: const EdgeInsets.only(
                             top: 12,
                             left: 16,
                             right: 16,
                           ),
                           child: TextLabelWithValue(
                             label: 'Day:',
-                            value: 'Monday',
+                            value:
+                                '${attendantController.attendantScreenData.value.classScheduleSubjectData?.dayname}',
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(
+                        Padding(
+                          padding: const EdgeInsets.only(
                             top: 12,
                             left: 16,
                             right: 16,
                           ),
                           child: TextLabelWithValue(
                             label: 'Date:',
-                            value: '15/9/2024',
+                            value: AppDateFormatter.formatDate(
+                              pattern: AppDateFormatter.monthCommaDateYear,
+                              dateString: attendantController
+                                  .attendantScreenData
+                                  .value
+                                  .classScheduleSubjectData
+                                  ?.startDate
+                                  ?.split('T')[0],
+                            ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(
+                        Padding(
+                          padding: const EdgeInsets.only(
                             top: 12,
                             left: 16,
                             right: 16,
                           ),
                           child: TextLabelWithValue(
                             label: 'Time:',
-                            value: '7:00 pm',
+                            value:
+                                '${attendantController.attendantScreenData.value.classScheduleSubjectData?.timeGeneral}',
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
                             vertical: 12,
                             horizontal: 16,
                           ),
                           child: TextLabelWithValue(
                             label: 'Subject:',
-                            value: 'subject code',
+                            value:
+                                '${attendantController.attendantScreenData.value.classScheduleSubjectData?.subjectCode}',
                           ),
                         ),
                       ],
@@ -163,21 +179,21 @@ class AttendantScreen extends StatelessWidget {
                             ),
                           ),
                           if (attendantController.checkInAndOutHistoryResult
-                                  .value.checkInAndOutHistoryData !=
+                                  .value.checkInAndOutHistoryDataList !=
                               null)
                             Expanded(
                               child: ListView.builder(
                                 itemCount: attendantController
                                     .checkInAndOutHistoryResult
                                     .value
-                                    .checkInAndOutHistoryData
+                                    .checkInAndOutHistoryDataList
                                     ?.length,
                                 itemBuilder: (context, index) {
                                   var checkInAndOutHistoryDataItem =
                                       attendantController
                                           .checkInAndOutHistoryResult
                                           .value
-                                          .checkInAndOutHistoryData?[index];
+                                          .checkInAndOutHistoryDataList?[index];
                                   if (checkInAndOutHistoryDataItem == null) {
                                     return const SizedBox();
                                   }
@@ -188,7 +204,7 @@ class AttendantScreen extends StatelessWidget {
                                         (attendantController
                                                     .checkInAndOutHistoryResult
                                                     .value
-                                                    .checkInAndOutHistoryData
+                                                    .checkInAndOutHistoryDataList
                                                     ?.length ??
                                                 0) -
                                             1,
@@ -227,9 +243,9 @@ class AttendantItemWidget extends StatelessWidget {
     if (item.status == null) {
       time = '';
     } else if (item.status?.toLowerCase() == 'in') {
-      time = '${item.fromTime}';
+      time = '${item.checkInDate}';
     } else if (item.status?.toLowerCase() == 'out') {
-      time = '${item.toTime}';
+      time = '${item.checkOutDate}';
     }
     return Container(
       margin: EdgeInsets.only(
@@ -268,7 +284,7 @@ class AttendantItemWidget extends StatelessWidget {
               SizedBox(
                 width: remainingWidth,
                 child: Text(
-                  item.subject ?? '',
+                  item.subjectId ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         color: AppColor.textSecondaryColor,
@@ -282,7 +298,7 @@ class AttendantItemWidget extends StatelessWidget {
                   SizedBox(
                     width: (remainingWidth * 0.5) - 2,
                     child: Text(
-                      'Date: ${item.date}',
+                      'Date: $time',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppColor.textSecondaryColor,
                             fontWeight: FontWeight.bold,

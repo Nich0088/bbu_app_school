@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
+import 'package:school_app/src/modules/user_dashboard/model/attendant_screen_data.dart';
 import 'package:school_app/src/modules/user_dashboard/model/class_schedule_subject_result.dart';
 
 import '../../../common/app_setting.dart';
@@ -159,7 +161,13 @@ class StudentClassDetailScreen extends StatelessWidget {
                                       0) -
                                   1,
                           onClick: () {
-                            //
+                            context.push(
+                              AppScreen.attendantScreen.path,
+                              extra: AttendantScreenData(
+                                studentId: classScheduleData?.studentId,
+                                classScheduleSubjectData: item,
+                              ),
+                            );
                           },
                         );
                       },
