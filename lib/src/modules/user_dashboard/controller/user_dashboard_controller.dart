@@ -116,22 +116,22 @@ class UserDashboardController extends BaseGetXController {
         _selectedUniversityBranch == null) return;
 
     String urlString = '${ApiEndpoint.webBaseUrl}${ApiEndpoint.scheduleLink}';
-    debugPrint(urlString);
-
     var url = Uri.parse(urlString);
+    var requestBody = jsonEncode({
+      "branchId": _selectedUniversityBranch?.branchId,
+      "branchShortName": _selectedUniversityBranch?.shortName,
+      "scheduleId": scheduleCodeTextEditingController.value.text,
+      "studentId": _selectedStudentIdClassTab,
+    });
+    debugPrint(
+        "Grogu --> urlString = $urlString <==> requestBody = $requestBody}");
     setLoadingState(true);
-
     var response = await http.post(
       url,
       headers: {
         "Content-Type": "application/json",
       },
-      body: jsonEncode({
-        "branchId": _selectedUniversityBranch?.branchId,
-        "branchShortName": _selectedUniversityBranch?.shortName,
-        "scheduleId": scheduleCodeTextEditingController.value.text,
-        "studentId": _selectedStudentIdClassTab,
-      }),
+      body: requestBody,
     );
     debugPrint('Grogu --> status code =  ${response.statusCode}');
     debugPrint('Grogu --> body = ${response.body}');

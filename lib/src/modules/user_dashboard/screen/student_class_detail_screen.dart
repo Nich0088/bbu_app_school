@@ -108,7 +108,7 @@ class StudentClassDetailScreen extends StatelessWidget {
                           width:
                               (MediaQuery.of(context).size.width - 176) * 0.4,
                           child: Text(
-                            AppDateFormatter.formatDate(
+                            AppDateFormatter.formatDateWithLocalTimeZone(
                               pattern: AppDateFormatter.monthCommaDateYear,
                               dateString:
                                   classScheduleData?.startDate?.split('T')[0],

@@ -82,7 +82,7 @@ class ScheduleItemWidget extends StatelessWidget {
               SizedBox(
                 width: (MediaQuery.of(context).size.width - 176) * 0.4,
                 child: Text(
-                  AppDateFormatter.formatDate(
+                  AppDateFormatter.formatDateWithLocalTimeZone(
                     pattern: AppDateFormatter.monthCommaDateYear,
                     dateString: item.startDate?.split('T')[0],
                   ),

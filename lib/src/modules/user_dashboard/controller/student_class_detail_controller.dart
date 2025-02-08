@@ -7,6 +7,8 @@ import 'package:school_app/src/common/base_get_x_controller.dart';
 import 'package:school_app/src/modules/user_dashboard/model/class_schedule_subject_result.dart';
 
 import '../../../common/api_endpoint.dart';
+import '../../../common/helpers/local_storage.dart';
+import '../../create_user_with_branch/model/university_branch_result.dart';
 
 class StudentClassDetailController extends BaseGetXController {
   var classScheduleSubjectResult = ClassScheduleSubjectResult().obs;
@@ -19,6 +21,16 @@ class StudentClassDetailController extends BaseGetXController {
         scheduleId.isEmpty == true ||
         studentId == null ||
         studentId.isEmpty == true) return;
+
+    String? universityBranchDataString = await LocalStorage.getStringValue(
+        key: LocalStorage.universityBranchData);
+    if (universityBranchDataString == null) return;
+    var universityBranchData =
+        UniversityBranchData.fromJson(jsonDecode(universityBranchDataString));
+
+    if (universityBranchData.branchId == null ||
+        universityBranchData.shortName == null) return;
+
     String urlString =
         '${ApiEndpoint.webBaseUrl}${ApiEndpoint.classSubjectList}';
     debugPrint(urlString);
@@ -32,6 +44,8 @@ class StudentClassDetailController extends BaseGetXController {
         "Content-Type": "application/json",
       },
       body: jsonEncode({
+        "branchId": universityBranchData.branchId?.toString(),
+        "branchShortName": universityBranchData.shortName,
         "scheduleId": scheduleId,
         "studentId": studentId,
       }),
@@ -44,8 +58,7 @@ class StudentClassDetailController extends BaseGetXController {
 
     classScheduleSubjectResult.value =
         ClassScheduleSubjectResult.fromJson(jsonDecode(response.body));
-    debugPrint(
-        'Grogu --> parse = ${jsonEncode(classScheduleSubjectResult.value)}');
+
     if (response.statusCode != 200) {
       appDialogHelper?.showErrorDialog(
         errorMessage:

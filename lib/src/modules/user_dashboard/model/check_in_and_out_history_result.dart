@@ -81,7 +81,7 @@ class CheckInAndOutHistoryData {
   @JsonKey(name: 'parentId')
   final int? parentId;
   @JsonKey(name: 'checkOut')
-  final dynamic checkOut;
+  final CheckInAndOutHistoryData? checkOut;
 
   factory CheckInAndOutHistoryData.fromJson(Map<String, dynamic> json) =>
       _$CheckInAndOutHistoryDataFromJson(json);

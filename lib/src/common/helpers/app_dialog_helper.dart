@@ -69,7 +69,7 @@ class AppDialogHelper {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SvgPicture.asset(
-                  "assets/success_vector.svg",
+                  "assets/attendant/success_vector.svg",
                   height: 96,
                 ),
                 const SizedBox(height: 12),
@@ -77,7 +77,7 @@ class AppDialogHelper {
                   message,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppColor.textPrimaryColor,
+                        color: AppColor.textSecondaryColor,
                       ),
                 ),
                 const SizedBox(height: 24),

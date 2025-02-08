@@ -47,7 +47,10 @@ CheckInAndOutHistoryData _$CheckInAndOutHistoryDataFromJson(
       latitude: json['latitude'],
       longitude: json['longitude'],
       parentId: (json['parentId'] as num?)?.toInt(),
-      checkOut: json['checkOut'],
+      checkOut: json['checkOut'] == null
+          ? null
+          : CheckInAndOutHistoryData.fromJson(
+              json['checkOut'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CheckInAndOutHistoryDataToJson(
