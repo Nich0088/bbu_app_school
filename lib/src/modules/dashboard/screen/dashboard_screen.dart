@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/main.dart';
 import 'package:school_app/src/common/app_setting.dart';
+import 'package:school_app/src/common/helpers/app_date_formatter.dart';
 import 'package:school_app/src/common/widgets/loading_container_widget.dart';
 import 'package:school_app/src/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
@@ -171,9 +172,9 @@ class DashboardScreen extends StatelessWidget {
                             '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              // color: AppColor.textSecondaryColor,
                               color: Colors.black,
                               fontSize: 16.0,
+                              fontFamily: AppFontFamily.khmerFontFamily,
                             ),
                       ),
                     ],
@@ -255,10 +256,14 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       const SizedBox(width: 14),
                       Text(
-                        dashboardController.userProfileData.value.dob ?? '',
+                        AppDateFormatter.formatDateWithLocalTimeZone(
+                              pattern: AppDateFormatter.monthCommaDateYear,
+                              dateString:
+                                  dashboardController.userProfileData.value.dob,
+                            ) ??
+                            '',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              // color: AppColor.textSecondaryColor,
                               color: Colors.black,
                               fontSize: 16.0,
                             ),
@@ -756,7 +761,7 @@ class DashboardScreen extends StatelessWidget {
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Colors.black,
-                                    fontFamily: "notoSansKhmer",
+                                    fontFamily: AppFontFamily.khmerFontFamily,
                                   ),
                         ),
                         const Spacer(),
@@ -811,7 +816,7 @@ class DashboardScreen extends StatelessWidget {
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Colors.black,
-                                    fontFamily: "sourceSansThree",
+                                    fontFamily: AppFontFamily.englishFontFamily,
                                   ),
                         ),
                         const Spacer(),

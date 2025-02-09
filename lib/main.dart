@@ -212,8 +212,8 @@ class MyApp extends StatelessWidget {
         fontFamily:
             Language.getLanguage(languageKey: context.locale.languageCode) ==
                     Language.english
-                ? 'sourceSansThree'
-                : 'notoSansKhmer',
+                ? AppFontFamily.englishFontFamily
+                : AppFontFamily.khmerFontFamily,
         appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(color: AppColor.textPrimaryColor),
           backgroundColor: Colors.white,

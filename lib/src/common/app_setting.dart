@@ -33,3 +33,8 @@ class AppStyle {
   static const double borderRadius = 12;
   static const double horizontalPadding = 20;
 }
+
+class AppFontFamily {
+  static const englishFontFamily = "sourceSansThree";
+  static const khmerFontFamily = "notoSansKhmer";
+}

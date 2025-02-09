@@ -51,9 +51,9 @@ class StudyItemWidget extends StatelessWidget {
                   color: Colors.black,
                   fontFamily: (() {
                     if (item.isFixedEnglishLanguage) {
-                      return 'sourceSansThree';
+                      return AppFontFamily.englishFontFamily;
                     } else if (item.isFixedKhmerLanguage) {
-                      return 'notoSansKhmer';
+                      return AppFontFamily.khmerFontFamily;
                     }
                   }())), // if both condition is false then it will depend on the app selected language
             ),
