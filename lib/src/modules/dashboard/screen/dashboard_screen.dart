@@ -410,9 +410,12 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       TextButton(
                         onPressed: () {
-                          _logOutUser(action: () {
-                            context.go(AppScreen.splashScreen.path);
-                          });
+                          _logOutUser(
+                            action: () {
+                              Get.delete<DashboardController>();
+                              context.go(AppScreen.splashScreen.path);
+                            },
+                          );
                         },
                         child: Text(
                           "Logout",

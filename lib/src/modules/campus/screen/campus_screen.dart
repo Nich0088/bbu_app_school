@@ -73,19 +73,17 @@ class CampusItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       margin: EdgeInsets.only(
         top: 20,
         left: 20,
         right: 20,
         bottom: isLastItem ? 20 : 0,
       ),
-      decoration: BoxDecoration(
-        color: AppColor.cardColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        boxShadow: [
-          AppStyle.boxShadow,
-        ],
+      color: AppColor.cardColor,
+      elevation: 4,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         children: [
