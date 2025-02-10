@@ -4,16 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:injectable/injectable.dart';
 import 'package:school_app/src/modules/location/model/campus_location.dart';
 
 import '../../../common/api_endpoint.dart';
 import '../../../common/helpers/app_dialog_helper.dart';
 
 class LocationController extends GetxController {
-  @factoryMethod
-  static init() => Get.put(LocationController());
-
   RxSet<Marker> campusLocationMarkers = <Marker>{}.obs;
   var isShowLoading = false;
   AppDialogHelper? _appDialogHelper;
