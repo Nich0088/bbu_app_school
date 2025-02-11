@@ -46,7 +46,7 @@ class _ContactScreenState extends State<ContactScreen>
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "Contact",
         onPressedBack: () {
           context.pop();

@@ -40,7 +40,7 @@ class _CreateUserWithBranchScreenState
           appBar: CustomAppBar(
             context,
             backgroundColor: AppColor.primaryColor,
-            isDashboardAppBar: false,
+            appBarType: AppBarType.generalType,
             title: "Create",
             isCenterTitle: true,
             onPressedBack: () {

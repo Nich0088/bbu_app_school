@@ -57,7 +57,7 @@ class _FAQPageState extends State<FaqScreen> {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "FAQ",
         colorTitle: Colors.white,
         isCenterTitle: true,

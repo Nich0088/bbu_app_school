@@ -8,110 +8,175 @@ import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/core/auth/login/model/login_result.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item.dart';
-import 'package:school_app/src/modules/dashboard/models/home_grid_item_type.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/message_item.dart';
 import 'package:school_app/src/modules/dashboard/models/slide_banner.dart';
+import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 
 import '../../../common/api_endpoint.dart';
 import '../../../common/helpers/app_dialog_helper.dart';
+import '../../create_user_with_branch/model/user_type_result.dart';
+import '../models/home_grid_item_type.dart';
 
 class DashboardController extends GetxController {
   @factoryMethod
   static init() => Get.put(DashboardController());
 
-  List<HomeGridItem> get homeGridItemList => [
-        HomeGridItem(
-          0,
-          "For Enrollment",
-          "assets/dashboard/enrollment.png",
-          HomeGridItemType.forEnrollment,
-        ),
-        HomeGridItem(
-          1,
-          "Campus",
-          "assets/dashboard/campus.png",
-          HomeGridItemType.campus,
-        ),
-        HomeGridItem(
-          2,
-          "Check In",
-          "assets/dashboard/checkIn.png",
-          HomeGridItemType.checkIn,
-        ),
-        HomeGridItem(
-          3,
-          "Events",
-          "assets/dashboard/events.png",
-          HomeGridItemType.event,
-        ),
-        HomeGridItem(
-          4,
-          "Location",
-          "assets/dashboard/location.png",
-          HomeGridItemType.location,
-        ),
-        // HomeGridItem(
-        //   5,
-        //   "Attendant",
-        //   "assets/dashboard/attendance.png",
-        //   HomeGridItemType.attendant,
-        // ),
-        HomeGridItem(
-          6,
-          "Contact",
-          "assets/dashboard/contact.png",
-          HomeGridItemType.contact,
-        ),
-        HomeGridItem(
-          7,
-          "Calendar",
-          "assets/dashboard/calendar.png",
-          HomeGridItemType.calendar,
-        ),
-        HomeGridItem(
-          8,
-          "Billing",
-          "assets/dashboard/billing.png",
-          HomeGridItemType.billing,
-        ),
-        HomeGridItem(
-          11,
-          "Study",
-          "assets/dashboard/study.png",
-          HomeGridItemType.study,
-        ),
-        HomeGridItem(
-          9,
-          "Video",
-          "assets/dashboard/video.png",
-          HomeGridItemType.video,
-        ),
-        HomeGridItem(
-          10,
-          "About Us",
-          "assets/dashboard/aboutUs.png",
-          HomeGridItemType.aboutUs,
-        ),
-        HomeGridItem(
-          12,
-          "Apply",
-          "assets/dashboard/apply.png",
-          HomeGridItemType.apply,
-        ),
-        HomeGridItem(
-          13,
-          "Scholarship",
-          "assets/dashboard/scholarship.png",
-          HomeGridItemType.scholarship,
-        ),
-        HomeGridItem(
-          14,
-          "FAQ",
-          "assets/dashboard/faq.png",
-          HomeGridItemType.faq,
-        ),
-      ];
+  final List<HomeGridItem> _studentAndTeacherHomeGridItemList = [
+    HomeGridItem(
+      0,
+      "For Enrollment",
+      "assets/dashboard/enrollment.png",
+      HomeGridItemType.forEnrollment,
+    ),
+    HomeGridItem(
+      1,
+      "Campus",
+      "assets/dashboard/campus.png",
+      HomeGridItemType.campus,
+    ),
+    HomeGridItem(
+      2,
+      "Check In",
+      "assets/dashboard/checkIn.png",
+      HomeGridItemType.checkIn,
+    ),
+    HomeGridItem(
+      3,
+      "Events",
+      "assets/dashboard/events.png",
+      HomeGridItemType.event,
+    ),
+    HomeGridItem(
+      4,
+      "Location",
+      "assets/dashboard/location.png",
+      HomeGridItemType.location,
+    ),
+    HomeGridItem(
+      6,
+      "Contact",
+      "assets/dashboard/contact.png",
+      HomeGridItemType.contact,
+    ),
+    HomeGridItem(
+      7,
+      "Calendar",
+      "assets/dashboard/calendar.png",
+      HomeGridItemType.calendar,
+    ),
+    HomeGridItem(
+      8,
+      "Billing",
+      "assets/dashboard/billing.png",
+      HomeGridItemType.billing,
+    ),
+    HomeGridItem(
+      11,
+      "Study",
+      "assets/dashboard/study.png",
+      HomeGridItemType.study,
+    ),
+    HomeGridItem(
+      9,
+      "Video",
+      "assets/dashboard/video.png",
+      HomeGridItemType.video,
+    ),
+    HomeGridItem(
+      10,
+      "About Us",
+      "assets/dashboard/aboutUs.png",
+      HomeGridItemType.aboutUs,
+    ),
+    HomeGridItem(
+      12,
+      "Apply",
+      "assets/dashboard/apply.png",
+      HomeGridItemType.apply,
+    ),
+    HomeGridItem(
+      13,
+      "Scholarship",
+      "assets/dashboard/scholarship.png",
+      HomeGridItemType.scholarship,
+    ),
+    HomeGridItem(
+      14,
+      "FAQ",
+      "assets/dashboard/faq.png",
+      HomeGridItemType.faq,
+    ),
+  ];
+
+  final List<HomeGridItem> _guestHomeGridItemList = [
+    HomeGridItem(
+      0,
+      "For Enrollment",
+      "assets/dashboard/enrollment.png",
+      HomeGridItemType.forEnrollment,
+    ),
+    HomeGridItem(
+      4,
+      "Location",
+      "assets/dashboard/location.png",
+      HomeGridItemType.location,
+    ),
+    HomeGridItem(
+      9,
+      "Video",
+      "assets/dashboard/video.png",
+      HomeGridItemType.video,
+    ),
+    HomeGridItem(
+      1,
+      "Campus",
+      "assets/dashboard/campus.png",
+      HomeGridItemType.campus,
+    ),
+    HomeGridItem(
+      6,
+      "Contact",
+      "assets/dashboard/contact.png",
+      HomeGridItemType.contact,
+    ),
+    HomeGridItem(
+      10,
+      "About Us",
+      "assets/dashboard/aboutUs.png",
+      HomeGridItemType.aboutUs,
+    ),
+    HomeGridItem(
+      3,
+      "Events",
+      "assets/dashboard/events.png",
+      HomeGridItemType.event,
+    ),
+    HomeGridItem(
+      7,
+      "Calendar",
+      "assets/dashboard/calendar.png",
+      HomeGridItemType.calendar,
+    ),
+    HomeGridItem(
+      12,
+      "Apply",
+      "assets/dashboard/apply.png",
+      HomeGridItemType.apply,
+    ),
+    HomeGridItem(
+      13,
+      "Scholarship",
+      "assets/dashboard/scholarship.png",
+      HomeGridItemType.scholarship,
+    ),
+    HomeGridItem(
+      14,
+      "FAQ",
+      "assets/dashboard/faq.png",
+      HomeGridItemType.faq,
+    ),
+  ];
 
   List<CertificateFormatItem> get certificateFormatList => [
         CertificateFormatItem(
@@ -159,9 +224,11 @@ class DashboardController extends GetxController {
         )
       ];
 
+  var homeGridItemList = <HomeGridItem>[].obs;
   var selectedLanguage = Language.english.obs;
   var slideBannerList = SlideBanner().obs;
   var userProfileData = LoginResultData().obs;
+  var userTypeData = UserTypeData().obs;
   var isShowLoading = false;
   AppDialogHelper? _appDialogHelper;
 
@@ -170,10 +237,21 @@ class DashboardController extends GetxController {
     super.onInit();
     await _getBannerList();
     await _getUserProfileData();
+
+    String? userTypeDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
+    if (userTypeDataString == null) return;
+    userTypeData.value = UserTypeData.fromJson(jsonDecode(userTypeDataString));
   }
 
   void register(BuildContext context) {
     _appDialogHelper = AppDialogHelper(context: context);
+  }
+
+  void initializeHomeGridItemList(UserType? userType) {
+    homeGridItemList.value = userType == UserType.loggedInUser
+        ? _studentAndTeacherHomeGridItemList
+        : _guestHomeGridItemList;
   }
 
   void setSelectedLanguage(Language language) {
@@ -182,15 +260,16 @@ class DashboardController extends GetxController {
 
   Future<void> _getBannerList() async {
     String urlString = ApiEndpoint.unAuthorizeBastUrl + ApiEndpoint.bannerList;
-    debugPrint("$urlString");
+    debugPrint(urlString);
     var url = Uri.parse(urlString);
-    // _setLoadingState(true);
+    _setLoadingState(true);
     var response = await http.post(
       url,
       headers: {
         "Content-Type": "application/json",
       },
     );
+    _setLoadingState(false);
     if (response.statusCode == 200) {
       slideBannerList.value = SlideBanner.fromJson(jsonDecode(response.body));
     } else {
@@ -199,7 +278,6 @@ class DashboardController extends GetxController {
         errorCode: '',
       );
     }
-    _setLoadingState(false);
   }
 
   Future<void> logOut() async {

@@ -4,8 +4,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/modules/event/models/event_new_data.dart';
 
-import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 
 class EventDetailScreen extends StatelessWidget {
   const EventDetailScreen({super.key, this.eventData});
@@ -23,7 +23,7 @@ class EventDetailScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "Detail news & Event",
         isCenterTitle: true,
         onPressedBack: () {

@@ -5,6 +5,7 @@ import 'package:school_app/main.dart';
 import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/common/widgets/custom_button.dart';
 import 'package:school_app/src/common/widgets/loading_scaffold_widget.dart';
+import 'package:school_app/src/modules/create_user_with_branch/model/user_type_result.dart';
 import 'package:school_app/src/modules/user_dashboard/controller/user_dashboard_controller.dart';
 import 'package:school_app/src/modules/user_dashboard/model/class_schedule_result.dart';
 
@@ -17,7 +18,9 @@ import '../../../common/widgets/user_dashboard/study_item_widget.dart';
 import '../../../common/widgets/user_dashboard/study_result_item_widget.dart';
 
 class UserDashboardScreen extends StatefulWidget {
-  const UserDashboardScreen({super.key});
+  const UserDashboardScreen({super.key, this.userTypeData});
+
+  final UserTypeData? userTypeData;
 
   @override
   State<UserDashboardScreen> createState() => _UserDashboardScreenState();
@@ -35,7 +38,11 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(
+      length:
+          widget.userTypeData?.usertypeName?.toLowerCase() == 'student' ? 4 : 3,
+      vsync: this,
+    );
 
     _tabController.addListener(() async {
       if (_tabController.indexIsChanging) {
@@ -70,7 +77,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
           appBar: CustomAppBar(
             context,
             backgroundColor: AppColor.primaryColor,
-            isDashboardAppBar: false,
+            appBarType: AppBarType.generalType,
             title: "User Dashboard",
             isCenterTitle: true,
             onPressedBack: () {
@@ -83,17 +90,19 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
               indicatorColor: const Color(0xCCE25425),
               indicatorSize: TabBarIndicatorSize.tab,
               unselectedLabelColor: AppColor.textPrimaryColor.withOpacity(0.3),
-              tabs: const [
-                Tab(
+              tabs: [
+                const Tab(
                   text: "Study",
                 ),
-                Tab(
-                  text: "Result",
-                ),
-                Tab(
+                if (widget.userTypeData?.usertypeName?.toLowerCase() ==
+                    'student')
+                  const Tab(
+                    text: "Result",
+                  ),
+                const Tab(
                   text: "Class",
                 ),
-                Tab(
+                const Tab(
                   text: "Chat",
                 ),
               ],

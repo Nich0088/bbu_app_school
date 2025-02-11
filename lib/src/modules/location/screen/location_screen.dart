@@ -33,7 +33,7 @@ class _LocationScreenState extends State<LocationScreen> {
         appBar: CustomAppBar(
           context,
           backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: false,
+          appBarType: AppBarType.generalType,
           title: "Location",
           isCenterTitle: true,
           onPressedBack: () {

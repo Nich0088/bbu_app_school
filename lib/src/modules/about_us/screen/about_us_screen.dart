@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/app_setting.dart';
+import '../../../common/widgets/custom_app_bar.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -13,7 +13,7 @@ class AboutUsScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "About Us",
         isCenterTitle: true,
         onPressedBack: () {

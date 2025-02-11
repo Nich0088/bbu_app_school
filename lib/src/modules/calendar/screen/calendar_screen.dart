@@ -125,7 +125,7 @@ class _NewCalendarScreenState extends State<CalendarScreen>
         appBar: CustomAppBar(
           context,
           backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: false,
+          appBarType: AppBarType.generalType,
           title: "Calendar",
           isCenterTitle: true,
           onPressedBack: () {

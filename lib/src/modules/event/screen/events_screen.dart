@@ -24,7 +24,7 @@ class _EventsScreenState extends State<EventsScreen> {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "Events",
         isCenterTitle: true,
         onPressedBack: () {

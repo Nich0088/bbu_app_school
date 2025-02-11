@@ -17,7 +17,7 @@ class ScholarshipScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "Scholarship",
         isCenterTitle: true,
         onPressedBack: () {

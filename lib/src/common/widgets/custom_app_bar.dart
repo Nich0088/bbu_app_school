@@ -6,7 +6,7 @@ import 'package:school_app/src/common/app_setting.dart';
 PreferredSizeWidget CustomAppBar(
   BuildContext context, {
   double elevation = 0.0,
-  bool isDashboardAppBar = false,
+  AppBarType appBarType = AppBarType.generalType,
   bool isDarkStatusBar = false,
   bool isCenterTitle = false,
   Color iconColor = Colors.white,
@@ -27,7 +27,7 @@ PreferredSizeWidget CustomAppBar(
     elevation: elevation,
     automaticallyImplyLeading: automaticallyImplyLeading,
     leading: (() {
-      if (isDashboardAppBar == false) {
+      if (appBarType == AppBarType.generalType) {
         return IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
@@ -40,55 +40,63 @@ PreferredSizeWidget CustomAppBar(
       }
     }()),
     title: (() {
-      if (isDashboardAppBar) {
-        return GestureDetector(
-          onTap: () {
-            onViewProfile?.call();
-          },
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 3,
-              ),
-              ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
+      switch (appBarType) {
+        case AppBarType.guestType:
+          return Image.asset(
+            "assets/dashboard/guest_school_logo.jpg",
+            width: MediaQuery.of(context).size.width * 0.35,
+            height: 50,
+            alignment: Alignment.centerLeft,
+          );
+        case AppBarType.loggedInType:
+          return GestureDetector(
+            onTap: () {
+              onViewProfile?.call();
+            },
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 3,
                 ),
-              ),
-              const SizedBox(
-                width: AppStyle.horizontalPadding,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    username,
-                    style: Theme.of(context).textTheme.bodyLarge,
+                ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
                   ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    "View Profile >",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      } else if (title.isNotEmpty) {
-        return Text(
-          title,
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium
-              ?.copyWith(color: colorTitle),
-        );
+                ),
+                const SizedBox(
+                  width: AppStyle.horizontalPadding,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      username,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      "View Profile >",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        case AppBarType.generalType:
+          return Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(color: colorTitle),
+          );
       }
     }()),
     centerTitle: isCenterTitle,
@@ -97,7 +105,8 @@ PreferredSizeWidget CustomAppBar(
           isDarkStatusBar == true ? Brightness.light : Brightness.dark,
     ),
     actions: [
-      if (isDashboardAppBar == true)
+      if (appBarType == AppBarType.loggedInType ||
+          appBarType == AppBarType.guestType)
         IconButton(
           icon: Icon(
             Icons.notifications_none_outlined,
@@ -107,7 +116,8 @@ PreferredSizeWidget CustomAppBar(
             onNotificationPressed?.call();
           },
         ),
-      if (isDashboardAppBar == true)
+      if (appBarType == AppBarType.loggedInType ||
+          appBarType == AppBarType.guestType)
         IconButton(
           icon: Icon(
             Icons.language,
@@ -124,3 +134,5 @@ PreferredSizeWidget CustomAppBar(
     bottom: bottom,
   );
 }
+
+enum AppBarType { guestType, loggedInType, generalType }

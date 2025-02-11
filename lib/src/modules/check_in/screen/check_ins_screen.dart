@@ -18,7 +18,7 @@ class CheckInsScreen extends StatelessWidget {
       appBar: CustomAppBar(
         context,
         backgroundColor: AppColor.primaryColor,
-        isDashboardAppBar: false,
+        appBarType: AppBarType.generalType,
         title: "Check In",
         isCenterTitle: true,
         onPressedBack: () {

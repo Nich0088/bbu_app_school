@@ -24,7 +24,7 @@ class CampusScreen extends StatelessWidget {
         appBar: CustomAppBar(
           context,
           backgroundColor: AppColor.primaryColor,
-          isDashboardAppBar: false,
+          appBarType: AppBarType.generalType,
           title: "Campus",
           isCenterTitle: true,
           onPressedBack: () {

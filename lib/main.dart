@@ -12,6 +12,7 @@ import 'package:school_app/src/modules/calendar/screen/calendar_screen.dart';
 import 'package:school_app/src/modules/campus/screen/campus_screen.dart';
 import 'package:school_app/src/modules/check_in/screen/check_ins_screen.dart';
 import 'package:school_app/src/modules/contact/screen/contact_screen.dart';
+import 'package:school_app/src/modules/create_user_with_branch/model/user_type_result.dart';
 import 'package:school_app/src/modules/create_user_with_branch/screen/create_user_with_branch_screen.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 import 'package:school_app/src/modules/dashboard/models/language.dart';
@@ -95,10 +96,6 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const LocationScreen(),
     ),
     GoRoute(
-      path: AppScreen.userDashboardScreen.path,
-      builder: (context, state) => const UserDashboardScreen(),
-    ),
-    GoRoute(
       path: AppScreen.registrationApplicationScreen.path,
       builder: (context, state) => const RegistrationApplicationScreen(),
     ),
@@ -162,6 +159,15 @@ final GoRouter _goRouter = GoRouter(
             state.extra as CertificateFormatItem?;
         return CertificateFormatScreen(
           certificateFormatItem: certificateFormatItem,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppScreen.userDashboardScreen.path,
+      builder: (context, state) {
+        UserTypeData? userTypeData = state.extra as UserTypeData?;
+        return UserDashboardScreen(
+          userTypeData: userTypeData,
         );
       },
     ),

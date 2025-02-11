@@ -48,7 +48,7 @@ class StudentClassDetailScreen extends StatelessWidget {
           appBar: CustomAppBar(
             context,
             backgroundColor: AppColor.primaryColor,
-            isDashboardAppBar: false,
+            appBarType: AppBarType.generalType,
             title: "Student class detail",
             isCenterTitle: true,
             onPressedBack: () {
