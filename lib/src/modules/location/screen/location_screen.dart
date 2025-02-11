@@ -7,6 +7,7 @@ import '../../../common/app_setting.dart';
 import '../../../common/widgets/custom_app_bar.dart';
 import '../../../common/widgets/loading_scaffold_widget.dart';
 import '../controller/location_controller.dart';
+import '../model/campus_location.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -22,6 +23,32 @@ class _LocationScreenState extends State<LocationScreen> {
     zoom: 18,
   );
   late GoogleMapController _googleMapController;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeMarker();
+  }
+
+  Future<void> _initializeMarker() async {
+    await _locationController.getCampusLocation().then(
+      (campusLocation) async {
+        List<CampusLocationData>? listOfCampusLocation =
+            campusLocation?.location;
+        if (listOfCampusLocation != null) {
+          await _locationController.generateMarkers(listOfCampusLocation).then(
+            (value) {
+              LatLngBounds? bounds = _locationController.getBoundToFitMarkers();
+              if (bounds != null) {
+                _googleMapController
+                    .animateCamera(CameraUpdate.newLatLngBounds(bounds, 20));
+              }
+            },
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

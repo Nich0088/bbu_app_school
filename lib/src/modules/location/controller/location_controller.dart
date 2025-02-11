@@ -11,6 +11,7 @@ import '../../../common/helpers/app_dialog_helper.dart';
 
 class LocationController extends GetxController {
   RxSet<Marker> campusLocationMarkers = <Marker>{}.obs;
+  var listOfCampusLatLng = <LatLng>[].obs;
   var isShowLoading = false;
   AppDialogHelper? _appDialogHelper;
 
@@ -18,25 +19,10 @@ class LocationController extends GetxController {
     _appDialogHelper = AppDialogHelper(context: context);
   }
 
-  @override
-  void onInit() async {
-    super.onInit();
-    await _getCampusLocation().then(
-      (campusLocation) async {
-        List<CampusLocationData>? listOfCampusLocation =
-            campusLocation?.location;
-        if (listOfCampusLocation != null) {
-          campusLocationMarkers.value =
-              await _generateMarkers(listOfCampusLocation);
-        }
-      },
-    );
-  }
-
-  Future<CampusLocation?> _getCampusLocation() async {
+  Future<CampusLocation?> getCampusLocation() async {
     String urlString =
         ApiEndpoint.unAuthorizeBastUrl + ApiEndpoint.viewLocation;
-    debugPrint("$urlString");
+    debugPrint(urlString);
     var url = Uri.parse(urlString);
     _setLoadingState(true);
     var response = await http.post(
@@ -62,7 +48,7 @@ class LocationController extends GetxController {
     update();
   }
 
-  Future<Set<Marker>> _generateMarkers(
+  Future<void> generateMarkers(
       List<CampusLocationData> campusLocationList) async {
     Set<Marker> markers = {};
     for (var campusLocation in campusLocationList) {
@@ -74,13 +60,15 @@ class LocationController extends GetxController {
       String? longitude = campusLocation.longitude;
 
       if (latitude != null && longitude != null) {
+        LatLng latLng = LatLng(
+          double.parse(latitude),
+          double.parse(longitude),
+        );
+        listOfCampusLatLng.add(latLng);
         markers.add(
           Marker(
             markerId: MarkerId('marker_${campusLocation.campus ?? ''}'),
-            position: LatLng(
-              double.parse(latitude),
-              double.parse(longitude),
-            ),
+            position: latLng,
             icon: markerIcon,
             infoWindow: InfoWindow(
               title: campusLocation.campus,
@@ -90,6 +78,31 @@ class LocationController extends GetxController {
       }
     }
 
-    return markers;
+    campusLocationMarkers.value = markers;
+  }
+
+  LatLngBounds? getBoundToFitMarkers() {
+    if (listOfCampusLatLng.isEmpty) return null;
+
+    return _getBoundsFromMarkers(listOfCampusLatLng);
+  }
+
+  LatLngBounds _getBoundsFromMarkers(List<LatLng> listOfLatLng) {
+    double southWestLat = listOfLatLng.first.latitude;
+    double southWestLng = listOfLatLng.first.longitude;
+    double northEastLat = listOfLatLng.first.latitude;
+    double northEastLng = listOfLatLng.first.longitude;
+
+    for (LatLng marker in listOfLatLng) {
+      if (marker.latitude < southWestLat) southWestLat = marker.latitude;
+      if (marker.longitude < southWestLng) southWestLng = marker.longitude;
+      if (marker.latitude > northEastLat) northEastLat = marker.latitude;
+      if (marker.longitude > northEastLng) northEastLng = marker.longitude;
+    }
+
+    return LatLngBounds(
+      southwest: LatLng(southWestLat, southWestLng),
+      northeast: LatLng(northEastLat, northEastLng),
+    );
   }
 }
