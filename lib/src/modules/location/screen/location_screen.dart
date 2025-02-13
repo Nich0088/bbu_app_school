@@ -41,7 +41,7 @@ class _LocationScreenState extends State<LocationScreen> {
               LatLngBounds? bounds = _locationController.getBoundToFitMarkers();
               if (bounds != null) {
                 _googleMapController
-                    .animateCamera(CameraUpdate.newLatLngBounds(bounds, 20));
+                    .animateCamera(CameraUpdate.newLatLngBounds(bounds, 32));
               }
             },
           );
