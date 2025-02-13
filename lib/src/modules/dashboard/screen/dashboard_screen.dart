@@ -466,6 +466,23 @@ class DashboardScreen extends StatelessWidget {
                             children: [
                               TextButton(
                                 onPressed: () {
+                                  context.push(
+                                      AppScreen.changePasswordScreen.path);
+                                },
+                                child: Text(
+                                  "Change Password",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.blue,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
                                   _logOutUser(
                                     action: () {
                                       Get.delete<DashboardController>();

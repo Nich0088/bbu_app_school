@@ -18,6 +18,7 @@ import 'package:school_app/src/modules/dashboard/models/certificate_format_item.
 import 'package:school_app/src/modules/dashboard/models/language.dart';
 import 'package:school_app/src/modules/dashboard/models/user_type.dart';
 import 'package:school_app/src/modules/dashboard/screen/certificate_format_screen.dart';
+import 'package:school_app/src/modules/dashboard/screen/change_password_screen.dart';
 import 'package:school_app/src/modules/dashboard/screen/dashboard_screen.dart';
 import 'package:school_app/src/modules/enrolment/register_step_one_screen.dart';
 import 'package:school_app/src/modules/event/models/event_new_data.dart';
@@ -128,6 +129,10 @@ final GoRouter _goRouter = GoRouter(
       builder: (context, state) => const CreateUserWithBranchScreen(),
     ),
     GoRoute(
+      path: AppScreen.changePasswordScreen.path,
+      builder: (context, state) => const ChangePasswordScreen(),
+    ),
+    GoRoute(
       path: AppScreen.eventDetailScreen.path,
       builder: (context, state) {
         final EventData? eventData = state.extra as EventData?;
@@ -196,6 +201,7 @@ enum AppScreen {
   createUserWithBranch("/create-user-with-branch"),
   studentClassDetailScreen("/student-class-detail-screen"),
   attendantScreen("/attendant-screen"),
+  changePasswordScreen("/change-password-screen"),
   faqScreen("/faq");
 
   final String path;
