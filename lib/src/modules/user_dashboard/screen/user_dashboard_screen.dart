@@ -111,7 +111,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
             controller: _tabController,
             children: [
               _studyTab(context),
-              _resultTab(),
+              if (widget.userTypeData?.usertypeName?.toLowerCase() == 'student')
+                _resultTab(),
               _classTab(),
               _chatTab(),
             ],
