@@ -9,11 +9,23 @@ import 'package:school_app/src/modules/user_dashboard/model/check_in_and_out_his
 import 'package:school_app/src/modules/user_dashboard/model/check_in_or_out_result.dart';
 
 import '../../../common/api_endpoint.dart';
+import '../../../common/helpers/local_storage.dart';
+import '../../create_user_with_branch/model/user_type_result.dart';
 import '../model/attendant_screen_data.dart';
 
 class AttendantController extends BaseGetXController {
   var attendantScreenData = AttendantScreenData().obs;
   var checkInAndOutList = <CheckInAndOutHistoryData>[].obs;
+  UserTypeData? _userTypeData;
+
+  @override
+  void onInit() async {
+    String? userTypeDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
+    if (userTypeDataString == null) return;
+    _userTypeData = UserTypeData.fromJson(jsonDecode(userTypeDataString));
+    super.onInit();
+  }
 
   void setAttendantScreenData(AttendantScreenData? attendantScreenData) async {
     if (attendantScreenData != null) {
@@ -38,7 +50,7 @@ class AttendantController extends BaseGetXController {
     }
 
     String urlString =
-        '${ApiEndpoint.webBaseUrl}${ApiEndpoint.checkInAndCheckOutHistoryList}';
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentClassCheckInAndCheckOutHistoryList : ApiEndpoint.teacherClassCheckInAndCheckOutHistoryList}';
     var requestBody = jsonEncode(
       {
         "scheduleId": scheduleId,
@@ -107,7 +119,7 @@ class AttendantController extends BaseGetXController {
     if (position == null) return;
 
     String urlString =
-        '${ApiEndpoint.webBaseUrl}${ApiEndpoint.classCheckInAndCheckOut}';
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentClassCheckInAndCheckOut : ApiEndpoint.teacherClassCheckInAndCheckOut}';
     debugPrint(urlString);
     var url = Uri.parse(urlString);
     setLoadingState(true);
@@ -163,7 +175,7 @@ class AttendantController extends BaseGetXController {
     if (position == null) return;
 
     String urlString =
-        '${ApiEndpoint.webBaseUrl}${ApiEndpoint.classCheckInAndCheckOut}';
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentClassCheckInAndCheckOut : ApiEndpoint.teacherClassCheckInAndCheckOut}';
     debugPrint(urlString);
     var url = Uri.parse(urlString);
     setLoadingState(true);

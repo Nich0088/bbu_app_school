@@ -9,18 +9,29 @@ import 'package:school_app/src/modules/user_dashboard/model/class_schedule_subje
 import '../../../common/api_endpoint.dart';
 import '../../../common/helpers/local_storage.dart';
 import '../../create_user_with_branch/model/university_branch_result.dart';
+import '../../create_user_with_branch/model/user_type_result.dart';
 
 class StudentClassDetailController extends BaseGetXController {
   var classScheduleSubjectResult = ClassScheduleSubjectResult().obs;
+  UserTypeData? _userTypeData;
+
+  @override
+  void onInit() async {
+    String? userTypeDataString =
+        await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
+    if (userTypeDataString == null) return;
+    _userTypeData = UserTypeData.fromJson(jsonDecode(userTypeDataString));
+    super.onInit();
+  }
 
   Future<void> getClassScheduleList({
     String? scheduleId,
-    String? studentId,
+    String? studentOrTeacherId,
   }) async {
     if (scheduleId == null ||
         scheduleId.isEmpty == true ||
-        studentId == null ||
-        studentId.isEmpty == true) return;
+        studentOrTeacherId == null ||
+        studentOrTeacherId.isEmpty == true) return;
 
     String? universityBranchDataString = await LocalStorage.getStringValue(
         key: LocalStorage.universityBranchData);
@@ -32,7 +43,7 @@ class StudentClassDetailController extends BaseGetXController {
         universityBranchData.shortName == null) return;
 
     String urlString =
-        '${ApiEndpoint.webBaseUrl}${ApiEndpoint.classSubjectList}';
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentClassSubjectList : ApiEndpoint.teacherClassSubjectList}';
     debugPrint(urlString);
 
     var url = Uri.parse(urlString);
@@ -47,7 +58,7 @@ class StudentClassDetailController extends BaseGetXController {
         "branchId": universityBranchData.branchId?.toString(),
         "branchShortName": universityBranchData.shortName,
         "scheduleId": scheduleId,
-        "studentId": studentId,
+        "studentId": studentOrTeacherId,
       }),
     );
     debugPrint('Grogu --> status code =  ${response.statusCode}');

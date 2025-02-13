@@ -15,8 +15,6 @@ class ApiEndpoint {
   static const String viewVideo = "api/view_video";
   static const String viewLocation = "api/view_location";
   static const String viewCampuses = "api/view_campuses";
-  static const String checkInAndCheckOutHistoryList =
-      "api/v1/schedule/class/subjects/checkinAndCheckout/list";
   static const String placeOfBirth = "api/v1/placeofbirth";
   static const String classTimeSchedule = "api/SchTeacherGetTimeByScheduleID";
   static const String videoAccesskey = "/api/v1/videoaccesskey";
@@ -27,11 +25,21 @@ class ApiEndpoint {
   static const String userWorkId = "api/PayrollUserWorkInBranch/getUserWorkId";
   static const String studentProfile = "api/v1/ApiStudentResult/studentprofile";
   static const String studentScore = "api/v1/ApiStudentResult/studentscores";
-  static const String scheduleLink = "api/v1/schedule/link";
-  static const String scheduleClassList = "api/v1/schedule/class/list";
-  static const String classSubjectList = "api/v1/schedule/class/subjects/list";
-  static const String classCheckInAndCheckOut =
+  static const String studentScheduleLink = "api/v1/schedule/link";
+  static const String studentScheduleClassList = "api/v1/schedule/class/list";
+  static const String studentClassSubjectList =
+      "api/v1/schedule/class/subjects/list";
+  static const String studentClassCheckInAndCheckOut =
       "api/v1/schedule/class/subjects/checkinAndCheckout";
-  static const String classCheckInAndCheckOutHistoryList =
+  static const String studentClassCheckInAndCheckOutHistoryList =
       "api/v1/schedule/class/subjects/checkinAndCheckout/list";
+  static const String teacherScheduleLink = "api/v1/teacher/schedule/link";
+  static const String teacherScheduleClassList =
+      "api/v1/teacher/schedule/class/list";
+  static const String teacherClassSubjectList =
+      "api/v1/teacher/schedule/class/subjects/list";
+  static const String teacherClassCheckInAndCheckOut =
+      "api/v1/teacher/schedule/class/subjects/checkinAndCheckout";
+  static const String teacherClassCheckInAndCheckOutHistoryList =
+      "api/v1/teacher/schedule/class/subjects/checkinAndCheckout/list";
 }

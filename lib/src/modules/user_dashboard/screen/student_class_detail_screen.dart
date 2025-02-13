@@ -29,7 +29,7 @@ class StudentClassDetailScreen extends StatelessWidget {
       actionOnInit: () async {
         await studentClassDetailController.getClassScheduleList(
           scheduleId: classScheduleData?.scheduleId,
-          studentId: classScheduleData?.studentId,
+          studentOrTeacherId: classScheduleData?.studentId,
         );
       },
     );

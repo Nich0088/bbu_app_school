@@ -32,8 +32,6 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   final UserDashboardController _userDashboardController =
       Get.put(UserDashboardController());
   final FocusNode _scheduleCodeFocusNode = FocusNode();
-  final FocusNode _selectedBranchFocusNode = FocusNode();
-  final FocusNode _studentIDxFocusNode = FocusNode();
 
   @override
   void initState() {

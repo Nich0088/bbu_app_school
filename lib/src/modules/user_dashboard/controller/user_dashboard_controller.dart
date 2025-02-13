@@ -37,6 +37,7 @@ class UserDashboardController extends BaseGetXController {
   UniversityBranchResult? _universityBranchResult;
   UniversityBranchData? _selectedUniversityBranch;
   String? _selectedStudentIdClassTab;
+  UserTypeData? _userTypeData;
 
   @override
   void onInit() async {
@@ -115,7 +116,8 @@ class UserDashboardController extends BaseGetXController {
         _selectedStudentIdClassTab?.isEmpty == true ||
         _selectedUniversityBranch == null) return;
 
-    String urlString = '${ApiEndpoint.webBaseUrl}${ApiEndpoint.scheduleLink}';
+    String urlString =
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentScheduleLink : ApiEndpoint.teacherScheduleLink}';
     var url = Uri.parse(urlString);
     var requestBody = jsonEncode({
       "branchId": _selectedUniversityBranch?.branchId,
@@ -161,7 +163,7 @@ class UserDashboardController extends BaseGetXController {
         _selectedStudentIdClassTab?.isEmpty == true) return;
 
     String urlString =
-        '${ApiEndpoint.webBaseUrl}${ApiEndpoint.scheduleClassList}';
+        '${ApiEndpoint.webBaseUrl}${_userTypeData?.usertypeName?.toLowerCase() == 'student' ? ApiEndpoint.studentScheduleClassList : ApiEndpoint.teacherScheduleClassList}';
     debugPrint(urlString);
 
     var url = Uri.parse(urlString);
@@ -204,7 +206,7 @@ class UserDashboardController extends BaseGetXController {
     String? userTypeDataString =
         await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
     if (userTypeDataString == null) return;
-    var userTypeData = UserTypeData.fromJson(jsonDecode(userTypeDataString));
+    _userTypeData = UserTypeData.fromJson(jsonDecode(userTypeDataString));
 
     String? universityBranchDataString = await LocalStorage.getStringValue(
         key: LocalStorage.universityBranchData);
@@ -213,7 +215,7 @@ class UserDashboardController extends BaseGetXController {
         UniversityBranchData.fromJson(jsonDecode(universityBranchDataString));
 
     String urlString =
-        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.userWorkId}/${loginResultData.id}/${universityBranchData.shortName}/${userTypeData.id}';
+        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.userWorkId}/${loginResultData.id}/${universityBranchData.shortName}/${_userTypeData?.id}';
     debugPrint(urlString);
 
     String? authorizeTokenData =
