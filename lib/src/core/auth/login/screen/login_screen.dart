@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -158,6 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AppScreen.createUserWithBranch.path,
                                   );
                                 },
+                                languageCode: context.locale.languageCode,
                               );
                             },
                             child: Text(

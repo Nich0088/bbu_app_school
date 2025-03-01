@@ -42,4 +42,5 @@ class ApiEndpoint {
       "api/v1/teacher/schedule/class/subjects/checkinAndCheckout";
   static const String teacherClassCheckInAndCheckOutHistoryList =
       "api/v1/teacher/schedule/class/subjects/checkinAndCheckout/list";
+  static const String changePassword = "api/v1/Usermanage/ChangePassword";
 }

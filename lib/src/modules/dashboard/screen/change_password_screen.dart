@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -24,6 +25,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _changePasswordController.register(context);
+
     return GetBuilder<ChangePasswordController>(
       builder: (controller) {
         return LoadingScaffoldWidget(
@@ -152,8 +155,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       horizontal: AppStyle.horizontalPadding,
                     ),
                     child: FilledButton(
-                      onPressed: () {
-                        // context.pop();
+                      onPressed: () async {
+                        await _changePasswordController.changeUserPassword(
+                          languageCode: context.locale.languageCode,
+                        );
                       },
                       child: Text(
                         "Change Password",
