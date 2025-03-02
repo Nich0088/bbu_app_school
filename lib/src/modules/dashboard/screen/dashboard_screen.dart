@@ -62,470 +62,458 @@ class DashboardScreen extends StatelessWidget {
             ),
             drawer: userType == UserType.loggedInUser
                 ? Drawer(
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      padding: EdgeInsets.zero,
-                      children: [
-                        DrawerHeader(
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                AppLogo.bbucampus,
-                              ),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ClipOval(
-                                child: CachedNetworkImage(
-                                  imageUrl: dashboardController
-                                          .userProfileData.value.photo ??
-                                      '',
-                                  width: 56,
-                                  height: 56,
-                                  fit: BoxFit.cover,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).padding.bottom,
+                      ),
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.zero,
+                        children: [
+                          DrawerHeader(
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  AppLogo.bbucampus,
                                 ),
+                                fit: BoxFit.fill,
                               ),
-                              Text(
-                                '${dashboardController.userProfileData.value.firstname} ${dashboardController.userProfileData.value.lastname}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              Text(
-                                dashboardController
-                                        .userProfileData.value.contactPhone ??
-                                    '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.white,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "ID :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Text(
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: dashboardController
+                                            .userProfileData.value.photo ??
+                                        '',
+                                    width: 56,
+                                    height: 56,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  '${dashboardController.userProfileData.value.firstname} ${dashboardController.userProfileData.value.lastname}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                Text(
                                   dashboardController
-                                          .userProfileData.value.id ??
+                                          .userProfileData.value.contactPhone ??
                                       '',
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge
                                       ?.copyWith(
-                                        // color: AppColor.textSecondaryColor,
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "ID :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
                                         color: Colors.black,
                                         fontSize: 16.0,
                                       ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: Text(
+                                    dashboardController
+                                            .userProfileData.value.id ??
+                                        '',
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors.black,
+                                          fontSize: 16.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Name in Khmer :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                dashboardController
-                                        .userProfileData.value.fullNameKh ??
-                                    '',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                      fontFamily: AppFontFamily.khmerFontFamily,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Name in English :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                "${dashboardController.userProfileData.value.firstname ?? ''} ${dashboardController.userProfileData.value.lastname ?? ''}",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Gender :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                dashboardController.userProfileData.value.sex ??
-                                    '',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Date of Birth :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                AppDateFormatter.formatDateWithLocalTimeZone(
-                                      pattern:
-                                          AppDateFormatter.monthCommaDateYear,
-                                      dateString: dashboardController
-                                          .userProfileData.value.dob,
-                                    ) ??
-                                    '',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Place of Birth :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                "Disable",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              // Text(
-                              //   '${dashboardController.userProfileData.value.pobVillage}, ${dashboardController.userProfileData.value.pobCommune}, ${dashboardController.userProfileData.value.pobDistrict}, ${dashboardController.userProfileData.value.pobProvince}',
-                              //   textAlign: TextAlign.center,
-                              //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              //         // color: AppColor.textSecondaryColor,
-                              //         color: Colors.black,
-                              //         fontSize: 16.0,
-                              //       ),
-                              // ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Phone Number :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                dashboardController
-                                        .userProfileData.value.contactPhone ??
-                                    '',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Email :",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 14),
-                              Text(
-                                dashboardController
-                                        .userProfileData.value.userName ??
-                                    '',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 8),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "About Us",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      // color: AppColor.textSecondaryColor,
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                              ),
-                              const SizedBox(width: 8),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 218,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  context.push(
-                                      AppScreen.changePasswordScreen.path);
-                                },
-                                child: Text(
-                                  "Change Password",
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Name in Khmer :",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge
                                       ?.copyWith(
-                                        color: Colors.blue,
+                                        color: Colors.black,
                                         fontSize: 16.0,
                                       ),
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  _logOutUser(
-                                    action: () {
-                                      Get.delete<DashboardController>();
-                                      context.go(AppScreen.splashScreen.path);
-                                    },
-                                  );
-                                },
-                                child: Text(
-                                  "Logout",
+                                const SizedBox(width: 14),
+                                Text(
+                                  dashboardController
+                                          .userProfileData.value.fullNameKh ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                        fontFamily:
+                                            AppFontFamily.khmerFontFamily,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Name in English :",
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge
                                       ?.copyWith(
-                                        color: Colors.red,
+                                        color: Colors.black,
                                         fontSize: 16.0,
                                       ),
                                 ),
-                              ),
-                              // const SizedBox(height: 14.0),
-                              Image.asset(
-                                "assets/app_logo.png",
-                                // Replace with your image path
-                                width: 35, // Adjust size as needed
-                                height: 50,
-                              ),
-                              const SizedBox(height: 14.0),
-                              // Add spacing between the image and text
-                              Text(
-                                "App Version: V 5.0.29",
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      color: Colors.black87,
-                                      fontSize: 12,
-                                    ),
-                              ),
-                            ],
+                                const SizedBox(width: 14),
+                                Text(
+                                  "${dashboardController.userProfileData.value.firstname ?? ''} ${dashboardController.userProfileData.value.lastname ?? ''}",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Gender :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 14),
+                                Text(
+                                  dashboardController
+                                          .userProfileData.value.sex ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Date of Birth :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 14),
+                                Text(
+                                  AppDateFormatter.formatDateWithLocalTimeZone(
+                                        pattern:
+                                            AppDateFormatter.monthCommaDateYear,
+                                        dateString: dashboardController
+                                            .userProfileData.value.dob,
+                                      ) ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Place of Birth :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 14),
+                                Text(
+                                  "Disable",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                // Text(
+                                //   '${dashboardController.userProfileData.value.pobVillage}, ${dashboardController.userProfileData.value.pobCommune}, ${dashboardController.userProfileData.value.pobDistrict}, ${dashboardController.userProfileData.value.pobProvince}',
+                                //   textAlign: TextAlign.center,
+                                //   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                //         // color: AppColor.textSecondaryColor,
+                                //         color: Colors.black,
+                                //         fontSize: 16.0,
+                                //       ),
+                                // ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Phone Number :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 14),
+                                Text(
+                                  dashboardController
+                                          .userProfileData.value.contactPhone ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Email :",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 14),
+                                Text(
+                                  dashboardController
+                                          .userProfileData.value.userName ??
+                                      '',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 8),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 16,
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "About Us",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 218,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    context.push(
+                                        AppScreen.changePasswordScreen.path);
+                                  },
+                                  child: Text(
+                                    "Change Password",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                          color: Colors.blue,
+                                          fontSize: 16.0,
+                                        ),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    _logOutUser(
+                                      action: () {
+                                        Get.delete<DashboardController>();
+                                        context.go(AppScreen.splashScreen.path);
+                                      },
+                                    );
+                                  },
+                                  child: Text(
+                                    "Logout",
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge
+                                        ?.copyWith(
+                                          color: Colors.red,
+                                          fontSize: 16.0,
+                                        ),
+                                  ),
+                                ),
+                                // const SizedBox(height: 14.0),
+                                Image.asset(
+                                  "assets/app_logo.png",
+                                  width: 35,
+                                  height: 50,
+                                ),
+                                const SizedBox(height: 14.0),
+                                Text(
+                                  "App Version: ${controller.appVersion.value}",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                        color: Colors.black87,
+                                        fontSize: 12,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 : null,

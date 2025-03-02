@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:school_app/main.dart';
 import 'package:school_app/src/common/app_setting.dart';
 
 PreferredSizeWidget CustomAppBar(
@@ -42,11 +44,16 @@ PreferredSizeWidget CustomAppBar(
     title: (() {
       switch (appBarType) {
         case AppBarType.guestType:
-          return Image.asset(
-            "assets/dashboard/guest_school_logo.jpg",
-            width: MediaQuery.of(context).size.width * 0.35,
-            height: 50,
-            alignment: Alignment.centerLeft,
+          return GestureDetector(
+            child: Image.asset(
+              "assets/dashboard/guest_school_logo.jpg",
+              width: MediaQuery.of(context).size.width * 0.35,
+              height: 50,
+              alignment: Alignment.centerLeft,
+            ),
+            onTap: () {
+              context.go(AppScreen.roleSelectionScreen.path);
+            },
           );
         case AppBarType.loggedInType:
           return GestureDetector(

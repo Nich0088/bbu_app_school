@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:school_app/src/common/helpers/local_storage.dart';
 import 'package:school_app/src/core/auth/login/model/login_result.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
@@ -230,6 +231,7 @@ class DashboardController extends GetxController {
   var userProfileData = LoginResultData().obs;
   var userTypeData = UserTypeData().obs;
   var isShowLoading = false;
+  var appVersion = ''.obs;
   AppDialogHelper? _appDialogHelper;
 
   @override
@@ -237,11 +239,18 @@ class DashboardController extends GetxController {
     super.onInit();
     await _getBannerList();
     await _getUserProfileData();
+    appVersion.value = await getAppVersion();
 
     String? userTypeDataString =
         await LocalStorage.getStringValue(key: LocalStorage.userTypeData);
     if (userTypeDataString == null) return;
     userTypeData.value = UserTypeData.fromJson(jsonDecode(userTypeDataString));
+  }
+
+  Future<String> getAppVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    return packageInfo.version;
   }
 
   void register(BuildContext context) {
