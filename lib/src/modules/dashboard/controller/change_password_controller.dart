@@ -54,9 +54,32 @@ class ChangePasswordController extends BaseGetXController {
   }
 
   Future<void> changeUserPassword({required String languageCode}) async {
-    if (currentPasswordTextEditingController.value.text.isEmpty ||
-        newPasswordTextEditingController.value.text.isEmpty ||
-        confirmNewPasswordTextEditingController.value.text.isEmpty) return;
+    if (currentPasswordTextEditingController.value.text.isEmpty) {
+      isInvalidCurrentPassword.value = true;
+      invalidCurrentPasswordDescription.value = 'Please enter current password';
+    }
+    if (newPasswordTextEditingController.value.text.isEmpty) {
+      isInvalidNewPassword.value = true;
+      invalidNewPasswordDescription.value = 'Please enter new password';
+    }
+    if (confirmNewPasswordTextEditingController.value.text.isEmpty) {
+      isInvalidConfirmNewPassword.value = true;
+      invalidConfirmNewPasswordDescription.value =
+          'Please enter confirm new password';
+    }
+    if (newPasswordTextEditingController.value.text !=
+        confirmNewPasswordTextEditingController.value.text) {
+      isInvalidNewPassword.value = true;
+      isInvalidConfirmNewPassword.value = true;
+      invalidNewPasswordDescription.value =
+          'New password and confirm new password should be the same';
+      invalidConfirmNewPasswordDescription.value =
+          'New password and confirm new password should be the same';
+    }
+
+    if (isInvalidCurrentPassword.value ||
+        isInvalidNewPassword.value ||
+        isInvalidConfirmNewPassword.value) return;
 
     String urlString =
         "${ApiEndpoint.appBaseUrl9}${ApiEndpoint.changePassword}?languageRequest=$languageCode";

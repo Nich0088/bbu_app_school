@@ -156,6 +156,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     child: FilledButton(
                       onPressed: () async {
+                        _currentPasswordFocusNode.unfocus();
+                        _newPasswordFocusNode.unfocus();
+                        _confirmNewPasswordFocusNode.unfocus();
                         await _changePasswordController.changeUserPassword(
                           languageCode: context.locale.languageCode,
                         );
