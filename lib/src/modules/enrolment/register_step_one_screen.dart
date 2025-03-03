@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/enrolment/province_res.dart';
 import 'package:school_app/src/modules/enrolment/register_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -718,7 +719,10 @@ class _RegisterScreenState extends State<RegistrationApplicationScreen> {
         }
         return null;
       },
-      style: TextStyle(fontSize: fontSize),
+      style: TextStyle(
+        fontSize: fontSize,
+        color: AppColor.textTertiaryColor,
+      ),
       decoration: InputDecoration(
         errorStyle: TextStyle(fontSize: height * 0.02),
         labelText: labelText,
