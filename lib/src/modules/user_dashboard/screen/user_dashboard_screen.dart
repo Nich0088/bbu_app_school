@@ -32,6 +32,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   final UserDashboardController _userDashboardController =
       Get.put(UserDashboardController());
   final FocusNode _scheduleCodeFocusNode = FocusNode();
+  int classTabIndex = 2;
 
   @override
   void initState() {
@@ -41,6 +42,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
           widget.userTypeData?.usertypeName?.toLowerCase() == 'student' ? 4 : 3,
       vsync: this,
     );
+    classTabIndex =
+        widget.userTypeData?.usertypeName?.toLowerCase() == 'student' ? 2 : 1;
 
     _tabController.addListener(() async {
       if (_tabController.indexIsChanging) {
@@ -117,7 +120,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
               _chatTab(),
             ],
           ),
-          floatingActionButton: controller.selectedTabViewIndex == 2
+          floatingActionButton: controller.selectedTabViewIndex == classTabIndex
               ? FloatingActionButton(
                   onPressed: () {
                     _showEnterScheduleBottomSheet(context);
