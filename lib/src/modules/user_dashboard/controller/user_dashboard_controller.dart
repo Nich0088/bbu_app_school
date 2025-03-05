@@ -26,6 +26,7 @@ class UserDashboardController extends BaseGetXController {
   var selectedStudentId = ''.obs;
   var studentProfileDataList = <StudyItem>[].obs;
   var studentScoreList = <StudentScoreItem>[].obs;
+  var studentScoreResult = StudentScoreResult().obs;
   var universityBranchDropDownItemList = <CustomDropDownMenuItem>[].obs;
   var studentIdDropDownItemList = <CustomDropDownMenuItem>[].obs;
   var scheduleCodeTextEditingController = TextEditingController().obs;
@@ -333,19 +334,20 @@ class UserDashboardController extends BaseGetXController {
 
     if (response.body.isEmpty) return;
 
-    StudentScoreResult studentScoreResult =
+    studentScoreResult.value =
         StudentScoreResult.fromJson(jsonDecode(response.body));
 
     if (response.statusCode != 200) {
       appDialogHelper?.showErrorDialog(
-        errorMessage: studentScoreResult.message ?? 'something when wrong',
-        errorCode: studentScoreResult.code?.toString() ?? '',
+        errorMessage:
+            studentScoreResult.value.message ?? 'something when wrong',
+        errorCode: studentScoreResult.value.code?.toString() ?? '',
       );
       return;
     }
-    if (studentScoreResult.studentScore != null) {
+    if (studentScoreResult.value.studentScore != null) {
       studentScoreList.value =
-          _generateStudentScoreItemList(studentScoreResult.studentScore!);
+          _generateStudentScoreItemList(studentScoreResult.value.studentScore!);
     }
   }
 

@@ -195,14 +195,42 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   Widget _resultTab() {
     return Obx(
       () => _userDashboardController.studentScoreList.value.isNotEmpty
-          ? ListView.builder(
-              itemCount: _userDashboardController.studentScoreList.value.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return StudyResultItemWidget(
-                  item: _userDashboardController.studentScoreList.value[index],
-                );
-              },
+          ? Column(
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    itemCount:
+                        _userDashboardController.studentScoreList.value.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return StudyResultItemWidget(
+                        item: _userDashboardController
+                            .studentScoreList.value[index],
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  color: AppColor.primaryColor,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    child: Text(
+                      _userDashboardController
+                              .studentScoreResult.value.footerFormat ??
+                          '',
+                      textAlign: TextAlign.center,
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                    ),
+                  ),
+                ),
+              ],
             )
           : const SizedBox(),
     );
