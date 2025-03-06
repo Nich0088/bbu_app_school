@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
 
@@ -52,7 +53,7 @@ class CertificateFormatItemWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.4),
               child: Text(
-                item.title,
+                context.tr(item.title),
                 textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme

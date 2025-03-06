@@ -411,7 +411,7 @@ class _RegisterScreenState extends State<RegistrationApplicationScreen> {
         toolbarHeight: height * 0.066,
         elevation: 0,
         title: Text(
-          LocaleKeys.registrationApplication.tr(),
+          context.tr('registration_application'),
           style: TextStyle(fontSize: fontSize),
         ),
         centerTitle: true,
@@ -500,41 +500,45 @@ class _RegisterScreenState extends State<RegistrationApplicationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           buildTextField(
-                              LocaleKeys.firstNameKh.tr(),
+                              context.tr(
+                                'first_name_kh',
+                              ),
                               _textFirstNameKh,
-                              "${LocaleKeys.firstNameKh.tr()} ${LocaleKeys.canNotBeEmpty.tr()}"),
+                              "${context.tr('first_name_kh')} ${context.tr('canNotbeEmpty')}"),
                           //_validateFirstnameKh
                           const SizedBox(height: 15),
                           buildTextField(
-                              LocaleKeys.lastNameKh.tr(),
+                              context.tr('last_name_kh'),
                               _textLastNameKh,
-                              "${LocaleKeys.lastNameKh.tr()} ${LocaleKeys.canNotBeEmpty.tr()}"),
+                              "${context.tr('last_name_kh')} ${context.tr('canNotbeEmpty')}"),
                           const SizedBox(height: 15),
                           buildTextField(
-                              LocaleKeys.fistNameEn.tr(),
+                              context.tr('first_name_en'),
                               _textFistNameEn,
-                              "${LocaleKeys.fistNameEn.tr()} ${LocaleKeys.canNotBeEmpty.tr()}"),
+                              "${context.tr('first_name_en')} ${context.tr('canNotbeEmpty')}"),
                           const SizedBox(height: 15),
                           buildTextField(
-                              LocaleKeys.lastNameEn.tr(),
+                              context.tr('last_name_en'),
                               _textLastNameEn,
-                              "${LocaleKeys.lastNameEn.tr()} ${LocaleKeys.canNotBeEmpty.tr()}"),
+                              "${context.tr('last_name_en')} ${context.tr('canNotbeEmpty')}"),
                           const SizedBox(
                             height: 10,
                           ),
                           Container(
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: Text(
-                              LocaleKeys.sex.tr(),
-                              style: TextStyle(fontSize: fontSize),
+                              context.tr('sex'),
+                              style: TextStyle(
+                                  fontSize: fontSize, color: Colors.black),
                             ),
                           ),
                           _buildSex(),
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: Text(LocaleKeys.dob.tr(),
-                                style: TextStyle(fontSize: fontSize)),
+                            child: Text(context.tr('date_of_birth'),
+                                style: TextStyle(
+                                    fontSize: fontSize, color: Colors.black)),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -640,13 +644,14 @@ class _RegisterScreenState extends State<RegistrationApplicationScreen> {
 
                           const SizedBox(height: 20),
                           // _phoneField(""),
-                          buildTextField(LocaleKeys.phone.tr(), _textPhone,
-                              "${LocaleKeys.phone.tr()} ${LocaleKeys.canNotBeEmpty.tr()}"),
+                          buildTextField(context.tr('phone'), _textPhone,
+                              "${context.tr('phone')} ${context.tr('canNotbeEmpty')}"),
                           const SizedBox(height: 10),
                           Container(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: Text(LocaleKeys.dop.tr(),
-                                style: TextStyle(fontSize: fontSize)),
+                            child: Text(context.tr('place_of_birth'),
+                                style: TextStyle(
+                                    fontSize: fontSize, color: Colors.black)),
                           ),
                           // buildTextField("ទីកន្លែងកំណើត(ខេត្ត/ក្រុង)", _textPlaceOfBirth),
                           _buildDateOfBirth(),
@@ -687,7 +692,7 @@ class _RegisterScreenState extends State<RegistrationApplicationScreen> {
                                 backgroundColor: Colors.indigo[900],
                               ),
                               child: Text(
-                                LocaleKeys.nextGo.tr(),
+                                context.tr('next'),
                                 style: TextStyle(
                                     fontSize: fontSize, color: Colors.white),
                               ),

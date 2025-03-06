@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -76,7 +77,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
             context,
             backgroundColor: AppColor.primaryColor,
             appBarType: AppBarType.generalType,
-            title: "User Dashboard",
+            title: context.tr('change_language'),
             isCenterTitle: true,
             onPressedBack: () {
               Get.delete<UserDashboardController>();

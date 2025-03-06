@@ -125,7 +125,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "ID :",
+                                context.tr('id'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -165,7 +165,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Name in Khmer :",
+                                context.tr('name_in_khmer'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -202,7 +202,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Name in English :",
+                                context.tr('name_in_english'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -229,7 +229,7 @@ class DashboardScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 10),
                         Padding(
                           padding: const EdgeInsets.only(
                             left: 16,
@@ -237,7 +237,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Gender :",
+                                context.tr('gender'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -273,7 +273,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Date of Birth :",
+                                context.tr('date_of_birth'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -313,7 +313,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Place of Birth :",
+                                context.tr('place_of_birth'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -357,7 +357,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Phone Number :",
+                                context.tr('phone_number'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -394,7 +394,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "Email :",
+                                context.tr('email'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -423,16 +423,6 @@ class DashboardScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                            left: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(width: 8),
-                            ],
-                          ),
-                        ),
                         const SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -441,7 +431,7 @@ class DashboardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                "About Us",
+                                context.tr('phone_number'),
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -452,17 +442,30 @@ class DashboardScreen extends StatelessWidget {
                                       fontSize: 16.0,
                                     ),
                               ),
-                              const SizedBox(width: 8),
+                              const SizedBox(width: 14),
+                              Text(
+                                dashboardController
+                                        .userProfileData.value.contactPhone ??
+                                    '',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge
+                                    ?.copyWith(
+                                      // color: AppColor.textSecondaryColor,
+                                      color: Colors.black,
+                                      fontSize: 16.0,
+                                    ),
+                              ),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 218,
-                        ),
+                        // const SizedBox(height: 8),
                         Padding(
-                          padding: const EdgeInsets.only(left: 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          padding: const EdgeInsets.only(
+                            left: 2,
+                          ),
+                          child: Row(
                             children: [
                               TextButton(
                                 onPressed: () {
@@ -470,17 +473,50 @@ class DashboardScreen extends StatelessWidget {
                                       AppScreen.changePasswordScreen.path);
                                 },
                                 child: Text(
-                                  "Change Password",
+                                  context.tr('change_password'),
                                   textAlign: TextAlign.center,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleLarge
                                       ?.copyWith(
-                                        color: Colors.blue,
+                                        color: Colors.black,
                                         fontSize: 16.0,
                                       ),
                                 ),
                               ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                context.tr('about_us'),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      // color: AppColor.textSecondaryColor,
+                                      color: Colors.black,
+                                      fontSize: 16.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 140,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
                               TextButton(
                                 onPressed: () {
                                   _logOutUser(
@@ -629,7 +665,7 @@ class DashboardScreen extends StatelessWidget {
                       bottom: 18,
                     ),
                     child: Text(
-                      "Certificate format",
+                      context.tr('certificate_format'),
                       style:
                           Theme.of(context).textTheme.displayMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -673,7 +709,7 @@ class DashboardScreen extends StatelessWidget {
                       bottom: 18,
                     ),
                     child: Text(
-                      "Message",
+                      context.tr('message'),
                       style: Theme.of(context)
                           .textTheme
                           .displayMedium
@@ -715,7 +751,7 @@ class DashboardScreen extends StatelessWidget {
                         bottom: 18,
                       ),
                       child: Text(
-                        "Slide Show",
+                        context.tr('slide_show'),
                         style: Theme.of(context)
                             .textTheme
                             .displayMedium

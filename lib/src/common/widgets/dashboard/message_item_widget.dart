@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/dashboard/models/message_item.dart';
@@ -46,7 +47,7 @@ class MessageItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  item.title,
+                  context.tr(item.title),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

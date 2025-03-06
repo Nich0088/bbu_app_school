@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:school_app/src/common/app_setting.dart';
 import 'package:school_app/src/modules/dashboard/models/home_grid_item.dart';
@@ -37,7 +38,7 @@ class HomeGridItemWidget extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              item.title,
+              context.tr(item.title),
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
