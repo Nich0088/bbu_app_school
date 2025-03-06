@@ -25,17 +25,13 @@ class LoadingContainerWidget extends StatelessWidget {
             ),
             child: Center(
               child: Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.35,
-                ),
+                height: MediaQuery.of(context).size.width * 0.18,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 child: Lottie.asset(
                   "assets/loading.json",
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  height: MediaQuery.of(context).size.width * 0.3,
                   fit: BoxFit.contain,
                   repeat: true,
                 ),

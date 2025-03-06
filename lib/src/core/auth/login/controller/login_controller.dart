@@ -71,7 +71,8 @@ class LoginController extends BaseGetXController {
     }
   }
 
-  Future<void> loginUser({required VoidCallback onSuccess}) async {
+  Future<void> loginUser(
+      {required VoidCallback onSuccess, required String languageCode}) async {
     if (emailTextEditingController.value.text.length < _emailMaxLength) {
       invalidEmailDescription.value = "Please enter username";
       isInvalidEmail.value = true;
@@ -94,7 +95,7 @@ class LoginController extends BaseGetXController {
     }
 
     String urlString =
-        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.login}?languageRequest=km';
+        '${ApiEndpoint.appBaseUrl9}${ApiEndpoint.login}?languageRequest=$languageCode';
 
     String? authorizeTokenData =
         await LocalStorage.getStringValue(key: LocalStorage.authorizeTokenData);

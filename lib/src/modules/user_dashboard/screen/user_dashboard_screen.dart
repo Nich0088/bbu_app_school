@@ -33,6 +33,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   final UserDashboardController _userDashboardController =
       Get.put(UserDashboardController());
   final FocusNode _scheduleCodeFocusNode = FocusNode();
+  int classTabIndex = 2;
 
   @override
   void initState() {
@@ -42,6 +43,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
           widget.userTypeData?.usertypeName?.toLowerCase() == 'student' ? 4 : 3,
       vsync: this,
     );
+    classTabIndex =
+        widget.userTypeData?.usertypeName?.toLowerCase() == 'student' ? 2 : 1;
 
     _tabController.addListener(() async {
       if (_tabController.indexIsChanging) {
@@ -118,7 +121,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
               _chatTab(),
             ],
           ),
-          floatingActionButton: controller.selectedTabViewIndex == 2
+          floatingActionButton: controller.selectedTabViewIndex == classTabIndex
               ? FloatingActionButton(
                   onPressed: () {
                     _showEnterScheduleBottomSheet(context);
@@ -193,14 +196,42 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
   Widget _resultTab() {
     return Obx(
       () => _userDashboardController.studentScoreList.value.isNotEmpty
-          ? ListView.builder(
-              itemCount: _userDashboardController.studentScoreList.value.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return StudyResultItemWidget(
-                  item: _userDashboardController.studentScoreList.value[index],
-                );
-              },
+          ? Column(
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    itemCount:
+                        _userDashboardController.studentScoreList.value.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return StudyResultItemWidget(
+                        item: _userDashboardController
+                            .studentScoreList.value[index],
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  color: AppColor.primaryColor,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    child: Text(
+                      _userDashboardController
+                              .studentScoreResult.value.footerFormat ??
+                          '',
+                      textAlign: TextAlign.center,
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                    ),
+                  ),
+                ),
+              ],
             )
           : const SizedBox(),
     );
