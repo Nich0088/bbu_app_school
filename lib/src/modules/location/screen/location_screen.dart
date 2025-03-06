@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +62,7 @@ class _LocationScreenState extends State<LocationScreen> {
           context,
           backgroundColor: AppColor.primaryColor,
           appBarType: AppBarType.generalType,
-          title: "Location",
+          title: context.tr('location'),
           isCenterTitle: true,
           onPressedBack: () {
             context.pop();

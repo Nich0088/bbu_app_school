@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +26,7 @@ class CampusScreen extends StatelessWidget {
           context,
           backgroundColor: AppColor.primaryColor,
           appBarType: AppBarType.generalType,
-          title: "Campus",
+          title: context.tr('campus'),
           isCenterTitle: true,
           onPressedBack: () {
             context.pop();
@@ -167,39 +168,39 @@ class CampusItemWidget extends StatelessWidget {
               ],
             ),
           ),
-          // GestureDetector(
-          //   onTap: () {
-          //     _showPhoneNumberBottomSheet(context, item.tel);
-          //   },
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(
-          //       top: 0,
-          //       right: 20,
-          //       left: 20,
-          //       bottom: 20,
-          //     ),
-          //     child: Row(
-          //       children: [
-          //         const Icon(
-          //           Icons.phone,
-          //           size: 20,
-          //           color: AppColor.primaryColor,
-          //         ),
-          //         const SizedBox(width: 9),
-          //         Expanded(
-          //           child: Text(
-          //             item.tel ?? '',
-          //             maxLines: 2,
-          //             style: Theme.of(context)
-          //                 .textTheme
-          //                 .titleLarge
-          //                 ?.copyWith(color: Colors.black, fontSize: 18.0),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          GestureDetector(
+            onTap: () {
+              _showPhoneNumberBottomSheet(context, item.tel);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 0,
+                right: 20,
+                left: 20,
+                bottom: 20,
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.phone,
+                    size: 20,
+                    color: AppColor.primaryColor,
+                  ),
+                  const SizedBox(width: 9),
+                  Expanded(
+                    child: Text(
+                      item.tel ?? '',
+                      maxLines: 2,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.black, fontSize: 18.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

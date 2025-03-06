@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +19,7 @@ class ScholarshipScreen extends StatelessWidget {
         context,
         backgroundColor: AppColor.primaryColor,
         appBarType: AppBarType.generalType,
-        title: "Scholarship",
+        title: context.tr('scholarship'),
         isCenterTitle: true,
         onPressedBack: () {
           context.pop();

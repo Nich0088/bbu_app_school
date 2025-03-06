@@ -139,7 +139,7 @@ class _VidesPageState extends State<VideoScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'video'.tr().toString(),
+          context.tr('video'),
           style: TextStyle(fontSize: fontsize),
         ),
         centerTitle: true,

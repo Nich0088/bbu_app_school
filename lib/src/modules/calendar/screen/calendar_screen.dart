@@ -1,5 +1,6 @@
 //import 'dart:collection';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -126,7 +127,7 @@ class _NewCalendarScreenState extends State<CalendarScreen>
           context,
           backgroundColor: AppColor.primaryColor,
           appBarType: AppBarType.generalType,
-          title: "Calendar",
+          title: context.tr('calendar'),
           isCenterTitle: true,
           onPressedBack: () {
             context.pop();

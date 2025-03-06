@@ -4,6 +4,7 @@
   "continue": "Continue",
   "for_Enrollment": "For Enrollment",
   "events": "Events",
+  "detail_news_event": "Detail news & Event",
   "calendar": "Calendar",
   "contact": "Contact",
   "campus": "Campus",
@@ -16,6 +17,7 @@
   "video": "Video",
   "about_us": "About Us",
   "scholarship": "Scholarship",
+  "user_dashboard": "User Dashboard",
   "certificate_format": "Certificate Format",
   "message": "Message",
   "slide_show": "Slide Show",
@@ -39,5 +41,6 @@
   "sex": "Sex",
   "phone": "Phone",
   "next": "Next",
-  "canNotbeEmpty": "Can'tBeEmpty"
+  "canNotbeEmpty": "Can'tBeEmpty",
+  "disable": "Disable"
 }

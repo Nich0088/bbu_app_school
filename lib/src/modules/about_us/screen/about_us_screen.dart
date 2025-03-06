@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,7 +15,7 @@ class AboutUsScreen extends StatelessWidget {
         context,
         backgroundColor: AppColor.primaryColor,
         appBarType: AppBarType.generalType,
-        title: "About Us",
+        title: context.tr('about_us'),
         isCenterTitle: true,
         onPressedBack: () {
           context.pop();

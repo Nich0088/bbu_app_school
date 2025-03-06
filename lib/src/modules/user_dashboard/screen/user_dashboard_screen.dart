@@ -80,7 +80,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
             context,
             backgroundColor: AppColor.primaryColor,
             appBarType: AppBarType.generalType,
-            title: context.tr('change_language'),
+            title: context.tr('user_dashboard'),
             isCenterTitle: true,
             onPressedBack: () {
               Get.delete<UserDashboardController>();
