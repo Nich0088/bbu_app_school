@@ -19,10 +19,10 @@ class MessageItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: 0,
+        left: 1,
         right: isLastItem ? 0 : 29,
       ),
-      width: 170,
+      width: 160,
       decoration: const BoxDecoration(
         color: AppColor.background,
         borderRadius: BorderRadius.all(Radius.circular(16)),

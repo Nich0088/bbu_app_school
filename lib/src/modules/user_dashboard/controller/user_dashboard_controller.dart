@@ -432,7 +432,7 @@ class UserDashboardController extends BaseGetXController {
       StudyItem(
         id: 0,
         title: studentProfileData.branchNameEn ?? '',
-        label: 'name_in_english'.tr,
+        label: 'branch_name_in_english',
         isFixedEnglishLanguage: true,
       ),
     );

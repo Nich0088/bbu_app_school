@@ -42,5 +42,6 @@
   "phone": "Phone",
   "next": "Next",
   "canNotbeEmpty": "Can'tBeEmpty",
-  "disable": "Disable"
+  "disable": "Disable",
+  "branch_name_in_english": "Branch Name in English "
 }
