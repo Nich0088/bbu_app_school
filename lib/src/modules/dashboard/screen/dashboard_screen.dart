@@ -423,27 +423,37 @@ class DashboardScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 12),
-                        TextButton(
-                          onPressed: () {
-                            context.push(AppScreen.changePasswordScreen.path);
-                          },
-                          child: Text(
-                            context.tr('change_password'),
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge
-                                ?.copyWith(
-                                  color: Colors.blue,
-                                  fontSize: 16.0,
-                                ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
+                        // const SizedBox(height: 12),
                         Padding(
                           padding: const EdgeInsets.only(
-                            left: 16,
+                            left: 6,
+                          ),
+                          child: Row(
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  context.push(AppScreen.changePasswordScreen.path);
+                                },
+                                child: Text(
+                                  context.tr('change_password'),
+                                  textAlign: TextAlign.left,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                    color: Colors.blue,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // const SizedBox(height: 12),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 18,
                           ),
                           child: Row(
                             children: [
@@ -464,7 +474,7 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 218,
+                          height: 90,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 0),
@@ -502,7 +512,7 @@ class DashboardScreen extends StatelessWidget {
                               const SizedBox(height: 14.0),
                               // Add spacing between the image and text
                               Text(
-                                "App Version: V 5.0.29",
+                                "App Version: V 1.0.0",
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme

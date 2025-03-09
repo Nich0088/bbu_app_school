@@ -44,16 +44,19 @@ PreferredSizeWidget CustomAppBar(
     title: (() {
       switch (appBarType) {
         case AppBarType.guestType:
-          return GestureDetector(
-            child: Image.asset(
-              "assets/dashboard/guest_school_logo.jpg",
-              width: MediaQuery.of(context).size.width * 0.35,
-              height: 50,
-              alignment: Alignment.centerLeft,
+          return Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: GestureDetector(
+              child: Image.asset(
+                "assets/dashboard/guest_school_logo.jpg",
+                width: MediaQuery.of(context).size.width * 0.35,
+                height: 50,
+                alignment: Alignment.centerLeft,
+              ),
+              onTap: () {
+                context.go(AppScreen.roleSelectionScreen.path);
+              },
             ),
-            onTap: () {
-              context.go(AppScreen.roleSelectionScreen.path);
-            },
           );
         case AppBarType.loggedInType:
           return GestureDetector(

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_app/src/modules/dashboard/models/certificate_format_item.dart';
@@ -18,7 +19,9 @@ class CertificateFormatScreen extends StatelessWidget {
         context,
         backgroundColor: AppColor.primaryColor,
         appBarType: AppBarType.generalType,
-        title: certificateFormatItem?.title ?? '',
+        title: certificateFormatItem?.title != null
+            ? context.tr(certificateFormatItem!.title)
+            : '',
         isCenterTitle: true,
         onPressedBack: () {
           context.pop();
