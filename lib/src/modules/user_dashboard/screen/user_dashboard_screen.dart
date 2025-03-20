@@ -496,6 +496,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen>
                     ),
                     child: CustomButton(
                       onPressed: () async {
+                        Navigator.pop(context);
                         await _userDashboardController.linkClassSchedule(
                           actionOnSuccess: () {
                             context.pop();

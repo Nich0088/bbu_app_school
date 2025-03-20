@@ -150,6 +150,7 @@ class StudentClassDetailScreen extends StatelessWidget {
                           return const SizedBox();
                         }
                         return ClassScheduleSubjectItemWidget(
+                          index: index + 1,
                           item: item,
                           isNotFirstItem: index > 0,
                           isLastItem: index ==

@@ -128,6 +128,13 @@ class LoginController extends BaseGetXController {
       ),
     );
     setLoadingState(false);
+    if(response.statusCode != 200){
+      appDialogHelper?.showErrorDialog(
+        errorMessage: "Your username and password incorrect!",
+        errorCode: "401",
+      );
+      return;
+    }
     debugPrint(response.body);
     loginResult = LoginResult.fromJson(jsonDecode(response.body));
     debugPrint(jsonEncode(loginResult));

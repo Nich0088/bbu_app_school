@@ -10,11 +10,13 @@ class ClassScheduleSubjectItemWidget extends StatelessWidget {
     required this.isNotFirstItem,
     required this.onClick,
     required this.isLastItem,
+    required this.index
   });
 
   final ClassScheduleSubjectData item;
   final bool isNotFirstItem;
   final bool isLastItem;
+  final int index;
   final GestureTapCallback onClick;
 
   @override
@@ -33,41 +35,42 @@ class ClassScheduleSubjectItemWidget extends StatelessWidget {
         elevation: 4,
         color: AppColor.cardColor,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                'assets/student_class_detail/menu.png',
-                width: 10,
-                fit: BoxFit.fill,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text( "$index. ${ item.subjectNameen}"
+                     ,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: Colors.black),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 4),
-              Expanded(
+              const SizedBox(height: 10,),
+              SizedBox(
+                width: double.infinity,
                 child: Text(
-                  item.subjectNameen ?? '',
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(color: Colors.black),
+                  "Day : ${item.dayname} : Time : ${item.timeGeneral}",
+                  style: TextStyle(color: Colors.indigo),
+                  textAlign: TextAlign.start,
                 ),
               ),
-              Text(
-                item.dayname ?? '',
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.right,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Colors.black),
-              ),
-              const SizedBox(width: 4),
-              Image.asset(
-                'assets/student_class_detail/setting.png',
-                width: 16,
-                fit: BoxFit.fill,
-              ),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  "Teacher Name : ${item.teaName}",
+                  style: TextStyle(color: Colors.black),
+                  textAlign: TextAlign.start,
+                ),
+              )
             ],
           ),
         ),
